@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "class-validator";
+import { IsArray, IsNotEmpty } from "class-validator";
 
 export class AuthPayloadDto{
 
@@ -6,5 +6,5 @@ export class AuthPayloadDto{
     username:string
 
     @IsNotEmpty()
-    password:string
+    password:string 
 }

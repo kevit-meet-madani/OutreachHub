@@ -1,19 +1,22 @@
-import { Controller , Get , Patch , Body , Post, UsePipes, ValidationPipe , Delete , Param , HttpException} from '@nestjs/common';
+import { Controller , Get , Patch , Body , Post, UsePipes, ValidationPipe , Delete , Param , HttpException, UseGuards} from '@nestjs/common';
 import { createUserDto } from 'src/users/dto/createUser.dto';
 import { UserService } from 'src/users/users.service';
 import mongoose  from 'mongoose'
 import { updateUserDto } from 'src/users/dto/updateUser.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('users')
 export class UsersController {
 
     constructor(private userService:UserService){}
     @Get()
+    @UseGuards(AuthGuard)
     getUsers(){
         return this.userService.getUsers();
     }
 
     @Get(':id')
+    @UseGuards(AuthGuard)
     async getUserById(@Param('id') id:string){
 
         const bool = mongoose.Types.ObjectId.isValid(id);
@@ -47,6 +50,7 @@ export class UsersController {
     }
     
     @Patch(':id')
+    @UseGuards(AuthGuard)
     async updateUser(@Param('id') id:string,@Body() updateUserDto:updateUserDto){
        const bool= mongoose.Types.ObjectId.isValid(id);
        if(!bool){

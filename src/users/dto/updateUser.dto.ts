@@ -1,21 +1,21 @@
-import { IsNotEmpty , MinLength } from "class-validator";
+import { IsNotEmpty , IsOptional, MinLength } from "class-validator";
 import mongoose from 'mongoose'
 
 export class updateUserDto{
-    @IsNotEmpty()
+        @IsNotEmpty()
         username:string;
     
-        @IsNotEmpty()
+        @IsOptional()
         @MinLength(6)
         password:string;
     
-        @IsNotEmpty()
+         @IsOptional()
         role:string;
     
-        @IsNotEmpty()
+         @IsOptional()
         createdAt:Date;
     
-        @IsNotEmpty()
+        @IsOptional()
         right:string;
         
         workspaces:mongoose.Types.ObjectId[];
