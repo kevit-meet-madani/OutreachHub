@@ -1,12 +1,17 @@
-import { Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
 export type TokenDocument = Token & Document;
 
+
+@Schema({timestamps:true})
 export class Token{
 
     @Prop({required:true})
     token:string
+
+    @Prop({default:Date.now,expires:3600})
+    createdAt:Date
 }
 
 export const tokenSchema = SchemaFactory.createForClass(Token);

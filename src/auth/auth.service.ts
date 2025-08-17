@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, Req } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import mongoose from 'mongoose'
 import { AuthPayloadDto } from './dto/auth.dto';
@@ -15,7 +15,7 @@ export class AuthService {
 
     constructor(private jwtService: JwtService,@InjectModel(OutUser.name) private userModel:Model<OutUser>,@InjectModel(Token.name) private tokenModel:Model<Token>){}
 
-    async loginUser({username,password}:AuthPayloadDto){
+    async loginUser({username,password}:AuthPayloadDto,req:Request){
         
         const findUser = await this.userModel.findOne({username}).exec();
         if(!findUser) throw new HttpException('User Not found',404);
@@ -30,13 +30,19 @@ export class AuthService {
         const token = this.jwtService.sign(payload);
         console.log(token);
         const tokenObj = new this.tokenModel({token});
+
+        req.headers.authorization = `Bearer ${token}`; 
         return await tokenObj.save();
     }
 
-    async logOut(req:Request){
-        const token = req.headers.authorization?.split(' ')[1];
-        
-        const obj = this.tokenModel.deleteOne({token:token}).exec();
+    async logOut(token:string){
+        const obj = this.tokenModel.deleteOne({token}).exec();
         return obj;
+    }
+
+    async isActive(token:string){
+        const res = await this.tokenModel.findOne({token}).exec();
+        console.log(res);
+        return res !==null;
     }
 }

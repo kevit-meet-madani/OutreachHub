@@ -1,7 +1,9 @@
-import { Controller , Get , Post , Body, HttpException, UsePipes , ValidationPipe} from '@nestjs/common';
+import { Controller , Get , Post , Body, HttpException, UsePipes , ValidationPipe, Req} from '@nestjs/common';
 import { AuthPayloadDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
-import express from 'express';
+import type { Request } from 'express';
+import { request } from 'http';
+
 @Controller('auth')
 export class AuthController {
     
@@ -9,8 +11,8 @@ export class AuthController {
 
     @Post('login')
     @UsePipes(new ValidationPipe())
-    loginUser(@Body() authPayload:AuthPayloadDto){
-         const user = this.authService.loginUser(authPayload);
+    loginUser(@Body() authPayload:AuthPayloadDto,@Req() req: Request){
+         const user = this.authService.loginUser(authPayload,req);
          if(!user){
             throw new HttpException('Not found',404);
          }
@@ -18,7 +20,11 @@ export class AuthController {
     }
 
     @Get('logout')
-    logOut(req:express.Request){
-        return this.authService.logOut(req);
+    logOut(@Req() req:Request){
+        const token = req.headers.authorization?.split(' ')[1];
+        if(!token){
+            throw new HttpException('No token provided',401);
+        }
+        return this.authService.logOut(token);
     }
 }

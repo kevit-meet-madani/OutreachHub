@@ -10,7 +10,7 @@ import { Token } from './schemas/token.schema';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://meetmadani:meetmadani@cluster0.k81uvvx.mongodb.net/'),
+    MongooseModule.forRoot('mongodb+srv://---------@cluster0.k81uvvx.mongodb.net/'),
     UsersModule,
     AuthModule,
     WorkspacesModule,
