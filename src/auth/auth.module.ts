@@ -6,10 +6,11 @@ import { OutUser , OutUsersSchema} from 'src/schemas/users.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthGuard } from './auth.guard';
 import { Token, tokenSchema } from 'src/schemas/token.schema';
+
 @Module({
   imports:[
     JwtModule.register({
-      secret:'secret',
+      secret: process.env.SECRET_KEY,
       signOptions: { expiresIn :'1h'},
     }),
     MongooseModule.forFeature([

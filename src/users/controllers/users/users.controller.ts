@@ -9,6 +9,7 @@ import { AuthGuard } from 'src/auth/auth.guard';
 export class UsersController {
 
     constructor(private userService:UserService){}
+
     @Get()
     @UseGuards(AuthGuard)
     getUsers(){
@@ -16,7 +17,6 @@ export class UsersController {
     }
 
     @Get(':id')
-    @UseGuards(AuthGuard)
     async getUserById(@Param('id') id:string){
 
         const bool = mongoose.Types.ObjectId.isValid(id);
@@ -50,7 +50,6 @@ export class UsersController {
     }
     
     @Patch(':id')
-    @UseGuards(AuthGuard)
     async updateUser(@Param('id') id:string,@Body() updateUserDto:updateUserDto){
        const bool= mongoose.Types.ObjectId.isValid(id);
        if(!bool){

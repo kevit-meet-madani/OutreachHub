@@ -7,17 +7,22 @@ import { ContactModule } from './contacts/contacts.module';
 import { CampModule } from './campaigns/camp.module';
 import { MsgModule } from './message/msg.module';
 import { Token } from './schemas/token.schema';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://--------------@cluster0.k81uvvx.mongodb.net/'),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    MongooseModule.forRoot(`${process.env.DB_URL}`),
     UsersModule,
     AuthModule,
     WorkspacesModule,
     ContactModule,
     CampModule,
     MsgModule,
-    Token
+    Token,
   ],
   controllers: [],
   providers: [],

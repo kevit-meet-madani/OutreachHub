@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 export class AuthGuard{
 
     constructor(private JwtService:JwtService,private authService:AuthService){}
-    async canActivate(context: any): Promise<boolean> {
+    async canActivate(context: any): Promise<boolean>{
         const req:Request = context.switchToHttp().getRequest();
         const token = req.headers.authorization?.split(' ')[1]; 
         if (!token) {
@@ -29,10 +29,9 @@ export class AuthGuard{
         }
         
         try {
-            const decoded = this.JwtService.verify(token);
+            const decoded = this.JwtService.verify(token, { secret: process.env.SECRET_KEY });
             console.log(decoded);            
             req["user"] = decoded;
-            
             return true; 
         } catch (error) {
             console.log(error);

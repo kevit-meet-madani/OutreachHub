@@ -10,7 +10,7 @@ export class Token{
     @Prop({required:true})
     token:string
 
-    @Prop({default:Date.now,expires:3600})
+    @Prop({default:Date.now,expires:'1h'})
     createdAt:Date
 }
 

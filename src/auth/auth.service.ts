@@ -27,7 +27,7 @@ export class AuthService {
         }
         const payload = {id:findUser._id,username:findUser.username}
 
-        const token = this.jwtService.sign(payload);
+        const token = this.jwtService.sign(payload,{secret : process.env.SECRET_KEY});
         console.log(token);
         const tokenObj = new this.tokenModel({token});
 
