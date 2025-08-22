@@ -7,10 +7,6 @@
   justify-content: space-around;
 }
 
-:root {
-  --primary-color: black;
-}
-
 input[type="text"] {
   border: solid 1px var(--primary-color);
   padding: 10px;
