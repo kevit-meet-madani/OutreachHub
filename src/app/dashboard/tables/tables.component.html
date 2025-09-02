@@ -1,0 +1,45 @@
+<div class="tables-container">
+
+  <!-- 📋 Recent Campaigns Table -->
+  <div class="table-section">
+    <h3>📋 Recent 5 Campaigns</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Campaign Name</th>
+          <th>Date</th>
+          <th>Targeted Tags</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let campaign of recentCampaigns">
+          <td>{{ campaign.name }}</td>
+          <td>{{ campaign.date }}</td>
+          <td>
+            <span *ngFor="let tag of campaign.tags" class="tag">{{ tag }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 🔖 Top Tags Table -->
+  <div class="table-section">
+    <h3>🔖 Top 5 Tags by Contacts</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tag</th>
+          <th>Contacts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tag of topTags">
+          <td>{{ tag.tag }}</td>
+          <td>{{ tag.contactCount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

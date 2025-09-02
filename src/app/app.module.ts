@@ -3,17 +3,51 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { NavbarComponent } from './dashboard/navbar/navbar.component';
+import { FooterComponent } from './dashboard/footer/footer.component';
+import { DataComponent } from './dashboard/data/data.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { CampaignchartComponent } from './dashboard/campaignchart/campaignchart.component';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { MessagechartComponent } from './dashboard/messagechart/messagechart.component';
+import { ContactchartComponent } from './dashboard/contactchart/contactchart.component';
+import { ContactsComponent } from './contacts/contacts/contacts.component';
+import { TablesComponent } from './dashboard/tables/tables.component';
+import { CampaignsComponent } from './campaigns/campaigns/campaigns.component';
+import { TemplatesComponent } from './templates/templates/templates.component';
+
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    NavbarComponent,
+    FooterComponent,
+    DataComponent,
+    CampaignchartComponent,
+    MessagechartComponent,
+    ContactchartComponent,
+    ContactsComponent,
+    TablesComponent,
+    CampaignsComponent,
+    TemplatesComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-  ],
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BaseChartDirective
+],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync(),
+    provideCharts(withDefaultRegisterables())
   ],
   bootstrap: [AppComponent]
 })

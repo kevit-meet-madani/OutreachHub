@@ -1,0 +1,23 @@
+<nav>
+    <div class="navbar">
+      <div class="logo">OutreachHub</div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="menu" id="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li onclick="toggleDropdown(this)">
+          <a href="#">Modules ▾</a>
+          <div class="dropdown-content">
+            <a href="#" [routerLink]="['/dashboard/contacts']">Contacts</a>
+            <a href="#" [routerLink]="['/dashboard/campaigns']">Campaigns</a>
+            <a href="#" [routerLink]="['/dashboard/templates']">Templates</a>
+          </div>
+        </li>
+        <li><a href="#">Log-Out</a></li>
+      </ul>
+    </div>
+  </nav>
