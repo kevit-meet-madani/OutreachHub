@@ -4,7 +4,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { NavbarComponent } from './dashboard/navbar/navbar.component';
 import { FooterComponent } from './dashboard/footer/footer.component';
@@ -18,6 +18,8 @@ import { ContactsComponent } from './contacts/contacts/contacts.component';
 import { TablesComponent } from './dashboard/tables/tables.component';
 import { CampaignsComponent } from './campaigns/campaigns/campaigns.component';
 import { TemplatesComponent } from './templates/templates/templates.component';
+import { HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { AddcontactComponent } from './contacts/addcontact/addcontact.component';
 
 
 
@@ -33,21 +35,24 @@ import { TemplatesComponent } from './templates/templates/templates.component';
     CampaignchartComponent,
     MessagechartComponent,
     ContactchartComponent,
-    ContactsComponent,
     TablesComponent,
     CampaignsComponent,
     TemplatesComponent,
+    AddcontactComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BaseChartDirective
+    BaseChartDirective,
+    HttpClientModule,
+    FormsModule
 ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideCharts(withDefaultRegisterables())
+    provideCharts(withDefaultRegisterables()),
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })

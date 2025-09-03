@@ -1,1 +1,37 @@
-<p>contacts works!</p>
+
+<br><br>
+<div class="contact-header-container">
+  <div class="left-section">
+    <h2 class="heading">Contacts</h2>
+    <span class="count">({{ contacts!.length }} total)</span>
+  </div>
+
+  <div class="right-section">
+    <label for="sortSelect" class="sort-label">Sort by:</label>
+    <select id="sortSelect" class="sort-select" [(ngModel)]="selectedSort" (change)="onSortChange($event)">
+      <option value="name">Name</option>
+      <option value="date">Date Created</option>
+      <option value="tag">Tag</option>
+    </select>
+
+    <button class="add-button" [routerLink]="['/dashboard/contacts/create']">+ Add New Contact</button>
+  </div>
+</div>
+    <div class="contact-list">
+         <div class="contact-card" *ngFor="let contact of contacts">
+
+             <section class="listing">
+                  <h2 class="listing-heading">Name :- {{ contact.name }}</h2>
+                  <h2 class="listing-heading">Phone :- {{ contact.phoneNumber }}</h2>
+                  <h2><span class="contact-tag">{{ contact.tag }}</span></h2>
+                  <div class="contact-actions">
+                       <button>View</button>
+                       <button (click)="editContact(contact)">Edit</button>
+                       <button (click)="deleteContact(contact)">Delete</button>
+                  </div>
+            </section>
+         </div>
+    </div>
+<hr />
+
+

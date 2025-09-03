@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path:'contacts',
-        component:ContactsComponent
+        loadChildren: () => import('./contacts/contacts/contacts.module').then(m => m.ContactsModule)
       },
       {
         path:'campaigns',
