@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 
 export class createUserDto{
     @IsNotEmpty()
-    username:string;
+    email:string;
 
     @IsNotEmpty()
     @MinLength(6)

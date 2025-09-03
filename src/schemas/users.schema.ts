@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 @Schema()
 export class OutUser{
     @Prop({unique:true,required:true})
-    username:string
+    email:string
 
     @Prop({unique:true,required:true})
     password:string

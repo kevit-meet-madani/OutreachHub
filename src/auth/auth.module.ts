@@ -11,7 +11,7 @@ import { Token, tokenSchema } from 'src/schemas/token.schema';
   imports:[
     JwtModule.register({
       secret: process.env.SECRET_KEY,
-      signOptions: { expiresIn :'1h'},
+      signOptions: { expiresIn :'60m'},
     }),
     MongooseModule.forFeature([
           {

@@ -23,7 +23,7 @@ export class UserService{
     }
 
     getUsers(){
-        return this.userModel.find({},'id  username password role right workspaces').exec();
+        return this.userModel.find({},'id  email password role right workspaces').exec();
     }
 
     getUserById(id:string){

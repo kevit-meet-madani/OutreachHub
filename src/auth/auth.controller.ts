@@ -19,9 +19,8 @@ export class AuthController {
          return user;
     }
 
-    @Get('logout')
-    logOut(@Req() req:Request){
-        const token = req.headers.authorization?.split(' ')[1];
+    @Post('logout')
+    logOut(token:string){
         if(!token){
             throw new HttpException('No token provided',401);
         }

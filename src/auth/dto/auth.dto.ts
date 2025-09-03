@@ -3,7 +3,7 @@ import { IsArray, IsNotEmpty } from "class-validator";
 export class AuthPayloadDto{
 
     @IsNotEmpty()
-    username:string
+    email:string
 
     @IsNotEmpty()
     password:string 

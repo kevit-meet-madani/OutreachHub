@@ -1,4 +1,4 @@
-import { Controller , Get , Post , Patch , Delete , Body, Param, UseGuards} from "@nestjs/common";
+import { Controller , Get , Post , Patch , Delete , Body, Param, UseGuards, Req} from "@nestjs/common";
 import { ContactService } from "./contact.service";
 import { createContactDto } from "./dto/create.contact.dto";
 import { updateContactDto } from "./dto/update.contact.dto";
@@ -10,13 +10,13 @@ export class ContactController{
      constructor(private contactService:ContactService){}
 
      @Get()
-      //  @UseGuards(AuthGuard)
-     getContacts(){
-        return this.contactService.getContacts();
+      @UseGuards(AuthGuard)
+     getContacts(@Req() req : Request){
+        return this.contactService.getContacts(req);
      }
 
      @Get(':id')
-   //   @UseGuards(AuthGuard)
+     @UseGuards(AuthGuard)
      getContactById(@Param('id') id:string){
         return this.contactService.getContactById(id);
      }

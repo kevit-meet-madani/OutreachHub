@@ -19,7 +19,7 @@ export class AuthGuard{
             console.log("No token provided");
             return false; 
         }  
-        console.log(token);     
+              
         
         const isActive = await this.authService.isActive(token);
         
@@ -29,8 +29,7 @@ export class AuthGuard{
         }
         
         try {
-            const decoded = this.JwtService.verify(token, { secret: process.env.SECRET_KEY });
-            console.log(decoded);            
+            const decoded = this.JwtService.verify(token, { secret: process.env.SECRET_KEY , clockTolerance:3600},);            
             req["user"] = decoded;
             return true; 
         } catch (error) {

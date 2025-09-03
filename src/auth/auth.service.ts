@@ -15,24 +15,30 @@ export class AuthService {
 
     constructor(private jwtService: JwtService,@InjectModel(OutUser.name) private userModel:Model<OutUser>,@InjectModel(Token.name) private tokenModel:Model<Token>){}
 
-    async loginUser({username,password}:AuthPayloadDto,req:Request){
+    async loginUser({email,password}:AuthPayloadDto,req:Request){
         
-        const findUser = await this.userModel.findOne({username}).exec();
-        if(!findUser) throw new HttpException('User Not found',404);
+        const findUser = await this.userModel.findOne({email}).exec();
+        if(!findUser) throw new HttpException('User Not found',501);
 
         const result = await bcrypt.compare(password,findUser.password);
         
         if(!result){
             throw new HttpException('Password is incorrect',404);
         }
-        const payload = {id:findUser._id,username:findUser.username}
 
-        const token = this.jwtService.sign(payload,{secret : process.env.SECRET_KEY});
-        console.log(token);
-        const tokenObj = new this.tokenModel({token});
+        const expiresAt = new Date(Date.now() + 60 * 60 * 1000); 
 
-        req.headers.authorization = `Bearer ${token}`; 
-        return await tokenObj.save();
+        const payload = {id:findUser._id,username:findUser.email}
+
+        const token = this.jwtService.sign(payload,{secret : process.env.SECRET_KEY,expiresIn:'60m'});
+
+        const obj = {
+            token:token
+        }
+        const newToken = new this.tokenModel(obj);
+        newToken.save();
+         
+        return {token:token};
     }
 
     async logOut(token:string){
@@ -41,8 +47,7 @@ export class AuthService {
     }
 
     async isActive(token:string){
-        const res = await this.tokenModel.findOne({token}).exec();
-        console.log(res);
+        const res = await this.tokenModel.findOne({token}).exec(); 
         return res !==null;
     }
 }
