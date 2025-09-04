@@ -12,9 +12,7 @@ export class createContactDto{
    @IsNotEmpty()
     tag:string
     
-   @IsNotEmpty()
     createdBy:mongoose.Types.ObjectId;
 
-   @IsNotEmpty()
     workspace:mongoose.Types.ObjectId;
 }

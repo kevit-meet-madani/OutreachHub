@@ -23,8 +23,8 @@ export class ContactController{
 
      @Post()
      @UseGuards(AuthGuard)
-     createContact(@Body() contactDto:createContactDto){
-        return this.contactService.createContact(contactDto);
+     createContact(@Body() contactDto:createContactDto,@Req() req:Request){
+        return this.contactService.createContact(contactDto,req);
      }
 
      @Delete(':id')
@@ -35,7 +35,7 @@ export class ContactController{
 
      @Patch(':id')
      @UseGuards(AuthGuard)
-     updateContact(@Param('id') id:string, @Body() contactDto:updateContactDto){
+     updateContact(@Body() contactDto:updateContactDto,@Param('id') id:string){
         return this.contactService.updateContact(id,contactDto);
      }
 }

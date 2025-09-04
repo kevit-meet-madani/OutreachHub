@@ -16,14 +16,16 @@ export class ContactService
         const decoded = req["user"];
 
         console.log(decoded);
-        return this.contactModel.find({createdBy:decoded.id}).populate('createdBy','username role right').populate('workspace');
+        return this.contactModel.find({createdBy:decoded.id}).populate('_id createdBy','username role right').populate('workspace');
     }
 
     getContactById(id:string){
         return this.contactModel.findById(id).populate('createdBy','username role right').populate('workspace');
     }
 
-    createContact(contactDto:createContactDto){
+    createContact(contactDto:createContactDto,req:any){
+        const decoded = req["user"];
+        contactDto["createdBy"] = decoded.id;
         const newContact = new this.contactModel(contactDto);
         console.log(contactDto);
         return newContact.save();
@@ -34,6 +36,6 @@ export class ContactService
     }
 
     updateContact(id:string,contactDto:createContactDto){
-        return this.contactModel.findByIdAndUpdate(id,contactDto,{new :true});
+        return this.contactModel.findByIdAndUpdate(id,contactDto);
     }
 }

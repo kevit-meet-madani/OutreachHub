@@ -18,17 +18,17 @@ export class AuthService {
     async loginUser({email,password}:AuthPayloadDto,req:Request){
         
         const findUser = await this.userModel.findOne({email}).exec();
-        if(!findUser) throw new HttpException('User Not found',501);
+        if(!findUser) throw new HttpException('User Not found',404);
 
         const result = await bcrypt.compare(password,findUser.password);
         
         if(!result){
-            throw new HttpException('Password is incorrect',404);
+            throw new HttpException('Password is incorrect',401);
         }
 
         const expiresAt = new Date(Date.now() + 60 * 60 * 1000); 
 
-        const payload = {id:findUser._id,username:findUser.email}
+        const payload = {id:findUser._id,right:findUser.right}
 
         const token = this.jwtService.sign(payload,{secret : process.env.SECRET_KEY,expiresIn:'60m'});
 
