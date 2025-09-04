@@ -3,9 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { DataComponent } from './dashboard/data/data.component';
-import { ContactsComponent } from './contacts/contacts/contacts.component';
 import { CampaignsComponent } from './campaigns/campaigns/campaigns.component';
-import { TemplatesComponent } from './templates/templates/templates.component';
+
 
 const routes: Routes = [
   {
@@ -30,7 +29,7 @@ const routes: Routes = [
       },
       {
         path:'templates',
-        component:TemplatesComponent
+        loadChildren: () => import('./templates/templates/templates.module').then(m => m.TemplatesModule)
       }
     ]
   }

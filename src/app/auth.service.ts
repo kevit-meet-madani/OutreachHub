@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from './user';
-import { response } from 'express';
+import { payload, User } from './user';
 import { catchError, map, Observable , of} from 'rxjs';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -50,4 +50,25 @@ export class AuthService {
       })
       return of(false);
     }
+
+    getDecodedToken(token: string): string | null {
+    try {
+      const data = jwtDecode<payload>(token);
+      return data.right;
+    } catch (error) {
+      console.error('Invalid token', error);
+      return null;
+    }
+  }
+
+  getTokenFromStorage(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  getUserInfo() {
+    const token = this.getTokenFromStorage();
+    if (!token) return null;
+
+    return this.getDecodedToken(token);
+  }
 }

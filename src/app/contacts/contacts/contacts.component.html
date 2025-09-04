@@ -14,7 +14,7 @@
       <option value="tag">Tag</option>
     </select>
 
-    <button class="add-button" [routerLink]="['/dashboard/contacts/create']">+ Add New Contact</button>
+    <button class="add-button" [routerLink]="['/dashboard/contacts/create']" [ngClass]="{'denied':permisson}">+ Add New Contact</button>
   </div>
 </div>
     <div class="contact-list">
@@ -25,9 +25,9 @@
                   <h2 class="listing-heading">Phone :- {{ contact.phoneNumber }}</h2>
                   <h2><span class="contact-tag">{{ contact.tag }}</span></h2>
                   <div class="contact-actions">
-                       <button>View</button>
-                       <button (click)="editContact(contact)">Edit</button>
-                       <button (click)="deleteContact(contact)">Delete</button>
+                       <button [routerLink]="['/dashboard/contacts/view',contact._id]">View</button>
+                       <button [routerLink]="['/dashboard/contacts/edit',contact._id]" [ngClass]="{'denied':permisson}">Edit</button>
+                       <button (click)="deleteContact(contact._id)" [ngClass]="{'denied':permisson}">Delete</button>
                   </div>
             </section>
          </div>

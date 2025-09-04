@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Contact } from './data';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private authService:AuthService) { }
 
   url = 'http://localhost:5000/contacts'
 
@@ -19,5 +20,72 @@ export class ContactService {
       'Authorization':`Bearer ${token}`
     }
     return this.http.get<Contact[]>(this.url,{ headers });
+  }
+
+  createContact(contact:Contact){
+    const token = localStorage.getItem('token');
+    const headers = {
+      'Authorization':`Bearer ${token}`
+    }
+     
+      this.http.post<Contact>(this.url,contact,{ headers }).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+
+        error: (error) => {
+          console.log(error);
+        }
+      });
+  }
+
+  editContact(contact:any){
+    const token = localStorage.getItem('token');
+    const headers = {
+      'Authorization':`Bearer ${token}`
+    }
+    
+    this.http.patch<Contact>(`${this.url}/${contact.id}`,contact,{ headers }).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  getContact(id:any):Observable<Contact>{
+
+    const token = localStorage.getItem('token');
+    const headers = {
+      'Authorization':`Bearer ${token}`
+    }
+      return this.http.get<Contact>(`${this.url}/${id}`,{ headers });
+  }
+
+  deleteContact(id:any){
+
+    const token = localStorage.getItem('token');
+    const headers = {
+      'Authorization':`Bearer ${token}`
+    }
+
+    this.http.delete(`${this.url}/${id}`,{ headers }).subscribe({
+      next: (response) => {
+        if(response){
+          console.log("Data deleted");
+        }
+      },
+
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  getPermisson():boolean{
+     return this.authService.getUserInfo() !== "edit";
   }
 }

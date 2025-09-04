@@ -1,0 +1,25 @@
+<div class="contact-container" *ngIf="contact">
+  <div class="contact-card">
+    <h2>Contact Details</h2>
+    <div class="contact-row">
+      <label>Name:</label>
+      <p>{{ contact.name }}</p>
+    </div>
+    <div class="contact-row">
+      <label>Phone:</label>
+      <p>{{ contact.phoneNumber }}</p>
+    </div>
+    <div class="contact-row" *ngIf="contact.tag">
+      <label>Tag:</label>
+      <p>{{ contact.tag }}</p>
+    </div>
+    <div class="contact-row" *ngIf="contact.createdAt">
+      <label>Created At:</label>
+      <p>{{ contact.createdAt }}</p>
+    </div>
+    <div class="contact-row" *ngIf="contact.workspace">
+      <label>workspace</label>
+      <p>{{ contact.workspace }}</p>
+    </div>
+  </div>
+</div>

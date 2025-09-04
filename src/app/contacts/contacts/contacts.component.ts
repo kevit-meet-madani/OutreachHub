@@ -1,7 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Contact } from '../data';
 import { ContactService } from '../contact.service';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
+
+
+
+ // For UI use only
 
 @Component({
   selector: 'app-contacts',
@@ -12,18 +16,14 @@ export class ContactsComponent {
 
    
     constructor(private contactService:ContactService,private router:Router) {}
-    @Input() contact!:Contact
+    // @Input() contact!:Contact
 
     contacts: Contact[] = []
     selectedSort = 'name';
+    permisson:boolean = this.contactService.getPermisson();
 
     ngOnInit(){
        this.getContacts()
-    }
-
-    onAddContact() {
-    // Implement modal open or router navigation
-       
     }
 
     onSortChange(event: any) {
@@ -38,11 +38,7 @@ export class ContactsComponent {
      })
   }
 
-  editContact(contact:Contact){
-
-  }
-
-  deleteContact(contact:Contact){
-
+  deleteContact(id:any){
+     this.contactService.deleteContact(id);
   }
 }

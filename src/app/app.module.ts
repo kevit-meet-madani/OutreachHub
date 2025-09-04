@@ -20,6 +20,10 @@ import { CampaignsComponent } from './campaigns/campaigns/campaigns.component';
 import { TemplatesComponent } from './templates/templates/templates.component';
 import { HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { AddcontactComponent } from './contacts/addcontact/addcontact.component';
+import { EditcontactComponent } from './contacts/editcontact/editcontact.component';
+import { ViewcontactComponent } from './contacts/viewcontact/viewcontact.component';
+
+
 
 
 
@@ -37,8 +41,9 @@ import { AddcontactComponent } from './contacts/addcontact/addcontact.component'
     ContactchartComponent,
     TablesComponent,
     CampaignsComponent,
-    TemplatesComponent,
     AddcontactComponent,
+    EditcontactComponent,
+    ViewcontactComponent,
   ],
   imports: [
     BrowserModule,

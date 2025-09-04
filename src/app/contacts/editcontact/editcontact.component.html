@@ -1,8 +1,6 @@
 <div class="container">
-
-    
-    <form [formGroup]="addform" (ngSubmit)="OnSubmit()">
-        <h1>Create New Contact</h1>
+    <form [formGroup]="editform" (ngSubmit)="OnSubmit()">
+        <h1>Update Contact</h1>
         <label for="name">Enter Name : </label>
         <input type="text" formControlName="name" #name>
 
@@ -12,6 +10,6 @@
         <label for="tag">Enter tag : </label>
         <input type="text" formControlName="tag" #tag>
         
-        <button type="submit" [disabled]="addform.invalid">Add</button>
+        <button type="submit" [disabled]="editform.invalid">Update</button>
     </form>
 </div>

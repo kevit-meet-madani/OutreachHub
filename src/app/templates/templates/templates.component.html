@@ -1,1 +1,103 @@
-<p>templates works!</p>
+<br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+<div class="contact-header-container">
+  <div class="left-section">
+    <h2 class="heading">Templates</h2>
+    
+  </div>
+
+  <div class="right-section">
+    <label for="sortSelect" class="sort-label">Sort by:</label>
+    <select id="sortSelect" class="sort-select">
+      <option value="name">Name</option>
+      <option value="date">Date Created</option>
+      <option value="tag">Tag</option>
+    </select>
+
+    <button class="add-button" [routerLink]="['/dashboard/contacts/create']" [ngClass]="{'denied':permisson}">+ Add New Template</button>
+  </div>
+</div>
+    <div class="contact-list">
+         <h1>Image - templates</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr *ngFor="let template of imageTypes">
+      <td><img src={{template.content.imagePath}} alt=""></td>
+      <td>{{ template.name }}</td>
+      <td>{{ template.type }}</td>
+      <td>
+        <button [routerLink]="['/dashboard/templates/view',template._id]">View</button>
+        <button [routerLink]="['/dashboard/template/edit',template._id]">Edit</button>
+        <button (click)="delete(template._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  <br><br><br>
+<h1>Text - templates</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let template of textTypes">
+      <td>{{ template.name }}</td>
+      <td>{{ template.type }}</td>
+      <td>
+        <button [routerLink]="['/dashboard/templates/view',template._id]">View</button>
+        <button [routerLink]="['/dashboard/template/edit',template._id]">Edit</button>
+        <button (click)="delete(template._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+<hr />
+
+

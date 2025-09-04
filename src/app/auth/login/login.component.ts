@@ -28,6 +28,7 @@ export class LoginComponent {
      this.authService.login(this.loginform.value).subscribe( (yes) => {
       console.log(yes);
       if(yes){
+        //  console.log(this.authService.getUserInfo());
          this.router.navigate(['/dashboard']);
       }
 
