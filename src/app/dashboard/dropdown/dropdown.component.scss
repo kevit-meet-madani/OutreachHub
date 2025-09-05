@@ -1,0 +1,35 @@
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.dropdown-label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.dropdown-select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+  background-color: white;
+}
+
+.dropdown-select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .dropdown-container {
+    max-width: 100%;
+  }
+}

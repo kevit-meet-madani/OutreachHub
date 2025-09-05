@@ -22,6 +22,8 @@ import { HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@ang
 import { AddcontactComponent } from './contacts/addcontact/addcontact.component';
 import { EditcontactComponent } from './contacts/editcontact/editcontact.component';
 import { ViewcontactComponent } from './contacts/viewcontact/viewcontact.component';
+import { CreatetemplateComponent } from './templates/createtemplate/createtemplate.component';
+import { DropdownComponent } from './dashboard/dropdown/dropdown.component';
 
 
 
@@ -44,6 +46,8 @@ import { ViewcontactComponent } from './contacts/viewcontact/viewcontact.compone
     AddcontactComponent,
     EditcontactComponent,
     ViewcontactComponent,
+    CreatetemplateComponent,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,

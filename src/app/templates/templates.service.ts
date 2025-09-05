@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Template } from './data';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class TemplatesService {
 
   constructor(private http:HttpClient) { }
@@ -20,6 +22,25 @@ export class TemplatesService {
     }
 
     return this.http.get<Template[]>(this.url,{ headers });
+  }
+
+  createTemplate(template:Template){
+     const token = localStorage.getItem('token');
+     const headers = {
+      'Authorization':`Bearer ${token}`
+     }
+    //  console.log(template);
+
+     
+     this.http.post<Template>(this.url,template,{ headers }).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+
+      error: (error) => {
+        console.log(error);
+      }
+     })
   }
 
   getPermisson():boolean{

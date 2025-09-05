@@ -1,0 +1,72 @@
+<div class="create-template-container">
+  <h2>Create New Template</h2>
+
+  <form (ngSubmit)="OnSubmit()" [formGroup]="addform" class="template-form">
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Template Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        placeholder="Enter template name"
+        formControlName="name"
+      />
+    </div>
+
+    <!-- Type -->
+    <div class="form-group">
+      <label for="type">Template Type</label>
+      <input
+        type="text"
+        id="type"
+        name="type"
+        required
+        placeholder="e.g., Welcome, Reminder, Promotion"
+        formControlName="type"
+      />
+    </div>
+
+    <!-- Text Content -->
+    <div class="form-group">
+      <label for="text">Text Content</label>
+      <textarea
+        id="text"
+        name="text"
+        rows="4"
+        placeholder="Enter message text"
+        formControlName="text"
+      ></textarea>
+    </div>
+
+    <!-- Image Upload -->
+    <div class="form-group">
+      <label for="image">Upload Image</label>
+      <input
+        type="file"
+        id="image"
+        name="image"
+        (change)="onImageSelected()"
+        accept="image/*"
+      /> OR
+      <input
+        type="text"
+        id="type"
+        name="type"
+        required
+        placeholder="Paste image link here"
+        formControlName="imagePath"
+      />
+      <div *ngIf="previewImage" class="image-preview">
+        <img [src]="previewImage" alt="Preview" />
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="form-actions">
+      <button type="submit" [disabled]="addform.invalid">Create Template</button>
+      <button type="button" class="cancel" (click)="OnCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,11 +1,10 @@
 export interface Template{
-    _id:string;
+    _id?:string;
     name:string;
     type:string;
-    tag:string;
-    createdBy:Object;
-    workspaceId:Object;
-    createdAt:Date;
+    createdBy?:Object;
+    workspaceId?:Object;
+    createdAt?:Date;
     content:Content
 }
 
