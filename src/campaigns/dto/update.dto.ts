@@ -2,7 +2,7 @@ import { IsNotEmpty , IsOptional} from "class-validator";
 import mongoose from 'mongoose';
 
 export class UpdateCampaignDto{
-    @IsNotEmpty()
+    
     name:string;
     
     @IsOptional()

@@ -17,5 +17,5 @@ export class CreateCampaignDto{
     createdBy:mongoose.Types.ObjectId;
     
     @IsNotEmpty()
-    tags:string;
+    tag:string;
 }

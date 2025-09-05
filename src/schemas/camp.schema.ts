@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose from 'mongoose'
 
-@Schema()
+@Schema({})
 export class OutCampaign{
     
     @Prop({required:true})
@@ -19,8 +19,14 @@ export class OutCampaign{
     @Prop({required:true,ref:'OutUser'})
     createdBy:mongoose.Types.ObjectId;
 
+    @Prop({required:true,ref:'OutMessage'})
+    templateId:mongoose.Types.ObjectId;
+
     @Prop({required:true})
-    tags:string;
+    tags:string[];
+
+    @Prop({default:Date.now})
+    createdAt:Date
 }
 
 export const CampaignSchema = SchemaFactory.createForClass(OutCampaign);
