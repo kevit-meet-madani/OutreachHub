@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Template } from '../data';
 import { TemplatesService } from '../templates.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createtemplate',
@@ -10,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CreatetemplateComponent {
 
-  constructor(private templateService:TemplatesService) {}
+  constructor(private templateService:TemplatesService,private router:Router) {}
 
   template!:Template
 
@@ -23,7 +24,7 @@ export class CreatetemplateComponent {
           name:new FormControl('',[Validators.required]),
           type: new FormControl('',[Validators.required]),
           text:new FormControl('',[Validators.required]),
-          imagePath:new FormControl('',[Validators.required]),
+          imagePath:new FormControl('',[]),
         })
      }
 
@@ -32,12 +33,14 @@ export class CreatetemplateComponent {
     const obj = {
       name:this.addform.value.name,
       type:this.addform.value.type,
+      workspaceId:localStorage.getItem('workspace')!,
       content:{
         text:this.addform.value.text,
         imagePath:this.addform.value.imagePath
       }
     }
      this.templateService.createTemplate(obj);
+     this.router.navigate(['/dashboard/templates']);
     // console.log(this.addform.value);
   }
 

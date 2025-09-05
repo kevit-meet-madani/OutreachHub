@@ -15,16 +15,7 @@ export class DataComponent {
     selectedWorkspaces: string[] = [];
     @Output() workspaces:Work[]=[]
 
+
+   
     
-    ngOnInit(){
-      // this.getWorkspaces();
-    }
-    obj!:Object
-    getWorkspaces(){
-      this.authService.getWorkSpaces().subscribe(res => {
-        this.array = res
-        console.log(this.array)
-        this.workspaces = this.array[0].workspaces
-      })
-    }
 }

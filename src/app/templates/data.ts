@@ -3,7 +3,7 @@ export interface Template{
     name:string;
     type:string;
     createdBy?:Object;
-    workspaceId?:Object;
+    workspaceId:string;
     createdAt?:Date;
     content:Content
 }

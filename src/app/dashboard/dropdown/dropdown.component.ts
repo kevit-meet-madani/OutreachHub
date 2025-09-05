@@ -29,4 +29,8 @@ export class DropdownComponent {
           this.workspaces = this.array[0].workspaces
         })
       }
+
+      getVal(){
+         localStorage.setItem('workspace',this.selectedValue);
+      }
 }

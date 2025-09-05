@@ -1,0 +1,40 @@
+<div class="edit-template-container">
+  <h2>Edit Template</h2>
+
+  <form [formGroup]="editform" (ngSubmit)="OnSubmit()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" formControlName="name" required />
+    </div>
+
+    <div class="form-group">
+      <label>Type</label>
+      <select name="type" required formControlName="type">
+        <option *ngFor="let t of types" [value]="t">{{ t }}</option>
+      </select>
+    </div>
+
+    
+    <div class="form-group">
+      <label>Content Text</label>
+      <textarea name="contentText" rows="4" required formControlName="text"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Content Image</label>
+      <input type="file" (change)="onImageSelected()" />
+      <div *ngIf="imagePreview" class="image-preview">
+        <img [src]="imagePreview" alt="Preview" />
+      </div> OR 
+       <input
+        type="text"
+        id="type"
+        name="type"
+        placeholder="Paste image link here"
+        formControlName="imagePath"
+      />
+    </div>
+
+    <button type="submit" class="submit-btn">Update Template</button>
+  </form>
+</div>

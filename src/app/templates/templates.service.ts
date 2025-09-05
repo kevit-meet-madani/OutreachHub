@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Template } from './data';
 import { response } from 'express';
+import { UpdateTemplate } from './updatedata';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,49 @@ export class TemplatesService {
      })
   }
 
+  updateTemplate(template:UpdateTemplate){
+    const token = localStorage.getItem('token');
+     const headers = {
+      'Authorization':`Bearer ${token}`
+     }
+
+     this.http.patch<UpdateTemplate>(`${this.url}/${template.id}`,template,{ headers }).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+     });
+  }
+
+  getTemplate(id:any): Observable<Template>{
+    const token = localStorage.getItem('token');
+     const headers = {
+      'Authorization':`Bearer ${token}`
+     }
+
+     return this.http.get<Template>(`${this.url}/${id}`,{ headers })
+  }
+
   getPermisson():boolean{
-       return false;
+      return false;
+  }
+
+  deleteTemplate(id:any){
+    const token = localStorage.getItem('token');
+     const headers = {
+      'Authorization':`Bearer ${token}`
+     }
+
+     this.http.delete(`${this.url}/${id}`, { headers }).subscribe({
+      next: (response) => {
+        console.log("data deleted");
+      },
+
+      error:(error) => {
+        console.log(error);
+      }
+     })
   }
 }

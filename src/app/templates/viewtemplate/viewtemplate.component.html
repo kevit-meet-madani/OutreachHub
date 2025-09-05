@@ -1,0 +1,29 @@
+<div class="template-view-container" *ngIf="template">
+  <h2>{{ template.name }}</h2>
+
+  <div class="template-details">
+    <div class="detail">
+      <strong>Type:</strong>
+      <span>{{ template.type }}</span>
+    </div>
+
+
+    <div class="detail">
+      <strong>Sent At:</strong>
+      <span>{{ template.createdAt | date: 'mediumDate' }}</span>
+    </div>
+
+    <div class="detail">
+      <strong>Text Content:</strong>
+      <p class="content-text">{{ template.content.text }}</p>
+    </div>
+
+    <div class="detail" *ngIf="template.content?.imagePath">
+      <strong>Image:</strong>
+      <div class="image-preview">
+        <img [src]="template.content.imagePath" alt="Template Image" />
+      </div>
+    </div>
+  </div>
+  <button [routerLink]="['/dashboard/templates']">Back</button>
+</div>

@@ -24,6 +24,9 @@ import { EditcontactComponent } from './contacts/editcontact/editcontact.compone
 import { ViewcontactComponent } from './contacts/viewcontact/viewcontact.component';
 import { CreatetemplateComponent } from './templates/createtemplate/createtemplate.component';
 import { DropdownComponent } from './dashboard/dropdown/dropdown.component';
+import { EdittemplateComponent } from './templates/edittemplate/edittemplate.component';
+import { ViewtemplateComponent } from './templates/viewtemplate/viewtemplate.component';
+import { CreatecampaignComponent } from './campaigns/createcampaign/createcampaign.component';
 
 
 
@@ -48,6 +51,9 @@ import { DropdownComponent } from './dashboard/dropdown/dropdown.component';
     ViewcontactComponent,
     CreatetemplateComponent,
     DropdownComponent,
+    EdittemplateComponent,
+    ViewtemplateComponent,
+    CreatecampaignComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path:'campaigns',
-        component:CampaignsComponent
+        loadChildren: () => import('./campaigns/campaigns/campaign.module').then(m => m.CampaignModule)
       },
       {
         path:'templates',

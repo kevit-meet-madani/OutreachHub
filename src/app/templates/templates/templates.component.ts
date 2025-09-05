@@ -31,6 +31,6 @@ export class TemplatesComponent {
       }
 
       delete(id:any){
-
+         this.templateService.deleteTemplate(id);
       }
 }

@@ -1,1 +1,37 @@
-<p>campaigns works!</p>
+<div class="campaign-list-container">
+  <div class="header">
+    <h2>Campaigns</h2>
+    <button class="create-btn" [routerLink]="['/dashboard/campaigns/create']">+ Create New Campaign</button>
+  </div>
+
+  <table class="campaign-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Tags</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of campaigns">
+        <td><a [routerLink]="['/campaigns/view', c._id]">{{ c.name }}</a></td>
+        <td><span class="status-badge">{{ c.status }}</span></td>
+        <td>
+          <ng-container *ngFor="let tag of c.tags">
+            <span class="tag-badge">{{ tag }}</span>
+          </ng-container>
+        </td>
+        <td>{{ c.createdAt | date:'mediumDate' }}</td>
+        <td class="actions">
+          <button *ngIf="c.status === 'Draft'" [routerLink]="['/campaigns/edit', c._id]">Edit</button>
+          <button [routerLink]="['/campaigns/view', c._id]">View</button>
+          <button *ngIf="c.status === 'draft'">Launch</button>
+          <button>Copy</button>
+          <button>Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
