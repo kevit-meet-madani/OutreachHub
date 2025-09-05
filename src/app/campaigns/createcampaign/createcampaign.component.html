@@ -6,35 +6,40 @@
       <input type="text" formControlName="name" required placeholder="Enter campaign name" />
     </div>
 
+    <!-- Workspace (reactive if you need later)
     <div class="form-group">
-      <!-- <label>Select Workspace</label>
-      <select name="workspace" required>
-        <option *ngFor="let ws of workspaces" [value]="ws._id">{{ ws.name }}</option>
+      <label>Select Workspace</label>
+      <select formControlName="workspace" required>
+        <option *ngFor="let ws of workspaces" [ngValue]="ws">{{ ws.name }}</option>
       </select>
-      -->
-    </div> 
+    </div>
+    -->
 
     <div class="form-group">
       <label>Select Template</label>
-      <select name="template" required>
-        <option *ngFor="let tmp of templates" [value]="tmp._id">{{ tmp.name }} ({{ tmp.type }})</option>
+      <select formControlName="template" required>
+        <option *ngFor="let tmp of templates" [ngValue]="tmp">
+          {{ tmp.name }} ({{ tmp.type }})
+        </option>
       </select>
     </div>
 
-    <div class="template-preview" *ngIf="selectedTemplate">
+    <div class="template-preview" *ngIf="addform.value.template">
       <h3>Template Preview</h3>
-      <p>{{ selectedTemplate.content.text }}</p>
-      <img *ngIf="selectedTemplate.content.imagePath" [src]="selectedTemplate.content.imagePath" alt="Template Image" />
+      <p>{{ addform.value.template.content.text }}</p>
+      <img *ngIf="addform.value.template.content.imagePath"
+           [src]="addform.value.template.content.imagePath"
+           alt="Template Image" />
     </div>
 
     <div class="form-group">
-      <label>Tags (comma-separated)</label>
-      <input type="text" name="campaignTags" placeholder="e.g., VIP, New Users" />
+      <label>Tags (space-separated)</label>
+      <input type="text" formControlName="tags" placeholder="e.g., VIP, New Users" />
     </div>
 
     <div class="form-group">
       <label>Schedule Date</label>
-      <input type="date" name="scheduledDate" />
+      <input formControlName="createdAt" type="date" />
     </div>
 
     <button type="submit" [disabled]="addform.invalid" class="submit-btn">

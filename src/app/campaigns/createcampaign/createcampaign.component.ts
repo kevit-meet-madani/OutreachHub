@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TemplatesService } from '../../templates/templates.service';
 import { Template } from '../../templates/data';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-createcampaign',
@@ -20,13 +20,16 @@ export class CreatecampaignComponent {
     ngOnInit(){
 
       this.addform = new FormGroup({
-        
+          template:new FormControl(''),
+          createdAt:new FormControl(' '),
+          name:new FormControl('',Validators.required),
+          tags:new FormControl(' ',Validators.required)
       })
       this.getTemplates();
     }
 
     submitCampaign(){
-      
+      console.log(this.addform.value.tags.split(' '));
     }
 
     getTemplates(){
@@ -34,4 +37,5 @@ export class CreatecampaignComponent {
         this.templates = tems;
       })
     }
+
 }

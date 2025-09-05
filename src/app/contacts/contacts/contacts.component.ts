@@ -33,6 +33,7 @@ export class ContactsComponent {
       }
 
   getContacts(){
+     
      this.contactService.getContacts().subscribe(contacts => {
        this.contacts = contacts
      })

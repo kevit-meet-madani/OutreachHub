@@ -16,6 +16,7 @@ export class ContactService {
   getContacts():Observable<Contact[]>{
      
     const token = localStorage.getItem('token');
+    const wid=localStorage.getItem('workspace')
     const headers = {
       'Authorization':`Bearer ${token}`
     }
