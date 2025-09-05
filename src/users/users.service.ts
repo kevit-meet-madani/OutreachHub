@@ -23,7 +23,7 @@ export class UserService{
     }
 
     getUsers(){
-        return this.userModel.find({},'id  email password role right workspaces').exec();
+        return this.userModel.find({},'id  email password role right workspaces').populate('workspaces').exec();
     }
 
     getUserById(id:string){
@@ -36,5 +36,11 @@ export class UserService{
 
     updateUser(id:string , updateUserDto:updateUserDto){
         return this.userModel.findByIdAndUpdate(id,updateUserDto)
+    }
+
+    getWorkspaces(req:any){
+        const decoded = req["user"];
+        console.log(decoded);
+        return this.userModel.find({_id:decoded.id},'workspaces').populate('workspaces');
     }
 }

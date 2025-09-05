@@ -2,7 +2,7 @@ import { IsNotEmpty , IsOptional, MinLength } from "class-validator";
 import mongoose from 'mongoose'
 
 export class updateUserDto{
-        @IsNotEmpty()
+        
         username:string;
     
         @IsOptional()

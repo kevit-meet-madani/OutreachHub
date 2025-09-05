@@ -18,7 +18,7 @@ export class OutMessage{
     @Prop({required:true})
     type:string;
 
-    @Prop({required:true,ref:'OutWorkspace'})
+    @Prop({type:mongoose.Types.ObjectId,ref:'OutWorkspace'})
     workspaceId:mongoose.Types.ObjectId;
 
     @Prop({required:true,ref:'OutUser'})
@@ -26,6 +26,9 @@ export class OutMessage{
 
     @Prop({required:true})
     content:Content
+
+    @Prop({type:Date,default: () => new Date()})
+    createdAt:Date
 }
 
 

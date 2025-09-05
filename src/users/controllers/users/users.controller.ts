@@ -1,4 +1,4 @@
-import { Controller , Get , Patch , Body , Post, UsePipes, ValidationPipe , Delete , Param , HttpException, UseGuards} from '@nestjs/common';
+import { Controller , Get , Patch , Body , Post, UsePipes, ValidationPipe , Delete , Param , HttpException, UseGuards, Req} from '@nestjs/common';
 import { createUserDto } from 'src/users/dto/createUser.dto';
 import { UserService } from 'src/users/users.service';
 import mongoose  from 'mongoose'
@@ -60,5 +60,11 @@ export class UsersController {
          throw new HttpException('User Not found',404);
        }
        return upUser;
+    }
+
+    @Get('workspaces')
+    @UseGuards(AuthGuard)
+    getWorkspaces(@Req() req:Request){
+      return this.userService.getWorkspaces(req);  
     }
 }

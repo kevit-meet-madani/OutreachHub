@@ -18,7 +18,7 @@ export class OutUser{
     @Prop({default:'edit'})
     right:string
 
-    @Prop({type:[mongoose.Types.ObjectId],ref:'Workspace',default:[],required:true})
+    @Prop({type:[mongoose.Types.ObjectId],ref:'OutWorkspace',default:[],required:true})
     workspaces:mongoose.Types.ObjectId[]
 }
 

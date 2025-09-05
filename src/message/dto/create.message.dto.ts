@@ -17,10 +17,10 @@ export class createMessageDto{
     @IsNotEmpty()
     type:string
 
-    @IsNotEmpty()
+    
     workspaceId:mongoose.Types.ObjectId
 
-    @IsNotEmpty()
+    
     createdBy:mongoose.Types.ObjectId
 
     @IsNotEmpty()

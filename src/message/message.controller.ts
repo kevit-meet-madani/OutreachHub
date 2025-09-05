@@ -1,4 +1,4 @@
-import { Body, Controller, Get , Param, Post , Patch , Delete, UseGuards} from "@nestjs/common";
+import { Body, Controller, Get , Param, Post , Patch , Delete, UseGuards, Req} from "@nestjs/common";
 import { MessageService } from "./message.service";
 import { createMessageDto } from "./dto/create.message.dto";
 import { UpdateMessageDto } from "./dto/update.message.dto";
@@ -10,8 +10,8 @@ export class MessageController{
 
     @Get()
     @UseGuards(AuthGuard)
-    getMessages(){
-        return this.messageService.getMessages();
+    getMessages(@Req() req:Request){
+        return this.messageService.getMessages(req);
     }
 
     @Get(':id')
@@ -22,8 +22,8 @@ export class MessageController{
 
     @Post()
     @UseGuards(AuthGuard)
-    createMessage(@Body() messageDto:createMessageDto){
-        return this.messageService.createMessage(messageDto);
+    createMessage(@Body() messageDto:createMessageDto,@Req() req:Request){
+        return this.messageService.createMessage(messageDto,req);
     }
 
     @Patch(':id')

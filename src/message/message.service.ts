@@ -9,15 +9,18 @@ import { UpdateMessageDto } from "./dto/update.message.dto";
 export class MessageService{
     constructor(@InjectModel(OutMessage.name) private messageModel:Model<OutMessage>){}
 
-    getMessages(){
-        return this.messageModel.find().populate('createdBy','username role right').populate('workspaceId').exec();
+    getMessages(req:any){
+
+        const decoded = req["user"];
+        return this.messageModel.find({createdBy:decoded.id}).populate('createdBy','username role right').populate('workspaceId').exec();
     }
 
     getMessageById(id:string){
         return this.messageModel.findById(id).populate('createdBy','username role right').populate('workspaceId').exec();
     }
 
-    createMessage(messageDto:createMessageDto){
+    createMessage(messageDto:createMessageDto,req:any){
+        messageDto["createdBy"] = req["user"].id;
         const newmsg = new this.messageModel(messageDto);
         return newmsg.save();
     }
