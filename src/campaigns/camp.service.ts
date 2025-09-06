@@ -7,15 +7,16 @@ import { UpdateCampaignDto } from "./dto/update.dto";
 export class CampService{
     constructor(@InjectModel(OutCampaign.name) private campModel:Model<OutCampaign>){}
 
-    getCampaigns(){
-        return this.campModel.find().populate('createdBy','username role right').populate('workspaceId').exec();
+    getCampaigns(req:any){
+        return this.campModel.find({workspaceId:req["user"].wid}).populate('createdBy','username role right').populate('workspaceId').exec();
     }
 
     getCampaignById(id:string){
         return this.campModel.findById(id).populate('createdBy','username role right').populate('workspaceId').exec();
     }
 
-    createCampaign(campDto:CreateCampaignDto){
+    createCampaign(campDto:CreateCampaignDto,req:any){
+        campDto["createdBy"] = req["user"].id;
         const newCamp = new this.campModel(campDto);
         return newCamp.save();
     }

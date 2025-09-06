@@ -1,4 +1,4 @@
-import { Controller , Body , Get , Post , Delete , Patch , Param, UseGuards} from "@nestjs/common";
+import { Controller , Body , Get , Post , Delete , Patch , Param, UseGuards, Req} from "@nestjs/common";
 import { CampService } from "./camp.service";
 import { CreateCampaignDto } from "./dto/createcamp.dto";
 import { UpdateCampaignDto } from "./dto/update.dto";
@@ -11,8 +11,8 @@ export class CampController{
     
     @Get()
     @UseGuards(AuthGuard)
-    getCampaigns(){
-        return this.campService.getCampaigns();
+    getCampaigns(@Req() req:Request){
+        return this.campService.getCampaigns(req);
     }
 
     @Get(':id')
@@ -23,8 +23,8 @@ export class CampController{
 
     @Post()
     @UseGuards(AuthGuard)
-    createCampaign(@Body() campDto:CreateCampaignDto){
-        return this.campService.createCampaign(campDto);
+    createCampaign(@Body() campDto:CreateCampaignDto,@Req() req:Request){
+        return this.campService.createCampaign(campDto,req);
     }
 
     @Patch(':id')

@@ -27,6 +27,6 @@ export class OutCampaign{
 
     @Prop({default:Date.now})
     createdAt:Date
-}
+}    
 
 export const CampaignSchema = SchemaFactory.createForClass(OutCampaign);

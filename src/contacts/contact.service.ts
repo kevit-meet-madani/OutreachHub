@@ -16,7 +16,7 @@ export class ContactService
         const decoded = req["user"];
 
         console.log(decoded);
-        return this.contactModel.find({createdBy:decoded.id}).populate('_id createdBy','username role right').populate('workspace');
+        return this.contactModel.find({workspace:decoded.wid}).populate('_id createdBy','username role right').populate('workspace');
     }
 
     getContactById(id:string){

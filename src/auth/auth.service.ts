@@ -30,7 +30,7 @@ export class AuthService {
 
         const payload = {id:findUser._id,right:findUser.right}
 
-        const token = this.jwtService.sign(payload,{secret : process.env.SECRET_KEY,expiresIn:'60m'});
+        const token = this.jwtService.sign(payload,{secret : `${process.env.secret}`,expiresIn:'60m'});
 
         const obj = {
             token:token

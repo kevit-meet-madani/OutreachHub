@@ -13,9 +13,8 @@ export class CreateCampaignDto{
     @IsNotEmpty()
     workspaceId:mongoose.Types.ObjectId;
     
-    @IsNotEmpty()
     createdBy:mongoose.Types.ObjectId;
     
     @IsNotEmpty()
-    tag:string;
+    tags:string[];
 }

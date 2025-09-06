@@ -12,7 +12,8 @@ export class MessageService{
     getMessages(req:any){
 
         const decoded = req["user"];
-        return this.messageModel.find({createdBy:decoded.id}).populate('createdBy','username role right').populate('workspaceId').exec();
+        decoded["wid"] = req["user"].wid;
+        return this.messageModel.find({workspaceId:decoded.wid}).populate('createdBy','username role right').populate('workspaceId').exec();
     }
 
     getMessageById(id:string){
