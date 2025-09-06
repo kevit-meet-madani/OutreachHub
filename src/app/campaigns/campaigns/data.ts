@@ -1,10 +1,18 @@
 export interface Campaign{
-    _id:string,
+    _id?:string,
      name: string,
     status: string,
     content: string,
-    workspaceId: Object,
-    createdBy: Object,
+    workspaceId: string,
+    templateId:{
+    type: 'text',
+    content: {
+      text:string
+      imagePath: string
+    },}
+    createdBy?: Object,
     tags: string[],
     createdAt:Date
 }
+
+

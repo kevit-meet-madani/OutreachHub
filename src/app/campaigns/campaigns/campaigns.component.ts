@@ -30,4 +30,8 @@ export class CampaignsComponent {
       this.campaigns = camps
     })
   }
+
+  deleteCampaign(id:any){
+     this.campsService.deleteCampaign(id);
+  }
 }

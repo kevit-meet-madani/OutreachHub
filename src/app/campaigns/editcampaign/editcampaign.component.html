@@ -1,6 +1,6 @@
 <div class="create-container">
   <h2>Create New Campaign</h2>
-  <form (ngSubmit)="submitCampaign()" [formGroup]="addform">
+  <form (ngSubmit)="submitCampaign()" [formGroup]="editform">
     <div class="form-group">
       <label>Campaign Name</label>
       <input type="text" formControlName="name" required placeholder="Enter campaign name" />
@@ -15,7 +15,7 @@
     </div>
     -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label>Select Template</label>
       <select formControlName="templateId" required>
         <option *ngFor="let tmp of templates" [ngValue]="tmp">
@@ -24,13 +24,13 @@
       </select>
     </div>
 
-    <div class="template-preview" *ngIf="addform.value.templateId">
+    <div class="template-preview" *ngIf="editform.value.templateId">
       <h3>Template Preview</h3>
-      <p>{{ addform.value.templateId.content.text }}</p>
-      <img *ngIf="addform.value.templateId.content.imagePath"
-           [src]="addform.value.templateId.content.imagePath"
+      <p>{{ editform.value.templateId.content.text }}</p>
+      <img *ngIf="editform.value.templateId.content.imagePath"
+           [src]="editform.value.templateId.content.imagePath"
            alt="Template Image" />
-    </div>
+    </div> -->
 
     <div class="form-group">
       <label for="text">Enter description</label>
@@ -53,8 +53,8 @@
       <input formControlName="createdAt" type="date" />
     </div>
 
-    <button type="submit" [disabled]="addform.invalid" class="submit-btn">
-      Create Campaign
+    <button type="submit" [disabled]="editform.invalid" class="submit-btn">
+      Update
     </button>
   </form>
 </div>

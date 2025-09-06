@@ -16,7 +16,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let c of campaigns">
-        <td><a [routerLink]="['/campaigns/view', c._id]">{{ c.name }}</a></td>
+        <td><a [routerLink]="['view', c._id]">{{ c.name }}</a></td>
         <td><span class="status-badge">{{ c.status }}</span></td>
         <td>
           <ng-container *ngFor="let tag of c.tags">
@@ -25,11 +25,11 @@
         </td>
         <td>{{ c.createdAt | date:'mediumDate' }}</td>
         <td class="actions">
-          <button *ngIf="c.status === 'Draft'" [routerLink]="['/campaigns/edit', c._id]">Edit</button>
-          <button [routerLink]="['/campaigns/view', c._id]">View</button>
-          <button *ngIf="c.status === 'draft'">Launch</button>
+          <button *ngIf="c.status === 'Draft'" [routerLink]="['edit', c._id]">Edit</button>
+          <button [routerLink]="['view', c._id]">View</button>
+          <button *ngIf="c.status === 'Draft'">Launch</button>
           <button>Copy</button>
-          <button>Delete</button>
+          <button (click)="deleteCampaign(c._id)">Delete</button>
         </td>
       </tr>
     </tbody>

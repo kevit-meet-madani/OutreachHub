@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TemplatesService } from '../../templates/templates.service';
 import { Template } from '../../templates/data';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CampaignService } from '../campaign.service';
 
 @Component({
   selector: 'app-createcampaign',
@@ -10,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CreatecampaignComponent {
 
-  constructor(private templateService:TemplatesService) {}
+  constructor(private campaignService:CampaignService,private templateService:TemplatesService) {}
 
   addform!:FormGroup
 
@@ -20,16 +21,25 @@ export class CreatecampaignComponent {
     ngOnInit(){
 
       this.addform = new FormGroup({
-          template:new FormControl(''),
-          createdAt:new FormControl(' '),
+          templateId:new FormControl(''),
+          createdAt:new FormControl(''),
           name:new FormControl('',Validators.required),
-          tags:new FormControl(' ',Validators.required)
+          tags:new FormControl([''],Validators.required),
+          content:new FormControl('',Validators.required)
       })
       this.getTemplates();
     }
 
     submitCampaign(){
-      console.log(this.addform.value.tags.split(' '));
+      const tags = this.addform.value.tags.split(' ');
+      
+      const obj = this.addform.value;
+      obj["tags"] = tags;
+      obj["workspaceId"] = localStorage.getItem('workspace');
+      obj["status"] = "Draft";
+
+      console.log(obj);
+      this.campaignService.createCampaign(obj);
     }
 
     getTemplates(){

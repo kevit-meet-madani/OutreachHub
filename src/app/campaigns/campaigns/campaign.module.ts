@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CampaignRoutingModule } from './campaign-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -8,7 +9,8 @@ import { CampaignRoutingModule } from './campaign-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    CampaignRoutingModule
+    CampaignRoutingModule,
+    FormsModule
   ]
 })
 export class CampaignModule { }

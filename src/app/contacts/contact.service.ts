@@ -16,15 +16,18 @@ export class ContactService {
   getContacts():Observable<Contact[]>{
      
     const token = localStorage.getItem('token');
+    const id = localStorage.getItem('workspace');
     const wid=localStorage.getItem('workspace')
     const headers = {
-      'Authorization':`Bearer ${token}`
+      'Authorization':`Bearer ${token} ${id}`,
     }
     return this.http.get<Contact[]>(this.url,{ headers });
   }
 
   createContact(contact:Contact){
     const token = localStorage.getItem('token');
+    const wid = localStorage.getItem('workspace')!;
+    contact["workspace"] = wid;
     const headers = {
       'Authorization':`Bearer ${token}`
     }
@@ -86,7 +89,8 @@ export class ContactService {
     })
   }
 
-  getPermisson():boolean{
-     return this.authService.getUserInfo() !== "edit";
+  getPermisson():string[]{
+     const res = this.authService.getUserInfo()?.split(' ')!;
+     return res;
   }
 }

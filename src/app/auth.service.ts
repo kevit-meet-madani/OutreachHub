@@ -56,7 +56,7 @@ export class AuthService {
     getDecodedToken(token: string): string | null {
     try {
       const data = jwtDecode<payload>(token);
-      return data.right;
+      return data.right+" "+data.id;
     } catch (error) {
       console.error('Invalid token', error);
       return null;

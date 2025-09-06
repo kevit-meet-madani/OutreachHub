@@ -4,6 +4,6 @@ export interface Contact{
     phoneNumber:number;
     tag:string;
     createdBy:Object;
-    workspace:Object;
+    workspace:string;
     createdAt:Date;
 }

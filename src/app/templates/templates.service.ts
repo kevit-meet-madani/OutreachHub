@@ -18,8 +18,9 @@ export class TemplatesService {
   getTemplates():Observable<Template[]>{
 
     const token = localStorage.getItem('token');
+    const wid = localStorage.getItem('workspace');
     const headers = {
-      'Authorization':`Bearer ${token}`
+      'Authorization':`Bearer ${token} ${wid}`
     }
 
     return this.http.get<Template[]>(this.url,{ headers });

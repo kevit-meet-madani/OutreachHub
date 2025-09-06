@@ -1,4 +1,3 @@
-
 <br><br>
 <div class="contact-header-container">
   <div class="left-section">
@@ -14,7 +13,7 @@
       <option value="tag">Tag</option>
     </select>
 
-    <button class="add-button" [routerLink]="['/dashboard/contacts/create']" [ngClass]="{'denied':permisson}">+ Add New Contact</button>
+    <button class="add-button" [routerLink]="['/dashboard/contacts/create']" [ngClass]="{'denied':user[0] === 'view'}">+ Add New Contact</button>
   </div>
 </div>
     <div class="contact-list">
@@ -26,12 +25,10 @@
                   <h2><span class="contact-tag">{{ contact.tag }}</span></h2>
                   <div class="contact-actions">
                        <button [routerLink]="['/dashboard/contacts/view',contact._id]">View</button>
-                       <button [routerLink]="['/dashboard/contacts/edit',contact._id]" [ngClass]="{'denied':permisson}">Edit</button>
-                       <button (click)="deleteContact(contact._id)" [ngClass]="{'denied':permisson}">Delete</button>
+                       <button [routerLink]="['/dashboard/contacts/edit',contact._id]" [ngClass]="{'denied':call(contact.createdBy)}">Edit</button>
+                       <button (click)="deleteContact(contact._id)" [ngClass]="{'denied':call(contact.createdBy)}">Delete</button>
                   </div>
             </section>
          </div>
     </div>
 <hr />
-
-

@@ -27,6 +27,8 @@ import { DropdownComponent } from './dashboard/dropdown/dropdown.component';
 import { EdittemplateComponent } from './templates/edittemplate/edittemplate.component';
 import { ViewtemplateComponent } from './templates/viewtemplate/viewtemplate.component';
 import { CreatecampaignComponent } from './campaigns/createcampaign/createcampaign.component';
+import { EditcampaignComponent } from './campaigns/editcampaign/editcampaign.component';
+import { ViewcampaignComponent } from './campaigns/viewcampaign/viewcampaign.component';
 
 
 
@@ -54,6 +56,8 @@ import { CreatecampaignComponent } from './campaigns/createcampaign/createcampai
     EdittemplateComponent,
     ViewtemplateComponent,
     CreatecampaignComponent,
+    EditcampaignComponent,
+    ViewcampaignComponent
   ],
   imports: [
     BrowserModule,

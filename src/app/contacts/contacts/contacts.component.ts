@@ -20,10 +20,19 @@ export class ContactsComponent {
 
     contacts: Contact[] = []
     selectedSort = 'name';
-    permisson:boolean = this.contactService.getPermisson();
+
+    user!:string[]
+    getpermisson():string[]{
+      return this.contactService.getPermisson();
+    }
 
     ngOnInit(){
        this.getContacts()
+       this.user = this.getpermisson()
+    }
+
+    call(id:any){
+      return this.user[1] === id; 
     }
 
     onSortChange(event: any) {
@@ -36,6 +45,7 @@ export class ContactsComponent {
      
      this.contactService.getContacts().subscribe(contacts => {
        this.contacts = contacts
+       console.log(this.contacts);
      })
   }
 

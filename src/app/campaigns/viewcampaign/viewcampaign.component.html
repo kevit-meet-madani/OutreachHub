@@ -1,0 +1,42 @@
+<div class="template-view-container">
+  <h2>{{ campaign.name }}</h2>
+
+  <div class="template-details">
+    <div class="detail">
+      <strong>Status:</strong>
+      <span>{{ campaign.status }}</span>
+    </div>
+
+
+    <div class="detail">
+      <strong>Created At:</strong>
+      <span>{{ campaign.createdAt | date: 'mediumDate' }}</span>
+    </div>
+
+    <div class="detail">
+        <strong>Tgas:</strong>
+         <ng-container *ngFor="let tag of campaign.tags">
+            <span class="tag-badge">{{ tag }}</span>
+          </ng-container>
+    </div>
+
+    <div class="detail">
+      <strong>Text Content:</strong>
+      <p class="content-text">{{ campaign.content }}</p>
+    </div>
+
+    <div class="detail" [ngClass]="{'dis': campaign.templateId.type !== 'text'}">
+         <strong>Template-Image:</strong>
+         <div class="image-preview">
+             <img [src]="campaign.templateId?.content?.imagePath" alt="Template Image" />
+        </div>
+    </div>
+
+    <div class="detail">
+      <strong>Template Content:</strong>
+      <p class="content-text">{{ campaign.templateId?.content?.text }}</p>
+    </div>
+
+  </div>
+  <button [routerLink]="['/dashboard/campaigns']">Back</button>
+</div>

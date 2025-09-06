@@ -14,19 +14,36 @@ export class CampaignService {
 
   getCampaigns():Observable<Campaign[]>{
     const token = localStorage.getItem('token');
+    const wid = localStorage.getItem('workspace');
     const headers = {
-      "Authorization":`Bearer ${token}`
+      'Authorization':`Bearer ${token} ${wid}`
     }
     return this.http.get<Campaign[]>(this.url,{ headers })
+  }
+
+  getCampaign(id:any){
+    const token = localStorage.getItem('token');
+    const headers = {
+      'Authorization':`Bearer ${token}`
+    }
+
+    return this.http.get<Campaign>(`${this.url}/${id}`,{ headers })
   }
 
   createCampaign(campaign:Campaign){
     const token = localStorage.getItem('token');
     const headers = {
-      "Authorization":`bearer ${token}`
+      "Authorization":`Bearer ${token}`
     }
 
-    this.http.post<Campaign>(this.url,campaign,{ headers })
+    this.http.post<Campaign>(this.url,campaign,{ headers }).subscribe({
+      next:(response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   updateCampaign(campaign:Campaign){
@@ -35,7 +52,14 @@ export class CampaignService {
       "Authorization":`bearer ${token}`
     }
 
-    this.http.patch<Campaign>(`${this.url}/${campaign._id}`,campaign,{ headers })
+    this.http.patch<Campaign>(`${this.url}/${campaign._id}`,campaign,{ headers }).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error+"   !");
+      }
+    })
   }
 
   deleteCampaign(id:any){
