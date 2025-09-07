@@ -1,0 +1,30 @@
+<div class="campaign-list-container">
+  <div class="header">
+    <h2>Workspaces</h2>
+    <button class="create-btn">+ Create New Workspace</button>
+  </div>
+
+  <table class="campaign-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Number of Users</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let w of workspaces">
+        <td><a >{{ w.name }}</a></td>
+        <td>{{ w.createdAt }}</td>
+        <td>50</td>
+        <td class="actions">
+          <button>Edit</button>
+          <button>View</button>
+          <button>Copy</button>
+          <button>Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
