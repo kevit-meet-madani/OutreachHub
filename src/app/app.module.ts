@@ -64,7 +64,7 @@ import { ViewcampaignComponent } from './campaigns/viewcampaign/viewcampaign.com
     AppRoutingModule,
     ReactiveFormsModule,
     BaseChartDirective,
-    HttpClientModule,
+    HttpClientModule,     
     FormsModule
 ],
   providers: [

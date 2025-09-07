@@ -6,6 +6,7 @@ export interface User{
 export interface payload{
     id:string;
     right:string;
+    role:string;
     exp: number;
     iat: number;
 }

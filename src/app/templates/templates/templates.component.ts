@@ -27,7 +27,7 @@ export class TemplatesComponent {
       }
 
       call(id:any):boolean{
-      return !(this.user[1] === id && this.user[0] === "edit"); 
+      return (this.user[1] !== id && this.user[0] !== "edit"); 
     }
 
       getTemplates(){

@@ -32,7 +32,8 @@ export class ContactsComponent {
     }
 
     call(id:any):boolean{
-      return !(this.user[1] === id && this.user[0] === "edit"); 
+      console.log(this.user);
+      return (this.user[1] !== id && this.user[0] !== "edit"); 
     }
 
     onSortChange(event: any) {

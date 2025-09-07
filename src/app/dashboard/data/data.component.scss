@@ -12,6 +12,62 @@ h1{
   justify-content: center;
 }
 
+button{
+  background-color: #3F51B5;
+  color: white;
+  padding: 5px;
+  font-size: 20px;
+  width: 80px;
+  border-radius: 5px;
+}
+
+    .date-range-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      max-width: 450px;
+      width: 100%;
+    }
+
+    .date-group {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input[type="date"] {
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    input[type="date"]:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      .date-range-container {
+        flex-direction: column;
+      }
+    }
+
 .chart-box {
   width: 400px;       // You can adjust this (e.g. 300px, 500px)
   height: 300px;

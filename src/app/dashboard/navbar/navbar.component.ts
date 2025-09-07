@@ -13,6 +13,7 @@ export class NavbarComponent {
     logOut(){
        if(this.authservice.logOut()){
         localStorage.removeItem('token');
+        localStorage.removeItem('workspace');
        }
     }
 }
