@@ -11,7 +11,7 @@ export class WorkspaceService{
     constructor(@InjectModel(OutWorkspace.name) private workspaceModel:Model<OutWorkspace>){}
 
     getWorkspaces(){
-        return this.workspaceModel.find().populate('createdBy','username role right');
+        return this.workspaceModel.find().populate('createdBy','email role right');
     }
 
     getWorkspaceById(id:string){

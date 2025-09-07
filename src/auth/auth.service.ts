@@ -27,8 +27,7 @@ export class AuthService {
         }
 
         const expiresAt = new Date(Date.now() + 60 * 60 * 1000); 
-
-        const payload = {id:findUser._id,right:findUser.right}
+        const payload = {id:findUser._id,right:findUser.right,role:findUser.role}
 
         const token = this.jwtService.sign(payload,{secret : `${process.env.secret}`,expiresIn:'60m'});
 
