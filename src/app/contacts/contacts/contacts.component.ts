@@ -31,8 +31,8 @@ export class ContactsComponent {
        this.user = this.getpermisson()
     }
 
-    call(id:any){
-      return this.user[1] === id; 
+    call(id:any):boolean{
+      return !(this.user[1] === id && this.user[0] === "edit"); 
     }
 
     onSortChange(event: any) {

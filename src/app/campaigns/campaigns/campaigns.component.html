@@ -1,7 +1,7 @@
 <div class="campaign-list-container">
   <div class="header">
     <h2>Campaigns</h2>
-    <button class="create-btn" [routerLink]="['/dashboard/campaigns/create']">+ Create New Campaign</button>
+    <button class="create-btn" [routerLink]="['/dashboard/campaigns/create']" [ngClass]="{'denied':user[0] === 'view'}">+ Create New Campaign</button>
   </div>
 
   <table class="campaign-table">
@@ -25,11 +25,11 @@
         </td>
         <td>{{ c.createdAt | date:'mediumDate' }}</td>
         <td class="actions">
-          <button *ngIf="c.status === 'Draft'" [routerLink]="['edit', c._id]">Edit</button>
+          <button *ngIf="c.status === 'Draft'" [routerLink]="['edit', c._id]" [ngClass]="{'denied':call(c.createdBy)}">Edit</button>
           <button [routerLink]="['view', c._id]">View</button>
           <button *ngIf="c.status === 'Draft'">Launch</button>
           <button>Copy</button>
-          <button (click)="deleteCampaign(c._id)">Delete</button>
+          <button (click)="deleteCampaign(c._id)" [ngClass]="{'denied':call(c.createdBy)}">Delete</button>
         </td>
       </tr>
     </tbody>

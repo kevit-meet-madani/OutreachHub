@@ -101,7 +101,7 @@
         <option value="type">Type</option>
         <option value="sentAt">Sent Date</option>
       </select>
-      <button [routerLink]="['/dashboard/templates/create']" class="add-button">+ Add Template</button>
+      <button [routerLink]="['/dashboard/templates/create']" class="add-button" [ngClass]="{'denied':user[0] === 'view'}">+ Add Template</button>
     </div>
   </div>
 
@@ -116,8 +116,8 @@
           <p class="date">Sent: {{ template.createdAt | date:'mediumDate' }}</p>
           <div class="card-actions">
             <button [routerLink]="['/dashboard/templates/view', template._id]">View</button>
-            <button [routerLink]="['/dashboard/templates/edit', template._id]">Edit</button>
-            <button (click)="delete(template._id)" class="danger">Delete</button>
+            <button [routerLink]="['/dashboard/templates/edit', template._id]" [ngClass]="{'denied':call(template.createdBy)}">Edit</button>
+            <button (click)="delete(template._id)" class="danger" [ngClass]="{'denied':call(template.createdBy)}">Delete</button>
           </div>
         </div>
       </div>
@@ -142,8 +142,8 @@
           <td>{{ template.createdAt | date:'mediumDate' }}</td>
           <td>
             <button [routerLink]="['/dashboard/templates/view', template._id]">View</button>
-            <button [routerLink]="['/dashboard/templates/edit', template._id]">Edit</button>
-            <button (click)="delete(template._id)" class="danger">Delete</button>
+            <button [routerLink]="['/dashboard/templates/edit', template._id]" [ngClass]="{'denied':call(template.createdBy)}">Edit</button>
+            <button (click)="delete(template._id)" class="danger" [ngClass]="{'denied':call(template.createdBy)}">Delete</button>
           </td>
         </tr>
       </tbody>

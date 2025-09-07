@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Campaign } from './campaigns/data';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CampaignService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private authService:AuthService) { }
 
   url = 'http://localhost:5000/campaigns'
 
@@ -69,5 +70,10 @@ export class CampaignService {
     }
 
     this.http.delete(`${this.url}/${id}`,{ headers })
+  }
+
+  getPermisson():string[]{
+     const res = this.authService.getUserInfo()?.split(' ')!;
+     return res;
   }
 }

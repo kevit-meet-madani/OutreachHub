@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Template } from './data';
 import { response } from 'express';
 import { UpdateTemplate } from './updatedata';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { UpdateTemplate } from './updatedata';
 
 export class TemplatesService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private authService:AuthService) { }
 
   url = 'http://localhost:5000/messages'
 
@@ -70,8 +71,9 @@ export class TemplatesService {
      return this.http.get<Template>(`${this.url}/${id}`,{ headers })
   }
 
-  getPermisson():boolean{
-      return false;
+  getPermisson():string[]{
+     const res = this.authService.getUserInfo()?.split(' ')!;
+     return res;
   }
 
   deleteTemplate(id:any){

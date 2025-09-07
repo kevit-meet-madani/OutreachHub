@@ -15,12 +15,20 @@ export class TemplatesComponent {
 
       textTypes:Template[] = []
       imageTypes:Template[] = []
-      permisson:boolean = this.templateService.getPermisson();
+      user!:string[]
+    getpermisson():string[]{
+      return this.templateService.getPermisson();
+    }
 
       ngOnInit(){
         this.getTemplates();
+        this.user = this.getpermisson();
         console.log(this.templates)
       }
+
+      call(id:any):boolean{
+      return !(this.user[1] === id && this.user[0] === "edit"); 
+    }
 
       getTemplates(){
          this.templateService.getTemplates().subscribe(tems => {

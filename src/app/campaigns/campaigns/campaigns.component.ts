@@ -12,10 +12,20 @@ export class CampaignsComponent {
   constructor(private campsService:CampaignService) {}
      campaigns: Campaign[] = [];
 
+     user!:string[]
+    getpermisson():string[]{
+      return this.campsService.getPermisson();
+    }
+
   ngOnInit() {
     // replace with API call
     this.getCampaigns();
+    this.user = this.getpermisson();
   }
+
+  call(id:any):boolean{
+      return !(this.user[1] === id && this.user[0] === "edit"); 
+    }
 
   getStatusClass(status: string): string {
     return {
