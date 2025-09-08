@@ -1,4 +1,4 @@
-import { Controller , Get , Post , Delete , Patch , Body , Param , UseGuards, UsePipes, ValidationPipe, HttpException } from '@nestjs/common';
+import { Controller , Get , Post , Delete , Patch , Body , Param , UseGuards, UsePipes, ValidationPipe, HttpException, Req } from '@nestjs/common';
 import { WorkspaceService } from './workspace.service';
 import { createWorkspaceDto } from './dto/create.workspace.dto';
 import { UpdateWorkspaceDto } from './dto/update.workspace.dto';
@@ -23,8 +23,8 @@ export class WorkspaceController
 
     @Post()
     @UseGuards(AuthGuard)
-    createWorkspace(@Body() createWorkspace:createWorkspaceDto){
-        return this.workspaceService.createWorkspace(createWorkspace);
+    createWorkspace(@Body() createWorkspace:createWorkspaceDto,@Req() req:Request){
+        return this.workspaceService.createWorkspace(createWorkspace,req);
     }
 
     @Delete(':id')
