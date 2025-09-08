@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { payload, User } from './user';
 import { catchError, map, Observable , of} from 'rxjs';
 import { jwtDecode } from "jwt-decode";
-import { Workspace } from './dashboard/data';
+import { Work, Workspace } from './dashboard/data';
 
 @Injectable({
   providedIn: 'root'
@@ -74,12 +74,12 @@ export class AuthService {
     return this.getDecodedToken(token);
   }
 
-  getWorkSpaces():Observable<Workspace[]>{
+  getWorkSpaces():Observable<Work[]>{
 
     const token = localStorage.getItem('token');
     const headers = {
       'Authorization':`Bearer ${token}`
     }
-    return this.http.get<Workspace[]>(this.url2,{ headers })
+    return this.http.get<Work[]>(this.url2,{ headers }) 
   }
 }

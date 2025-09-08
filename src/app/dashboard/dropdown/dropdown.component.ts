@@ -16,6 +16,7 @@ export class DropdownComponent {
       selectedValue!:string ;
       array:Workspace[] = []
       selectedWorkspaces: string[] = [];
+      // workspaces:Work[]=[]
       workspaces:Work[]=[]
   
       ngOnInit(){
@@ -24,11 +25,13 @@ export class DropdownComponent {
       obj!:Object
       getWorkspaces(){
         this.authService.getWorkSpaces().subscribe(res => {
-          this.array = res
-          console.log(this.array)
-          this.workspaces = this.array[0].workspaces
-        })
-      }
+        //   this.array = res
+        //   console.log(this.array)
+        //   this.workspaces = this.array[0].workspaces
+        // })
+        this.workspaces = res
+      })
+    }
 
       getVal(){
          localStorage.setItem('workspace',this.selectedValue);
