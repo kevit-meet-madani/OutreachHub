@@ -1,0 +1,12 @@
+<div class="container">
+    <form [formGroup]="addform" (ngSubmit)="OnSubmit()">
+        <h1>Create New Workspace</h1>
+        <label for="name">Enter Name : </label>
+        <input type="text" formControlName="name" #name>
+
+        <label for="summary">Enter summary : </label>
+        <textarea formControlName="summary"></textarea>
+        
+        <button type="submit" [disabled]="addform.invalid">Create</button>
+    </form>
+</div>

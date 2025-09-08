@@ -11,6 +11,7 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { DataComponent } from './dashboard/data/data.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
+import { CreateworkspaceComponent } from './createworkspace/createworkspace.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { LoginComponent } from './auth/login/login.component';
     DashboardComponent,
     NavbarComponent,
     FooterComponent,
-    DataComponent
+    DataComponent,
+    CreateworkspaceComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 export interface Workspace{
-    _id:string;
+    _id?:string;
     name:string;
     createdBy?:Object;
     summary:string;
-    createdAt:Date
+    createdAt?:Date
 }

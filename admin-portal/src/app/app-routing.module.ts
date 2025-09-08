@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { DataComponent } from './dashboard/data/data.component';
 import { LoginComponent } from './auth/login/login.component';
+import { CreateworkspaceComponent } from './createworkspace/createworkspace.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path:'',
         component:DataComponent
+      },
+      {
+        path:'create',
+        component:CreateworkspaceComponent
       }
     ]
   }

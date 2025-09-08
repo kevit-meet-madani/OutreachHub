@@ -1,7 +1,7 @@
 <div class="campaign-list-container">
   <div class="header">
     <h2>Workspaces</h2>
-    <button class="create-btn">+ Create New Workspace</button>
+    <button class="create-btn" [routerLink]="['/dashboard/create']">+ Create New Workspace</button>
   </div>
 
   <table class="campaign-table">
@@ -22,7 +22,7 @@
           <button>Edit</button>
           <button>View</button>
           <button>Copy</button>
-          <button>Delete</button>
+          <button (click)="delete(w._id)">Delete</button> 
         </td>
       </tr>
     </tbody>
