@@ -38,4 +38,15 @@ export class CampController{
     deleteCampaign(@Param('id') id:string){
         return this.campService.deleteCampaign(id);
     }
+
+    @Get('recent/:id')
+    @UseGuards(AuthGuard)
+    getRecentCampaigns(@Param('id') id:string){
+         return this.campService.getRecentCampaigns(id);
+    }
+
+    @Get('/chart/:daterange')
+    getCampChart(@Param('daterange') daterange:string){
+        return this.campService.getCampChart(daterange);
+    }
 }

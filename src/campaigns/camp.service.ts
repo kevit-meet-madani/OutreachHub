@@ -28,4 +28,32 @@ export class CampService{
     deleteCampaign(id:string){
         return this.campModel.findByIdAndDelete(id).exec();
     }
+
+    getRecentCampaigns(id:string){
+        return this.campModel.aggregate([
+            {
+                $match:{workspaceId:id}
+            },
+            {
+                $sort:{createdAt:-1}
+            }
+        ]).limit(5);
+    }
+
+    getCampChart(daterange:string){
+        const arr = daterange.trim().split(' ');
+        const dates = [new Date(arr[0]),new Date(arr[1])];
+        console.log(dates);
+        return this.campModel.aggregate([
+            {
+                $match:{createdAt:{$gte:dates[0],$lte:dates[1]},workspaceId:arr[2]}
+            },
+            {
+                $group:{
+                    _id:"$createdAt",
+                    count:{$sum:1}
+                }
+            }
+        ])
+    }
 }

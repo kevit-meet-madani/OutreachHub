@@ -22,9 +22,10 @@ export class ContactController{
      }
 
      @Get('tags/:tag')
-     getContactsByTag(@Param('tag') tag:string){
-      console.log(tag);
-      return this.contactService.getContactByTag(tag);
+     getContactsByTag(@Param('tag') tags:string){
+      const arr = tags.split(' ');
+      console.log(arr);
+      return this.contactService.getContactsByTag(arr);
      }
 
      @Post()
@@ -43,5 +44,10 @@ export class ContactController{
      @UseGuards(AuthGuard)
      updateContact(@Body() contactDto:updateContactDto,@Param('id') id:string){
         return this.contactService.updateContact(id,contactDto);
+     }
+
+     @Get('toptags/:id')
+     getTopTags(@Param('id') id:string){
+        return this.contactService.getTopTags(id);
      }
 }

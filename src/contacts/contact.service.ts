@@ -23,8 +23,12 @@ export class ContactService
         return this.contactModel.findById(id).populate('createdBy','username role right').populate('workspace');
     }
 
-     getContactByTag(tagg:string){
-        return this.contactModel.find({tag:tagg}).select('_id name');
+     getContactsByTag(tags:string[]){
+        const wid = tags[tags.length-1];
+        tags.pop();
+
+
+        return this.contactModel.find({tag:{$in:tags},workspace:wid}).select('_id name');
     }
 
     createContact(contactDto:createContactDto,req:any){
@@ -41,5 +45,22 @@ export class ContactService
 
     updateContact(id:string,contactDto:createContactDto){
         return this.contactModel.findByIdAndUpdate(id,contactDto);
+    }
+
+    getTopTags(id:string){
+        return this.contactModel.aggregate([
+            {
+                $match:{workspace:id}
+            },
+            {
+                $group:{
+                    _id:"$tag",
+                    count:{$sum : 1}
+                },
+            },
+            {
+              $sort:{count:-1}
+            }
+        ]).limit(5)
     }
 }
