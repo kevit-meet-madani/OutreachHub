@@ -4,7 +4,6 @@ export class createWorkspaceDto{
     @IsNotEmpty()
     name:string;
 
-    @IsNotEmpty()
     createdBy:string;
 
     @IsNotEmpty()

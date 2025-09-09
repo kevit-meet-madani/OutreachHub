@@ -18,7 +18,8 @@ export class WorkspaceService{
         return this.workspaceModel.findById(id);
     }
 
-    createWorkspace(createWorkspaceDto:createWorkspaceDto){
+    createWorkspace(createWorkspaceDto:createWorkspaceDto,req:any){
+          createWorkspaceDto["createdBy"] = req["user"].id;
           const newWorkspace = new this.workspaceModel(createWorkspaceDto);
           return newWorkspace.save();
     }

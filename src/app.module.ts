@@ -19,7 +19,7 @@ import { CampMessModule } from './campmess/campmess.module';
     MongooseModule.forRoot(`${process.env.DBURL}`),
     UsersModule,
     AuthModule,
-    WorkspacesModule,
+    WorkspacesModule, 
     ContactModule,    
     CampModule,
     MsgModule,

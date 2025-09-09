@@ -4,11 +4,12 @@ import { UserService } from 'src/users/users.service';
 import mongoose  from 'mongoose'
 import { updateUserDto } from 'src/users/dto/updateUser.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { WorkspaceService } from 'src/workspaces/workspace.service';
 
 @Controller('users')
 export class UsersController {
 
-    constructor(private userService:UserService){}
+    constructor(private userService:UserService){} 
 
     @Get()
     @UseGuards(AuthGuard)
@@ -48,6 +49,7 @@ export class UsersController {
          }
          return del;
     }
+
     
     @Patch(':id')
     async updateUser(@Param('id') id:string,@Body() updateUserDto:updateUserDto){
@@ -64,7 +66,11 @@ export class UsersController {
 
     @Get('workspaces')
     @UseGuards(AuthGuard)
-    getWorkspaces(@Req() req:Request){
-      return this.userService.getWorkspaces(req);  
+    async getWorkspaces(@Req() req:Request){
+      const res = await this.userService.getWorkspaces(req);  
+      const arr = res[0].workspaces;
+
+      
+      return arr;
     }
 }

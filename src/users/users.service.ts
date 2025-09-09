@@ -38,9 +38,9 @@ export class UserService{
         return this.userModel.findByIdAndUpdate(id,updateUserDto)
     }
 
-    getWorkspaces(req:any){
+    async getWorkspaces(req:any){
         const decoded = req["user"];
         console.log(decoded);
-        return this.userModel.find({_id:decoded.id},'workspaces').populate('workspaces');
+        return await this.userModel.find({_id:decoded.id},'workspaces').populate('workspaces').then();
     }
 }
