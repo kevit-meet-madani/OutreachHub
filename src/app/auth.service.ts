@@ -74,12 +74,12 @@ export class AuthService {
     return this.getDecodedToken(token);
   }
 
-  getWorkSpaces():Observable<Work[]>{
+  getWorkSpaces():Observable<Workspace[]>{
 
     const token = localStorage.getItem('token');
     const headers = {
       'Authorization':`Bearer ${token}`
     }
-    return this.http.get<Work[]>(this.url2,{ headers }) 
+    return this.http.get<Workspace[]>(this.url2,{ headers }) 
   }
 }

@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Campaign } from './campaigns/data';
+import { Campaign, CampMess } from './campaigns/data';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { ContactService } from '../contacts/contact.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CampaignService {
 
-  constructor(private http:HttpClient,private authService:AuthService) { }
+  constructor(private http:HttpClient,private authService:AuthService,private contactService:ContactService) { }
 
   url = 'http://localhost:5000/campaigns'
+  url2 = 'http://localhost:5000/campmess';
 
   getCampaigns():Observable<Campaign[]>{
     const token = localStorage.getItem('token');
@@ -75,5 +77,38 @@ export class CampaignService {
   getPermisson():string[]{
      const res = this.authService.getUserInfo()?.split(' ')!;
      return res;
+  }
+
+  async launchCampMess(campaign:Campaign){
+    const token = localStorage.getItem('token');
+    const headers = {
+      "Authorization":`bearer ${token}`
+    }
+
+    
+     this.getContactsByTags(campaign.tags).subscribe((res) => {
+      next : () => {
+        const obj = {
+        campaignId:campaign._id,
+        workspaceId:localStorage.getItem('workspace')!,
+        templateData:campaign.templateId,
+        tags:campaign.tags,
+        contacts:res
+     }
+
+     this.http.post<CampMess>(this.url2,obj, { headers }).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+     })
+      }
+     })
+  }
+
+  getContactsByTags(tags:string[]){
+     return this.contactService.getContactsByTag(tags);
   }
 }

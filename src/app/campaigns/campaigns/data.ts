@@ -15,4 +15,14 @@ export interface Campaign{
     createdAt:Date
 }
 
+export interface CampMess{
+    campaignId?:string,
+    workspaceId:string;
+    createdBy?:Object;
+    templateData:Object;
+    tags:string[];
+    contacts:string[]
+    createdAt?:Date
+}
+
 

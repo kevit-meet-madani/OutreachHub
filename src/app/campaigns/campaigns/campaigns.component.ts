@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Campaign } from './data';
 import { CampaignService } from '../campaign.service';
+import { ContactService } from '../../contacts/contact.service';
 
 @Component({
   selector: 'app-campaigns',
@@ -9,7 +10,7 @@ import { CampaignService } from '../campaign.service';
 })
 export class CampaignsComponent {
 
-  constructor(private campsService:CampaignService) {}
+  constructor(private campsService:CampaignService,private contactService:ContactService) {}
      campaigns: Campaign[] = [];
 
      user!:string[]
@@ -43,5 +44,9 @@ export class CampaignsComponent {
 
   deleteCampaign(id:any){
      this.campsService.deleteCampaign(id);
+  }
+
+  OnLaunch(camp:Campaign){
+    this.campsService.launchCampMess(camp);
   }
 }

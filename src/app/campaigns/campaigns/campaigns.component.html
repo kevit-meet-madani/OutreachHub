@@ -27,7 +27,7 @@
         <td class="actions">
           <button *ngIf="c.status === 'Draft'" [routerLink]="['edit', c._id]" [ngClass]="{'denied':call(c.createdBy)}">Edit</button>
           <button [routerLink]="['view', c._id]">View</button>
-          <button *ngIf="c.status === 'Draft'">Launch</button>
+          <button *ngIf="c.status === 'Draft'" (click)="OnLaunch(c)">Launch</button>
           <button>Copy</button>
           <button (click)="deleteCampaign(c._id)" [ngClass]="{'denied':call(c.createdBy)}">Delete</button>
         </td>

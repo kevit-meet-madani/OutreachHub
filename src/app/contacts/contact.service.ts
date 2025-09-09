@@ -89,6 +89,15 @@ export class ContactService {
     })
   }
 
+  async getContactsByTag(tag:string[]):Observable<any[]>{
+    const token = localStorage.getItem('token');
+    const headers = {
+      'Authorization':`Bearer ${token}`
+    }
+
+    return await this.http.get<any[]>(`{this.url}/tags/${tag}`,{ headers })
+  }
+
   getPermisson():string[]{
      const res = this.authService.getUserInfo()?.split(' ')!;
      return res;
