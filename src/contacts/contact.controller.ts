@@ -21,6 +21,12 @@ export class ContactController{
         return this.contactService.getContactById(id);
      }
 
+     @Get('tags/:tag')
+     getContactsByTag(@Param('tag') tag:string){
+      console.log(tag);
+      return this.contactService.getContactByTag(tag);
+     }
+
      @Post()
      @UseGuards(AuthGuard)
      createContact(@Body() contactDto:createContactDto,@Req() req:Request){

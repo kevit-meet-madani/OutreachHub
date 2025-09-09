@@ -23,6 +23,10 @@ export class ContactService
         return this.contactModel.findById(id).populate('createdBy','username role right').populate('workspace');
     }
 
+     getContactByTag(tagg:string){
+        return this.contactModel.find({tag:tagg}).select('_id name');
+    }
+
     createContact(contactDto:createContactDto,req:any){
         const decoded = req["user"];
         contactDto["createdBy"] = decoded.id;

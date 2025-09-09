@@ -8,6 +8,7 @@ import { CampModule } from './campaigns/camp.module';
 import { MsgModule } from './message/msg.module';
 import { Token } from './schemas/token.schema';
 import { ConfigModule } from '@nestjs/config';
+import { CampMessModule } from './campmess/campmess.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ConfigModule } from '@nestjs/config';
     CampModule,
     MsgModule,
     Token,
+    CampMessModule
   ],
   controllers: [],
   providers: [],
