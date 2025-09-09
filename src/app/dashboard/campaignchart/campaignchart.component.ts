@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { CampaignService } from '../../campaigns/campaign.service';
 
 @Component({
   selector: 'app-campaignchart',
@@ -8,6 +9,28 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrl: './campaignchart.component.scss'
 })
 export class CampaignchartComponent {
+
+  constructor(private campService:CampaignService) {}
+
+  @Input() dates!:string;
+
+   chartdata = []
+
+  ngOnInit(){
+    
+    this.campService.getCampaingnChart(this.dates+" "+localStorage.getItem('workspace')).subscribe({
+       next: (response) => {
+        console.log(response);
+       },
+       error: (error) => {
+        console.log(error);
+       }
+    });
+  }
+
+  
+
+
    public type: ChartType = 'line';
 
    public data: ChartConfiguration['data'] = {

@@ -3,17 +3,26 @@
 <div class="date-range-container">
     <div class="date-group">
       <label for="from-date">From</label>
-      <input type="date" id="from-date" name="from-date">
+      <input type="date" id="from-date" name="from-date" [(ngModel)]="fromdate">
     </div>
     <div class="date-group">
       <label for="to-date">To</label>
-      <input type="date" id="to-date" name="to-date">
+      <input type="date" id="to-date" name="to-date" [(ngModel)]="todate">
     </div>
-    <button>Show</button>
+    <button (click)="OnShow()">Show</button>
   </div>
+
 <div class="charts-container">
   <div class="chart-box">
-   <app-campaignchart></app-campaignchart>
+   <!-- <app-campaignchart></app-campaignchart> -->
+
+   <h2>Number of Campaigns per Day</h2>
+<canvas baseChart
+        [type]="type"
+        [data]="data"
+        [options]="options">
+</canvas>
+
   </div>
   <div class="chart-box">
     <app-messagechart></app-messagechart>

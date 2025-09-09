@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Contact } from '../../contacts/data';
+import { ContactService } from '../../contacts/contact.service';
+import { CampaignService } from '../../campaigns/campaign.service';
 
 @Component({
   selector: 'app-tables',
@@ -6,19 +9,21 @@ import { Component } from '@angular/core';
   styleUrl: './tables.component.scss'
 })
 export class TablesComponent {
-    recentCampaigns = [
-    { name: 'Summer Blast', date: '2025-08-30', tags: ['promo', 'summer'] },
-    { name: 'New Product Launch', date: '2025-08-28', tags: ['product', 'launch'] },
-    { name: 'Feedback Request', date: '2025-08-26', tags: ['survey', 'feedback'] },
-    { name: 'Event Invite', date: '2025-08-24', tags: ['event', 'vip'] },
-    { name: 'Discount Offer', date: '2025-08-22', tags: ['discount', 'promo'] },
-  ];
 
-  topTags = [
-    { tag: 'promo', contactCount: 320 },
-    { tag: 'event', contactCount: 280 },
-    { tag: 'launch', contactCount: 250 },
-    { tag: 'feedback', contactCount: 220 },
-    { tag: 'vip', contactCount: 200 },
-  ];
+    constructor(private contactService:ContactService,private campservice:CampaignService) {}
+    
+    recentCampaigns:any[] = [];
+
+     topTags:any[] = [];
+
+  ngOnInit(){
+    this.contactService.getTopTags(localStorage.getItem('workspace')!).subscribe(res => {
+      this.topTags = res;
+      console.log(res);
+    });
+
+    this.campservice.getRecentCampaigns(localStorage.getItem('workspace')!).subscribe(res => {
+      this.recentCampaigns = res;
+    })
+  }
 }

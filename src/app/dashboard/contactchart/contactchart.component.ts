@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartConfiguration, ChartType } from 'chart.js';
 
 @Component({
@@ -8,6 +8,12 @@ import { ChartConfiguration, ChartType } from 'chart.js';
 })
 export class ContactchartComponent {
     chartType: ChartType = 'line';
+
+    @Input() dates!:string;
+
+    ngOnInit(){
+      console.log(this.dates);
+    }
 
   chartData: ChartConfiguration['data'] = {
     labels: ['2025-08-25', '2025-08-26', '2025-08-27'],

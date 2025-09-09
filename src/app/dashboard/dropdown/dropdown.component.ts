@@ -25,9 +25,9 @@ export class DropdownComponent {
       obj!:Object
       getWorkspaces(){
         this.authService.getWorkSpaces().subscribe(res => {
-          this.workspaces = res[0].workspaces
+          // this.workspaces = res[0].workspaces
         
-        // this.workspaces = res
+        this.workspaces = res
         console.log(res);
       })
     }

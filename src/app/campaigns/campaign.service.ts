@@ -86,8 +86,8 @@ export class CampaignService {
     }
 
     
-     this.getContactsByTags(campaign.tags).subscribe((res) => {
-      next : () => {
+     this.getContactsByTags(campaign.tags).subscribe({
+      next : (res) => {
         const obj = {
         campaignId:campaign._id,
         workspaceId:localStorage.getItem('workspace')!,
@@ -110,5 +110,23 @@ export class CampaignService {
 
   getContactsByTags(tags:string[]){
      return this.contactService.getContactsByTag(tags);
+  }
+
+  getRecentCampaigns(id:string){
+    const token = localStorage.getItem('token');
+    const headers = {
+      "Authorization":`bearer ${token}`
+    }
+
+     return this.http.get<any[]>(`${this.url}/recent/${id}`, { headers })
+  }
+
+  getCampaingnChart(daterange:string):Observable<any[]>{
+    const token = localStorage.getItem('token');
+    const headers = {
+      "Authorization":`bearer ${token}`
+    }
+    
+     return this.http.get<any[]>(`${this.url}/chart/${daterange}`,{ headers })
   }
 }

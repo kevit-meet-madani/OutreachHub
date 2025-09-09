@@ -48,5 +48,6 @@ export class CampaignsComponent {
 
   OnLaunch(camp:Campaign){
     this.campsService.launchCampMess(camp);
+    camp.tags.pop();
   }
 }

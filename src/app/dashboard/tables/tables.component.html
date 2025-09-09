@@ -14,7 +14,7 @@
       <tbody>
         <tr *ngFor="let campaign of recentCampaigns">
           <td>{{ campaign.name }}</td>
-          <td>{{ campaign.date }}</td>
+          <td>{{ campaign.createdAt | date:'mediumDate'}}</td>
           <td>
             <span *ngFor="let tag of campaign.tags" class="tag">{{ tag }}</span>
           </td>
@@ -35,8 +35,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let tag of topTags">
-          <td>{{ tag.tag }}</td>
-          <td>{{ tag.contactCount }}</td>
+          <td>{{ tag._id }}</td>
+          <td>{{ tag.count }}</td>
         </tr>
       </tbody>
     </table>

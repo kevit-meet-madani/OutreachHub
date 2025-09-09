@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartConfiguration, ChartType } from 'chart.js';
 
 @Component({
@@ -9,6 +9,7 @@ import { ChartConfiguration, ChartType } from 'chart.js';
 export class MessagechartComponent {
    chartType: ChartType = 'bar';
 
+   @Input() dates!:string;
   chartData: ChartConfiguration['data'] = {
     labels: ['SMS', 'Email', 'Push'],
     datasets: [
