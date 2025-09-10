@@ -129,4 +129,13 @@ export class CampaignService {
     
      return this.http.get<any[]>(`${this.url}/chart/${daterange}`,{ headers })
   }
+
+  getMsgTypeChart(daterange:string):Observable<any[]>{
+    const token = localStorage.getItem('token');
+    const headers = {
+      "Authorization":`bearer ${token}`
+    }
+
+    return this.http.get<any[]>(`${this.url2}/chart/${daterange}`,{ headers })
+  }
 }

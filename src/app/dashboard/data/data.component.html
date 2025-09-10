@@ -25,7 +25,13 @@
 
   </div>
   <div class="chart-box">
-    <app-messagechart></app-messagechart>
+    <!-- <app-messagechart></app-messagechart> -->
+     <h2>Messages by Type per day</h2>
+    <canvas baseChart
+            [type]="chartType"
+            [data]="Data1"
+            [options]="chartOptions">
+    </canvas>
   </div>
   <div class="chart-box">
     <app-contactchart></app-contactchart>

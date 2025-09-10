@@ -9,7 +9,7 @@ import { ChartConfiguration, ChartType } from 'chart.js';
 export class MessagechartComponent {
    chartType: ChartType = 'bar';
 
-   @Input() dates!:string;
+   
   chartData: ChartConfiguration['data'] = {
     labels: ['SMS', 'Email', 'Push'],
     datasets: [
