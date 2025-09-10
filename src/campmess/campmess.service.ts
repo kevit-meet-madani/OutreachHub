@@ -61,4 +61,21 @@ export class CampMessService{
             { $sort: { _id: 1 } }
         ])
     }
+
+    getContactsReachedChart(daterange:string){
+        const arr = daterange.trim().split(' ');
+        const dates = [new Date(arr[0]),new Date(arr[1])];
+
+        return this.campMessodel.aggregate([
+            {
+                $match:{createdAt:{$gte:dates[0],$lte:dates[1]}, workspaceId:arr[2]}
+            },
+            {
+                $group:{
+                    _id:{createdAt:{$dateToString:{format: "%Y-%m-%d",date:"$createdAt"}}},
+                    count:{$sum:{$size:"$contacts"}}
+                }
+            }
+        ])
+    }
 }

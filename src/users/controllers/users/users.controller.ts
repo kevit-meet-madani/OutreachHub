@@ -73,4 +73,10 @@ export class UsersController {
       
       return arr;
     }
+
+    @Get('works/:id')
+    @UseGuards(AuthGuard)
+    getUsersByWorks(@Param('id') id:string){
+       return this.userService.getUsersByWorks(id);
+    }
 }

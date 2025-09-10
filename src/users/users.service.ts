@@ -43,4 +43,8 @@ export class UserService{
         console.log(decoded);
         return await this.userModel.find({_id:decoded.id},'workspaces').populate('workspaces').then();
     }
+
+    getUsersByWorks(id:string){
+        return this.userModel.find({workspaces:id,role:'user'}).select('email right');
+    }
 }

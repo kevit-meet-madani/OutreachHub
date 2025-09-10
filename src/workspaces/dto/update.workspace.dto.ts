@@ -4,7 +4,6 @@ export class UpdateWorkspaceDto{
     @IsNotEmpty()
     name:string;
     
-    @IsNotEmpty()
     createdBy:string;
     
     @IsNotEmpty()

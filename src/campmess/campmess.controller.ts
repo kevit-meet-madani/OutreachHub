@@ -39,8 +39,13 @@ export class CampMessController{
         return this.campmessService.deleteCampaign(id);
     }
 
-    @Get('/chart/:daterange')
+    @Get('/chart1/:daterange')
     getMsgTypeChart(@Param('daterange') daterange:string){
        return this.campmessService.getMsgTypeChart(daterange);
+    }
+
+    @Get('/chart2/:daterange')
+    getContactsReachedChart(@Param('daterange') daterange:string){
+       return this.campmessService.getContactsReachedChart(daterange);
     }
 }
