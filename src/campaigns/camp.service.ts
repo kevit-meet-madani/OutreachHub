@@ -43,14 +43,18 @@ export class CampService{
     getCampChart(daterange:string){
         const arr = daterange.trim().split(' ');
         const dates = [new Date(arr[0]),new Date(arr[1])];
-        console.log(dates);
         return this.campModel.aggregate([
             {
                 $match:{createdAt:{$gte:dates[0],$lte:dates[1]},workspaceId:arr[2]}
             },
             {
                 $group:{
-                    _id:"$createdAt",
+                    _id:{
+                        $dateToString:{
+                        format: "%Y-%m-%d",
+                        date: "$createdAt"
+                      }
+                    },
                     count:{$sum:1}
                 }
             }

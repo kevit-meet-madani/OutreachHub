@@ -38,4 +38,9 @@ export class CampMessController{
     deleteCampaign(@Param('id') id:string){
         return this.campmessService.deleteCampaign(id);
     }
+
+    @Get('/chart/:daterange')
+    getMsgTypeChart(@Param('daterange') daterange:string){
+       return this.campmessService.getMsgTypeChart(daterange);
+    }
 }

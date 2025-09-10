@@ -6,27 +6,59 @@ import { UpdateCampMessDto } from "./dto/update.dto";
 import { CampMess } from "src/schemas/campaignmessage.schema";
 
 export class CampMessService{
-    constructor(@InjectModel(CampMess.name) private campModel:Model<CampMess>){}
+    constructor(@InjectModel(CampMess.name) private campMessodel:Model<CampMess>){}
 
     getCampaigns(req:any){
-        return this.campModel.find({workspaceId:req["user"].wid}).populate('createdBy','username role right').populate('workspaceId').exec();
+        return this.campMessodel.find({workspaceId:req["user"].wid}).populate('createdBy','username role right').populate('workspaceId').exec();
     }
 
     getCampaignById(id:string){
-        return this.campModel.findById(id).populate('createdBy','username role right').populate('workspaceId').exec();
+        return this.campMessodel.findById(id).populate('createdBy','username role right').populate('workspaceId').exec();
     }
 
     createCampaign(campmessDto:CreateCamMessessDto,req:any){
         campmessDto["createdBy"] = req["user"].id;
-        const newCamp = new this.campModel(campmessDto);
+        const newCamp = new this.campMessodel(campmessDto);
         return newCamp.save();
     }
 
     updateCampaign(id:string,campmessDto:UpdateCampMessDto){
-        return this.campModel.findByIdAndUpdate(id,campmessDto).exec();
+        return this.campMessodel.findByIdAndUpdate(id,campmessDto).exec();
     }
 
     deleteCampaign(id:string){
-        return this.campModel.findByIdAndDelete(id).exec();
+        return this.campMessodel.findByIdAndDelete(id).exec();
+    }
+
+    getMsgTypeChart(daterange:string){
+        const arr = daterange.trim().split(' ');
+        const dates = [new Date(arr[0]),new Date(arr[1])];
+
+        return this.campMessodel.aggregate([
+            {
+                $match:{createdAt:{$gte:dates[0],$lte:dates[1]},workspaceId:arr[2]}
+            },
+            {
+                $group:{
+                    _id:{
+                        createdAt:{$dateToString:{format: "%Y-%m-%d",date:"$createdAt"}},
+                        type:"$templateData.type",
+                    },
+                    count:{$sum : 1}
+                }
+            },
+            {
+                $group:{
+                    _id:"$_id.createdAt",
+                    types:{
+                        $push:{
+                            type:"$_id.type",
+                            total:"$count"
+                        }
+                    }
+                }
+            },
+            { $sort: { _id: 1 } }
+        ])
     }
 }
