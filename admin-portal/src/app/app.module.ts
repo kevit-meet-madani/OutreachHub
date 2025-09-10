@@ -12,6 +12,9 @@ import { DataComponent } from './dashboard/data/data.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { CreateworkspaceComponent } from './createworkspace/createworkspace.component';
+import { WorkspaceUpdateComponent } from './editworkspace/editworkspace.component';
+import { UserlistComponent } from './userlist/userlist.component';
+
 
 
 @NgModule({
@@ -22,7 +25,9 @@ import { CreateworkspaceComponent } from './createworkspace/createworkspace.comp
     NavbarComponent,
     FooterComponent,
     DataComponent,
-    CreateworkspaceComponent
+    CreateworkspaceComponent,
+    WorkspaceUpdateComponent,
+    UserlistComponent
   ],
   imports: [
     BrowserModule,

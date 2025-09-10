@@ -1,0 +1,32 @@
+<form [formGroup]="workspaceForm" (ngSubmit)="onSubmit()" class="workspace-form">
+    <h3>Update Workspace</h3>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      id="name"
+      formControlName="name"
+      type="text"
+      placeholder="Enter workspace name"
+    />
+    <div class="error" *ngIf="workspaceForm.get('name')?.touched && workspaceForm.get('name')?.invalid">
+      <small *ngIf="workspaceForm.get('name')?.errors?.['required']">Name is required.</small>
+      <small *ngIf="workspaceForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="summary">Summary</label>
+    
+    <textarea
+      id="summary"
+      formControlName="summary"
+      rows="4"
+      placeholder="Enter workspace summary"
+    ></textarea>
+    <div class="error" *ngIf="workspaceForm.get('summary')?.touched && workspaceForm.get('summary')?.invalid">
+      <small *ngIf="workspaceForm.get('summary')?.errors?.['required']">Summary is required.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="workspaceForm.invalid">Update Workspace</button>
+</form>

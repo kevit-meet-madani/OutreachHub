@@ -4,6 +4,9 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { DataComponent } from './dashboard/data/data.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CreateworkspaceComponent } from './createworkspace/createworkspace.component';
+import { WorkspaceUpdateComponent } from './editworkspace/editworkspace.component';
+import { UserlistComponent } from './userlist/userlist.component';
+
 
 const routes: Routes = [
   {
@@ -21,6 +24,14 @@ const routes: Routes = [
       {
         path:'create',
         component:CreateworkspaceComponent
+      },
+      {
+        path:'edit/:id',
+        component:WorkspaceUpdateComponent
+      },
+      {
+        path:'users/:id',
+        component:UserlistComponent
       }
     ]
   }

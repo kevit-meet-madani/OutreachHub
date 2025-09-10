@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Workspace } from './dashboard/data';
+import { Workspace, WorkUpdate } from './dashboard/data';
 import { Observable } from 'rxjs';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +60,22 @@ export class WorkspaceService {
     })
 
 
+  }
+
+  editWorkspace(w:WorkUpdate){
+    const token = localStorage.getItem('token');
+       const headers = {
+         'Authorization':`Bearer ${token}`
+       }
+
+       this.http.patch<WorkUpdate>(`${this.url}/${w.id}`,w,{ headers }).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+
+        error:(error) => {
+          console.log(error)
+        }
+       })
   }
 }

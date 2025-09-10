@@ -19,10 +19,11 @@
         <td>{{ w.createdAt }}</td>
         <td>50</td>
         <td class="actions">
-          <button>Edit</button>
+          <button [routerLink]="['/dashboard/edit',w._id]">Edit</button>
           <button>View</button>
           <button>Copy</button>
           <button (click)="delete(w._id)">Delete</button> 
+          <button [routerLink]="['/dashboard/users',w._id]">Open Users List</button>
         </td>
       </tr>
     </tbody>

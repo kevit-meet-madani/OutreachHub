@@ -1,0 +1,30 @@
+<div class="campaign-list-container">
+  <div class="header">
+    <h2>Users</h2>
+    <button class="create-btn" [routerLink]="['/dashboard/create']">+ Create New/Existing User</button>
+  </div>
+
+  <table class="campaign-table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Right</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users">
+        <td><a >{{ u.email }}</a></td>
+        <td>{{ u.right }}</td>
+        <td>50</td>
+        <td class="actions">
+          <button [routerLink]="['/dashboard/edit',u._id]">Edit</button>
+          <button>View</button>
+          <button>Copy</button>
+          <button (click)="delete(u._id)">Delete</button> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

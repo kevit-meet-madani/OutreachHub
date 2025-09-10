@@ -31,4 +31,8 @@ export class DataComponent {
    delete(id:any){
       this.workspaceService.deleteWorkspace(id);
    }
+
+   edit(w:Workspace){
+      this.workspaceService.editWorkspace(w);
+   }
 }
