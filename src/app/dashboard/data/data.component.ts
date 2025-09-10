@@ -30,7 +30,6 @@ export class DataComponent {
 
   this.campService.getCampaingnChart(`${dateRange} ${workspace}`).subscribe({
     next: (response) => {
-      console.log(response);
 
       const labels = response.map(item => item._id);
       const data = response.map(item => item.count);
@@ -56,31 +55,40 @@ export class DataComponent {
   });
 
    this.campService.getMsgTypeChart(`${dateRange} ${workspace}`).subscribe({
-    next: (response) =>{
-      console.log(response);
+    next: (response : any[]) =>{
 
 
-      let arr1:any[] = []
-      arr1 = response.filter(item => item.types.type === "text and image")
-  .map(item => item.types.total);
+      let arr1:number[] = []
+     
+      let arr2:number[] = []
+      response.forEach(item => {
+         
+        for(let t of item.types){
+          if(t.type === "text and image"){
+          
+          arr1.push(t.total);
+        }
+        else{
+          arr2.push(t.total);
+        }
+        }
 
-      let arr2:any[] = []
-      arr2 = response.filter(item => item.types.type === "text")
-  .map(item => item.types.total);
+        
+      })
 
-      console.log(arr1 +" "+arr2);
+      console.log(arr1.length +" "+arr2);
 
       this.Data1 = {
-  labels: response.map(item => item.id), // Days on X-axis
+  labels: response.map(item => item._id),
   datasets: [
     {
       label: 'text and image',
-      data: arr1, // per day SMS count
+      data: arr1, 
       backgroundColor: '#42A5F5'
     },
     {
       label: 'text',
-      data: arr2, // per day Email count
+      data: arr2, 
       backgroundColor: '#66BB6A'
     }
   ]
@@ -88,6 +96,31 @@ export class DataComponent {
       
       
     },
+    error: (error) => {
+      console.log(error);
+    }
+   })
+
+
+   this.campService.getContactsReachedChart(`${dateRange} ${workspace}`).subscribe({
+    next: (response) => {
+      console.log(response);
+
+      this.Data2 = {
+    labels: response.map(item => item._id.createdAt),
+    datasets: [
+      {
+        label: 'Contacts Reached per day',
+        data: response.map(item => item.count),
+        borderColor: '#AB47BC',
+        backgroundColor: 'rgba(171, 71, 188, 0.3)',
+        fill: true,
+        tension: 0.4
+      }
+    ]
+  }
+    },
+
     error: (error) => {
       console.log(error);
     }
@@ -140,16 +173,16 @@ export class DataComponent {
      chartType: ChartType = 'bar';
 
 Data1: ChartConfiguration['data'] = {
-  labels: ["1","2","3"], // Days on X-axis
+  labels: [], // Days on X-axis
   datasets: [
     {
       label: 'text and image',
-      data: [2,5,10], // per day SMS count
+      data: [], // per day SMS count
       backgroundColor: '#42A5F5'
     },
     {
       label: 'text',
-      data: [5,7,8], // per day Email count
+      data: [], // per day Email count
       backgroundColor: '#66BB6A'
     }
   ]
@@ -180,5 +213,30 @@ chartOptions: ChartConfiguration['options'] = {
   }
 };
 
-    
+
+Data2: ChartConfiguration['data'] = {
+    labels: [],
+    datasets: [
+      {
+        label: 'Contacts Reached',
+        data: [],
+        borderColor: '#AB47BC',
+        backgroundColor: 'rgba(171, 71, 188, 0.3)',
+        fill: true,
+        tension: 0.4
+      }
+    ]
+  };
+
+  chartOptions2: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      legend: { display: true }
+    },
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  };
 }

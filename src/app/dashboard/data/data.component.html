@@ -34,7 +34,14 @@
     </canvas>
   </div>
   <div class="chart-box">
-    <app-contactchart></app-contactchart>
+    <!-- <app-contactchart></app-contactchart> -->
+
+    <h2>Contacts Reached per Day</h2>
+    <canvas baseChart
+            [type]="chartType"
+            [data]="Data2"
+            [options]="chartOptions2">
+    </canvas>
   </div>
 </div>
 

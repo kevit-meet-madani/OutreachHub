@@ -10,10 +10,16 @@ export class NavbarComponent {
 
     constructor(private authservice: AuthService) {}
 
+    isMenuOpen: boolean = false;
+
     logOut(){
        if(this.authservice.logOut()){
         localStorage.removeItem('token');
         localStorage.removeItem('workspace');
        }
     }
+
+    toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 }

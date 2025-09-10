@@ -1,4 +1,4 @@
-<nav>
+<!-- <nav>
     <div class="navbar">
       <div class="logo">OutreachHub</div>
       <div class="hamburger">
@@ -9,7 +9,7 @@
       <ul class="menu" id="menu">
         <li><a href="#" [routerLink]="['/dashboard']">Home</a></li>
         <li><a href="#">About</a></li>
-        <li onclick="toggleDropdown(this)">
+        <li>
           <a href="#">Modules ▾</a>
           <div class="dropdown-content">
             <a href="#" [routerLink]="['/dashboard/contacts']">Contacts</a>
@@ -20,4 +20,29 @@
         <li><a href="#" (click)="logOut()">LogOut</a></li>
       </ul>
     </div>
-  </nav>
+  </nav> -->
+  <nav>
+  <div class="navbar">
+    <div class="logo">OutreachHub</div>
+    
+    <div class="hamburger" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <ul class="menu" [class.active]="isMenuOpen" id="menu">
+      <li><a [routerLink]="['/dashboard']">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li>
+        <a href="#">Modules ▾</a>
+        <div class="dropdown-content">
+          <a [routerLink]="['/dashboard/contacts']">Contacts</a>
+          <a [routerLink]="['/dashboard/campaigns']">Campaigns</a>
+          <a [routerLink]="['/dashboard/templates']">Templates</a>
+        </div>
+      </li>
+      <li><a href="#" (click)="logOut()">LogOut</a></li>
+    </ul>
+  </div>
+</nav>

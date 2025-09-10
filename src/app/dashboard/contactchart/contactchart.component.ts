@@ -15,7 +15,7 @@ export class ContactchartComponent {
       console.log(this.dates);
     }
 
-  chartData: ChartConfiguration['data'] = {
+  Data2: ChartConfiguration['data'] = {
     labels: ['2025-08-25', '2025-08-26', '2025-08-27'],
     datasets: [
       {

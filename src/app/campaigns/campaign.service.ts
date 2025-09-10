@@ -136,6 +136,15 @@ export class CampaignService {
       "Authorization":`bearer ${token}`
     }
 
-    return this.http.get<any[]>(`${this.url2}/chart/${daterange}`,{ headers })
+    return this.http.get<any[]>(`${this.url2}/chart1/${daterange}`,{ headers })
+  }
+
+  getContactsReachedChart(daterange:string):Observable<any[]>{
+    const token = localStorage.getItem('token');
+    const headers = {
+      "Authorization":`bearer ${token}`
+    }
+
+    return this.http.get<any[]>(`${this.url2}/chart2/${daterange}`, { headers })
   }
 }
