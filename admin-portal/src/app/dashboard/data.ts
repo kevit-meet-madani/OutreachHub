@@ -13,3 +13,10 @@ export interface WorkUpdate{
     summary?:string;
     createdAt?:Date
 }
+
+export interface User{
+    name:string;
+    email:string;
+    password:string;
+    right:string;
+}

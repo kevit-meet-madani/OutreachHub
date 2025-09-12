@@ -18,7 +18,6 @@ export class DataComponent {
     
     ngOnInit(){
      this.getWorkspaces();
-       
     }
    
    getWorkspaces(){

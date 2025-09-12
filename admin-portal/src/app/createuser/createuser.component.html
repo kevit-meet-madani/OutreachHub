@@ -1,0 +1,20 @@
+<div class="container">
+
+    
+    <form [formGroup]="addform" (ngSubmit)="OnSubmit()">
+        <h1>Create New User</h1>
+        <label for="name">Enter Name : </label>
+        <input type="text" formControlName="name" #name>
+
+        <label for="phone">Enter Email : </label>
+        <input type="email" formControlName="email" #phone>
+
+        <label for="password">Enter temporary password</label>
+        <input type="password" formControlName="password" #password>
+
+        <label for="tag">Enter Right : </label>
+        <input type="text" formControlName="right" #tag>
+        
+        <button type="submit" [disabled]="addform.invalid">Add User</button>
+    </form>
+</div>

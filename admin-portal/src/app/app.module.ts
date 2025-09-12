@@ -14,6 +14,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { CreateworkspaceComponent } from './createworkspace/createworkspace.component';
 import { WorkspaceUpdateComponent } from './editworkspace/editworkspace.component';
 import { UserlistComponent } from './userlist/userlist.component';
+import { CreateuserComponent } from './createuser/createuser.component';
+import { VieworkspaceComponent } from './vieworkspace/vieworkspace.component';
 
 
 
@@ -27,7 +29,9 @@ import { UserlistComponent } from './userlist/userlist.component';
     DataComponent,
     CreateworkspaceComponent,
     WorkspaceUpdateComponent,
-    UserlistComponent
+    UserlistComponent,
+    CreateuserComponent,
+    VieworkspaceComponent
   ],
   imports: [
     BrowserModule,

@@ -20,8 +20,7 @@
         <td>50</td>
         <td class="actions">
           <button [routerLink]="['/dashboard/edit',w._id]">Edit</button>
-          <button>View</button>
-          <button>Copy</button>
+          <button [routerLink]="['/dashboard/view',w._id]">View</button>
           <button (click)="delete(w._id)">Delete</button> 
           <button [routerLink]="['/dashboard/users',w._id]">Open Users List</button>
         </td>

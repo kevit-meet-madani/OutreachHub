@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,39 @@ export class UserService {
        }
 
      return this.http.get<any[]>(`${this.url}/works/${id}`,{ headers });
+  }
+
+  createUser(body:User){
+    const token = localStorage.getItem('token');
+       const headers = {
+         'Authorization':`Bearer ${token}`
+       }
+       this.http.post<User>(`${this.url}`,body,{ headers }).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+
+        error: (error) => {
+          console.log(error);
+        }
+       });
+  }
+
+  deleteUser(id:string){
+    const token = localStorage.getItem('token');
+       const headers = {
+         'Authorization':`Bearer ${token}`
+       }
+
+    this.http.delete(`${this.url}/${id}`,{ headers })
+  }
+
+  updateUser(body:User){
+    const token = localStorage.getItem('token');
+       const headers = {
+         'Authorization':`Bearer ${token}`
+       }
+
+       this.http.patch(`${this.url}/${body.id}`,body,{ headers })
   }
 }

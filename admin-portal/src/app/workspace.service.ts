@@ -78,4 +78,13 @@ export class WorkspaceService {
         }
        })
   }
+
+  getWorkspaceById(id:any){
+    const token = localStorage.getItem('token');
+       const headers = {
+         'Authorization':`Bearer ${token}`
+       }
+
+       return this.http.get<Workspace>(`${this.url}/${id}`,{ headers });
+  }
 }

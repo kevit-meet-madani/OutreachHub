@@ -14,7 +14,8 @@ export class UserlistComponent {
    users:any[] = []
 
    ngOnInit(){
-      const id = this.route.snapshot.paramMap.get('id');
+      const id = this.route.snapshot.paramMap.get('id')!;
+      localStorage.setItem('workspace',id);
       this.userService.getUsers(id).subscribe(res => {
         this.users = res;
         console.log(res);
@@ -22,6 +23,6 @@ export class UserlistComponent {
    }
 
    delete(id:any){
-
+       this.userService.deleteUser(id);
    }
 }

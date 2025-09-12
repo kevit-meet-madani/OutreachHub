@@ -1,7 +1,8 @@
 <div class="campaign-list-container">
   <div class="header">
     <h2>Users</h2>
-    <button class="create-btn" [routerLink]="['/dashboard/create']">+ Create New/Existing User</button>
+    <button class="create-btn oneb" [routerLink]="['/dashboard/adduser']">+ Create New User</button>
+    <button class="create-btn" [routerLink]="['/dashboard/create']">+ Add Existring User</button>
   </div>
 
   <table class="campaign-table">
@@ -21,7 +22,6 @@
         <td class="actions">
           <button [routerLink]="['/dashboard/edit',u._id]">Edit</button>
           <button>View</button>
-          <button>Copy</button>
           <button (click)="delete(u._id)">Delete</button> 
         </td>
       </tr>
