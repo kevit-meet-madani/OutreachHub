@@ -30,3 +30,4 @@ export class OutCampaign{
 }    
 
 export const CampaignSchema = SchemaFactory.createForClass(OutCampaign);
+
