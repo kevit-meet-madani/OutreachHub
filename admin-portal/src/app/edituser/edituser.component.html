@@ -1,0 +1,35 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="workspace-form">
+    <h3>Update User</h3>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      id="name"
+      formControlName="name"
+      type="text"
+      placeholder="Enter user name"
+    />
+    
+  </div>
+
+  <div class="form-group">
+    <label for="right">Enter Right</label>
+     <input
+      id="right"
+      formControlName="right"
+      type="text"
+      placeholder="Enter right"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Enter Email</label>
+     <input
+      id="email"
+      formControlName="email"
+      type="email"
+      placeholder="Enter email"
+    />
+  </div>
+
+  <button type="submit" [disabled]="userForm.invalid">Update</button>
+</form>

@@ -8,6 +8,7 @@ import { WorkspaceUpdateComponent } from './editworkspace/editworkspace.componen
 import { UserlistComponent } from './userlist/userlist.component';
 import { CreateuserComponent } from './createuser/createuser.component';
 import { VieworkspaceComponent } from './vieworkspace/vieworkspace.component';
+import { EdituserComponent } from './edituser/edituser.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path:'view/:id',
         component:VieworkspaceComponent
+      },
+      {
+        path:'edit/user/:id',
+        component:EdituserComponent
       }
     ]
   }

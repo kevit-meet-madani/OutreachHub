@@ -16,6 +16,7 @@ import { WorkspaceUpdateComponent } from './editworkspace/editworkspace.componen
 import { UserlistComponent } from './userlist/userlist.component';
 import { CreateuserComponent } from './createuser/createuser.component';
 import { VieworkspaceComponent } from './vieworkspace/vieworkspace.component';
+import { EdituserComponent } from './edituser/edituser.component';
 
 
 
@@ -31,7 +32,8 @@ import { VieworkspaceComponent } from './vieworkspace/vieworkspace.component';
     WorkspaceUpdateComponent,
     UserlistComponent,
     CreateuserComponent,
-    VieworkspaceComponent
+    VieworkspaceComponent,
+    EdituserComponent
   ],
   imports: [
     BrowserModule,

@@ -18,9 +18,9 @@
       <tr *ngFor="let u of users">
         <td><a >{{ u.email }}</a></td>
         <td>{{ u.right }}</td>
-        <td>50</td>
+        <td>{{u.createdAt | date:'mediumDate'}}</td>
         <td class="actions">
-          <button [routerLink]="['/dashboard/edit',u._id]">Edit</button>
+          <button [routerLink]="['/dashboard/edit/user',u._id]">Edit</button>
           <button>View</button>
           <button (click)="delete(u._id)">Delete</button> 
         </td>

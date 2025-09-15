@@ -52,6 +52,6 @@ export class UserService {
          'Authorization':`Bearer ${token}`
        }
 
-       this.http.patch(`${this.url}/${body.id}`,body,{ headers })
+       return this.http.patch(`${this.url}/${body.id}`,body,{ headers })
   }
 }
