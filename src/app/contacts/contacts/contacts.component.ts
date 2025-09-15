@@ -20,6 +20,7 @@ export class ContactsComponent {
 
     contacts: Contact[] = []
     selectedSort = 'name';
+    currentPage = 1;
 
     user!:string[]
     getpermisson():string[]{
@@ -32,8 +33,14 @@ export class ContactsComponent {
     }
 
     call(id:any):boolean{
-      console.log(this.user);
-      return (this.user[1] !== id && this.user[0] !== "edit"); 
+      console.log(this.user +" "+ id._id)
+
+      if(this.user[0] === "edit"){
+        if(this.user[1] === id._id){
+            return false;
+        }
+      }
+      return true; 
     }
 
     onSortChange(event: any) {
@@ -44,7 +51,7 @@ export class ContactsComponent {
 
   getContacts(){
      
-     this.contactService.getContacts().subscribe(contacts => {
+     this.contactService.getContacts(localStorage.getItem('workspace')!).subscribe(contacts => {
        this.contacts = contacts
        console.log(this.contacts);
      })

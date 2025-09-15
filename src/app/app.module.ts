@@ -29,6 +29,7 @@ import { ViewtemplateComponent } from './templates/viewtemplate/viewtemplate.com
 import { CreatecampaignComponent } from './campaigns/createcampaign/createcampaign.component';
 import { EditcampaignComponent } from './campaigns/editcampaign/editcampaign.component';
 import { ViewcampaignComponent } from './campaigns/viewcampaign/viewcampaign.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -67,7 +68,8 @@ import { ViewcampaignComponent } from './campaigns/viewcampaign/viewcampaign.com
     ReactiveFormsModule,
     BaseChartDirective,
     HttpClientModule,     
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
 ],
   providers: [
     provideClientHydration(),

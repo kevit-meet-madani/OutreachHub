@@ -16,6 +16,7 @@ export class TemplatesComponent {
       textTypes:Template[] = []
       imageTypes:Template[] = []
       user!:string[]
+      currentpage = 1
     getpermisson():string[]{
       return this.templateService.getPermisson();
     }
@@ -31,7 +32,7 @@ export class TemplatesComponent {
     }
 
       getTemplates(){
-         this.templateService.getTemplates().subscribe(tems => {
+         this.templateService.getTemplates(localStorage.getItem('workspace')!).subscribe(tems => {
             this.templates = tems;
              this.textTypes = this.templates.filter(t => t.type === "text");
              this.imageTypes = this.templates.filter(t => t.type !== "text");

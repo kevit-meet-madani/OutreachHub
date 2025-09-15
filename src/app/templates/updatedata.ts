@@ -1,5 +1,5 @@
 export interface UpdateTemplate{
-    id?:string;
+    id?:string | null;
     name?:string;
     type?:string;
     createdBy?:Object;

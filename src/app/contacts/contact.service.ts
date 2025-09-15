@@ -13,15 +13,20 @@ export class ContactService {
 
   url = 'http://localhost:5000/contacts'
 
-  getContacts():Observable<Contact[]>{
+  getContacts(id:string):Observable<Contact[]>{
      
     const token = localStorage.getItem('token');
-    const id = localStorage.getItem('workspace');
-    const wid=localStorage.getItem('workspace')
+    
+    
+    // const headers = {
+    //   'Authorization':`Bearer ${token} ${id}`,
+    //   'wid':`${id}`
+    // }
+
     const headers = {
-      'Authorization':`Bearer ${token} ${id}`,
+      'Authorization':`Bearer ${token}`
     }
-    return this.http.get<Contact[]>(this.url,{ headers });
+    return this.http.get<Contact[]>(`${this.url}/works/${id}`,{ headers });
   }
 
   createContact(contact:Contact){
@@ -97,6 +102,7 @@ export class ContactService {
     tag.push(localStorage.getItem('workspace')!);
     const arg = tag.join(' ');
     console.log(arg);
+
     return this.http.get<any[]>(`${this.url}/tags/${arg}`,{ headers })
   }
 

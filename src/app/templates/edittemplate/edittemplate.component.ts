@@ -27,9 +27,19 @@ export class EdittemplateComponent {
    editform!:FormGroup
 
    OnSubmit(){
+
       const id = this.route.snapshot.paramMap.get('id');
-      const obj = this.editform.value;
-      obj["id"] = id;
+      const obj = {
+      id:id,
+      name:this.editform.value.name,
+      type:this.editform.value.type,
+      workspaceId:localStorage.getItem('workspace')!,
+      content:{
+        text:this.editform.value.text,
+        imagePath:this.editform.value.imagePath
+      }
+    }
+      console.log(obj);
       this.templateService.updateTemplate(obj);
    }
 

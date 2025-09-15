@@ -31,6 +31,7 @@ export class DataComponent {
   this.campService.getCampaingnChart(`${dateRange} ${workspace}`).subscribe({
     next: (response) => {
 
+      console.log(response);
       const labels = response.map(item => item._id);
       const data = response.map(item => item.count);
 

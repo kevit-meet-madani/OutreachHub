@@ -43,7 +43,7 @@ export class CreatecampaignComponent {
     }
 
     getTemplates(){
-      this.templateService.getTemplates().subscribe(tems => {
+      this.templateService.getTemplates(localStorage.getItem('workspace')!).subscribe(tems => {
         this.templates = tems;
       })
     }

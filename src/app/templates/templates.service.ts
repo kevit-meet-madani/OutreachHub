@@ -16,15 +16,14 @@ export class TemplatesService {
 
   url = 'http://localhost:5000/messages'
 
-  getTemplates():Observable<Template[]>{
+  getTemplates(id:string):Observable<Template[]>{
 
     const token = localStorage.getItem('token');
-    const wid = localStorage.getItem('workspace');
     const headers = {
-      'Authorization':`Bearer ${token} ${wid}`
+      'Authorization':`Bearer ${token}`
     }
 
-    return this.http.get<Template[]>(this.url,{ headers });
+    return this.http.get<Template[]>(`${this.url}/tems/${id}`,{ headers });
   }
 
   createTemplate(template:Template){

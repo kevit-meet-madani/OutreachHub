@@ -15,13 +15,12 @@ export class CampaignService {
   url = 'http://localhost:5000/campaigns'
   url2 = 'http://localhost:5000/campmess';
 
-  getCampaigns():Observable<Campaign[]>{
+  getCampaigns(id:string):Observable<Campaign[]>{
     const token = localStorage.getItem('token');
-    const wid = localStorage.getItem('workspace');
     const headers = {
-      'Authorization':`Bearer ${token} ${wid}`
+      'Authorization':`Bearer ${token}`
     }
-    return this.http.get<Campaign[]>(this.url,{ headers })
+    return this.http.get<Campaign[]>(`${this.url}/camps/${id}`,{ headers })
   }
 
   getCampaign(id:any){
@@ -146,5 +145,13 @@ export class CampaignService {
     }
 
     return this.http.get<any[]>(`${this.url2}/chart2/${daterange}`, { headers })
+  }
+
+  changeStatus(id:any){
+    const token = localStorage.getItem('token');
+    const headers = {
+      "Authorization":`bearer ${token}`
+    }
+    return this.http.patch(`${this.url}/status/${id}`,{ status : "Completed" }, { headers });
   }
 }

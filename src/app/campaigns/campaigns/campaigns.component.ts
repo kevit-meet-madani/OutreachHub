@@ -14,6 +14,7 @@ export class CampaignsComponent {
      campaigns: Campaign[] = [];
 
      user!:string[]
+     currentpage = 1
     getpermisson():string[]{
       return this.campsService.getPermisson();
     }
@@ -37,7 +38,7 @@ export class CampaignsComponent {
   }
 
   getCampaigns(){
-    this.campsService.getCampaigns().subscribe( camps=> {
+    this.campsService.getCampaigns(localStorage.getItem('workspace')!).subscribe( camps=> {
       this.campaigns = camps
     })
   }
@@ -48,6 +49,28 @@ export class CampaignsComponent {
 
   OnLaunch(camp:Campaign){
     this.campsService.launchCampMess(camp);
+    this.campsService.changeStatus(camp._id).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+    camp.status = "Running";
+    console.log(camp._id);
+
+    setTimeout(() => {
+      camp.status = "Completed";
+    },5000);
+
     camp.tags.pop();
+  }
+
+  duplicate(camp:Campaign){
+    const { _id , ... newCamp} = camp;
+    console.log(newCamp);
+    this.campsService.createCampaign(newCamp);
+    this.getCampaigns();
   }
 }

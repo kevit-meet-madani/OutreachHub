@@ -1,7 +1,7 @@
 <div class="campaign-list-container">
   <div class="header">
     <h2>Campaigns</h2>
-    <button class="create-btn" [routerLink]="['/dashboard/campaigns/create']" [ngClass]="{'denied':user[0] === 'view'}">+ Create New Campaign</button>
+    <button class="create-btn" [routerLink]="['/dashboard/campaigns/create']">+ Create New Campaign</button>
   </div>
 
   <table class="campaign-table">
@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let c of campaigns">
+      <tr *ngFor="let c of campaigns | paginate: { itemsPerPage: 6, currentPage: currentpage }">
         <td><a [routerLink]="['view', c._id]">{{ c.name }}</a></td>
         <td><span class="status-badge">{{ c.status }}</span></td>
         <td>
@@ -25,13 +25,14 @@
         </td>
         <td>{{ c.createdAt | date:'mediumDate' }}</td>
         <td class="actions">
-          <button *ngIf="c.status === 'Draft'" [routerLink]="['edit', c._id]" [ngClass]="{'denied':call(c.createdBy)}">Edit</button>
+          <button *ngIf="c.status === 'Draft'" [routerLink]="['edit', c._id]">Edit</button>
           <button [routerLink]="['view', c._id]">View</button>
           <button *ngIf="c.status === 'Draft'" (click)="OnLaunch(c)">Launch</button>
-          <button>Copy</button>
-          <button (click)="deleteCampaign(c._id)" [ngClass]="{'denied':call(c.createdBy)}">Delete</button>
+          <button (click)="duplicate(c)" *ngIf="c.status === 'Draft'">Copy</button>
+          <button (click)="deleteCampaign(c._id)">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
+  <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
 </div>
