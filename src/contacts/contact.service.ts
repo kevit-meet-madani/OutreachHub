@@ -11,12 +11,8 @@ export class ContactService
 {
     constructor(@InjectModel(OutContacts.name) private contactModel:Model<OutContacts>){}
 
-    getContacts(req : any){
-         
-        const decoded = req["user"];
-
-        console.log(decoded);
-        return this.contactModel.find({workspace:decoded.wid}).populate('_id createdBy','username role right').populate('workspace');
+    getContacts(id:string){
+        return this.contactModel.find({workspace:id}).populate('_id createdBy','username role right').populate('workspace');
     }
 
     getContactById(id:string){

@@ -15,7 +15,6 @@ export class AuthGuard{
     async canActivate(context: any): Promise<boolean>{
         const req:Request = context.switchToHttp().getRequest();
         const token = req.headers.authorization?.split(' ')[1]; 
-        const wid = req.headers.authorization?.split(' ')[2];
         if (!token) {
             console.log("No token provided");
             return false; 
@@ -30,8 +29,7 @@ export class AuthGuard{
         }
         
         try {
-            const decoded = this.JwtService.verify(token, { secret: `${process.env.secret}` , clockTolerance:3600});  
-            decoded["wid"] = wid;          
+            const decoded = this.JwtService.verify(token, { secret: `${process.env.secret}` , clockTolerance:3600});           
             req["user"] = decoded;
             return true; 
         } catch (error) {

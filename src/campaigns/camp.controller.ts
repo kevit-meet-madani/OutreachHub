@@ -9,10 +9,10 @@ import { AuthGuard } from "src/auth/auth.guard";
 export class CampController{
     constructor(private campService:CampService){}
     
-    @Get()
+    @Get('camps/:id')
     @UseGuards(AuthGuard)
-    getCampaigns(@Req() req:Request){
-        return this.campService.getCampaigns(req);
+    getCampaigns(@Param('id') id:string){
+        return this.campService.getCampaigns(id);
     }
 
     @Get(':id')
@@ -48,5 +48,12 @@ export class CampController{
     @Get('/chart/:daterange')
     getCampChart(@Param('daterange') daterange:string){
         return this.campService.getCampChart(daterange);
+    }
+
+    @Patch('status/:id')
+    changeStatus(@Param('id') id:string,@Body() body:any){
+        console.log(body);
+        console.log(id);
+        return this.campService.changeStatus(id,body);
     }
 }

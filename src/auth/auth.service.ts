@@ -26,13 +26,13 @@ export class AuthService {
             throw new HttpException('Password is incorrect',401);
         }
 
-        const expiresAt = new Date(Date.now() + 60 * 60 * 1000); 
         const payload = {id:findUser._id,right:findUser.right,role:findUser.role}
 
         const token = this.jwtService.sign(payload,{secret : `${process.env.secret}`,expiresIn:'60m'});
 
         const obj = {
-            token:token
+            token:token,
+            createdAt: new Date()
         }
         const newToken = new this.tokenModel(obj);
         newToken.save();

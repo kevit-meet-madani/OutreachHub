@@ -19,8 +19,8 @@ export class CampMess{
     @Prop({required:true})
     tags:string[];
 
-    @Prop({required:true,ref:'OutContacts'})
-    contacts:mongoose.Types.ObjectId[];
+    @Prop({required:true})
+    contacts:Object[];
 
     @Prop({default:Date.now})
     createdAt:Date

@@ -7,8 +7,8 @@ import { UpdateCampaignDto } from "./dto/update.dto";
 export class CampService{
     constructor(@InjectModel(OutCampaign.name) private campModel:Model<OutCampaign>){}
 
-    getCampaigns(req:any){
-        return this.campModel.find({workspaceId:req["user"].wid}).populate('createdBy','username role right').populate('workspaceId').exec();
+    getCampaigns(id:string){
+        return this.campModel.find({workspaceId:id}).populate('createdBy','username role right').populate('workspaceId').exec();
     }
 
     getCampaignById(id:string){
@@ -59,5 +59,9 @@ export class CampService{
                 }
             }
         ])
+    }
+
+    changeStatus(id:string,body:any){
+        return this.campModel.findByIdAndUpdate(id,body);
     }
 }

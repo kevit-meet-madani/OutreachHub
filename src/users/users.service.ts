@@ -35,7 +35,7 @@ export class UserService{
     }
 
     updateUser(id:string , updateUserDto:updateUserDto){
-        return this.userModel.findByIdAndUpdate(id,updateUserDto)
+        return this.userModel.findByIdAndUpdate(id,updateUserDto);
     }
 
     async getWorkspaces(req:any){
@@ -45,6 +45,6 @@ export class UserService{
     }
 
     getUsersByWorks(id:string){
-        return this.userModel.find({workspaces:id,role:'user'}).select('email right');
+        return this.userModel.find({workspaces:id,role:'user'}).select('email right createdAt');
     }
 }

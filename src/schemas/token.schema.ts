@@ -7,8 +7,15 @@ export class Token {
 
     @Prop({required:true})
     token:string
+
+    @Prop({type:Date,default: () => new Date()})
+    createdAt:Date
 }
 
 export const tokenSchema = SchemaFactory.createForClass(Token);
 
-// Set TTL index on expiresAt field to expire documents after 3600 seconds
+
+tokenSchema.index({ createdAt: 1 }, { expireAfterSeconds: 3600 }); 
+
+
+

@@ -9,10 +9,10 @@ import { AuthGuard } from "src/auth/auth.guard";
 export class ContactController{
      constructor(private contactService:ContactService){}
 
-     @Get()
+     @Get('works/:id')
       @UseGuards(AuthGuard)
-     getContacts(@Req() req : Request){
-        return this.contactService.getContacts(req);
+     getContacts(@Param('id') id:string){
+        return this.contactService.getContacts(id);
      }
 
      @Get(':id')

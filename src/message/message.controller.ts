@@ -8,10 +8,10 @@ import { AuthGuard } from "src/auth/auth.guard";
 export class MessageController{
     constructor(private messageService:MessageService){}
 
-    @Get()
+    @Get('tems/:id')
     @UseGuards(AuthGuard)
-    getMessages(@Req() req:Request){
-        return this.messageService.getMessages(req);
+    getMessages(@Param('id') id:string){
+        return this.messageService.getMessages(id);
     }
 
     @Get(':id')
