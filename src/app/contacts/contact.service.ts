@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Contact } from './data';
+import { Contact, PaginatedResponse } from './data';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 
@@ -13,7 +13,7 @@ export class ContactService {
 
   url = 'http://localhost:5000/contacts'
 
-  getContacts(id:string):Observable<Contact[]>{
+  getContacts(page:number,limit:number,id:string):Observable<PaginatedResponse>{
      
     const token = localStorage.getItem('token');
     
@@ -26,7 +26,7 @@ export class ContactService {
     const headers = {
       'Authorization':`Bearer ${token}`
     }
-    return this.http.get<Contact[]>(`${this.url}/works/${id}`,{ headers });
+    return this.http.get<PaginatedResponse>(`${this.url}/works/${id}?page=${page}&limit=${limit}`,{ headers });
   }
 
   createContact(contact:Contact){

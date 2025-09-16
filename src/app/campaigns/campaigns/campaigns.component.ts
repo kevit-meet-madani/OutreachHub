@@ -15,14 +15,15 @@ export class CampaignsComponent {
 
      user!:string[]
      currentpage = 1
+     limit = 5
+     totalPages = 0;
     getpermisson():string[]{
       return this.campsService.getPermisson();
     }
 
   ngOnInit() {
     // replace with API call
-    this.getCampaigns();
-    this.user = this.getpermisson();
+    this.getCampaigns(1);
   }
 
   call(id:any):boolean{
@@ -37,19 +38,31 @@ export class CampaignsComponent {
     }[status] || 'Draft';
   }
 
-  getCampaigns(){
-    this.campsService.getCampaigns(localStorage.getItem('workspace')!).subscribe( camps=> {
-      this.campaigns = camps
+  getCampaigns(page:number){
+    this.campsService.getCampaigns(page,this.limit,localStorage.getItem('workspace')!).subscribe( camps=> {
+      this.campaigns = camps.data
+      console.log(camps);
+      this.totalPages = camps.totalPages
     })
   }
 
   deleteCampaign(id:any){
-     this.campsService.deleteCampaign(id);
+     this.campsService.deleteCampaign(id).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+
+      error: (error) => {
+        console.log(error);
+      }
+     });
   }
 
-  OnLaunch(camp:Campaign){
-    this.campsService.launchCampMess(camp);
-    this.campsService.changeStatus(camp._id).subscribe({
+  async OnLaunch(camp:Campaign){
+    const res = await this.campsService.launchCampMess(camp);
+    
+    if(res !== "error"){
+      this.campsService.changeStatus(camp._id).subscribe({  
         next: (response) => {
           console.log(response);
         },
@@ -57,13 +70,16 @@ export class CampaignsComponent {
           console.log(error);
         }
       });
-    camp.status = "Running";
-    console.log(camp._id);
+      camp.status = "Running";
+      console.log(camp._id);
 
-    setTimeout(() => {
-      camp.status = "Completed";
-    },5000);
-
+      setTimeout(() => {
+        camp.status = "Completed";
+      },5000);
+    }
+    else{
+      alert("No contacts found with the specified tags.");
+    }
     camp.tags.pop();
   }
 
@@ -71,6 +87,19 @@ export class CampaignsComponent {
     const { _id , ... newCamp} = camp;
     console.log(newCamp);
     this.campsService.createCampaign(newCamp);
-    this.getCampaigns();
+  }
+
+  prevpage(){
+    if(this.currentpage > 1){
+      this.currentpage--;
+      this.getCampaigns(this.currentpage);
+    }
+  }
+
+  nextpage(){
+    if(this.currentpage < this.totalPages){
+      this.currentpage++;
+      this.getCampaigns(this.currentpage);
+    }
   }
 }

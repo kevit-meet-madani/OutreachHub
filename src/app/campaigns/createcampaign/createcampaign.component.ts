@@ -3,6 +3,7 @@ import { TemplatesService } from '../../templates/templates.service';
 import { Template } from '../../templates/data';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CampaignService } from '../campaign.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createcampaign',
@@ -11,7 +12,7 @@ import { CampaignService } from '../campaign.service';
 })
 export class CreatecampaignComponent {
 
-  constructor(private campaignService:CampaignService,private templateService:TemplatesService) {}
+  constructor(private campaignService:CampaignService,private templateService:TemplatesService,private router:Router) {}
 
   addform!:FormGroup
 
@@ -40,6 +41,7 @@ export class CreatecampaignComponent {
 
       console.log(obj);
       this.campaignService.createCampaign(obj);
+      this.router.navigate(['/dashboard/campaigns'])
     }
 
     getTemplates(){

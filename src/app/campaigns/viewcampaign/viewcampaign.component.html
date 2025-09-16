@@ -20,6 +20,18 @@
           </ng-container>
     </div>
 
+    <div class="contact-detail">
+  <h3>🎯 Targeted Contacts</h3>
+
+  <ul class="contact-list">
+    <li *ngFor="let contact of contacts | paginate: { itemsPerPage: 5, currentPage: cp }" class="contact-item">
+      <span class="contact-name">{{ contact.name }}</span>
+      <span class="contact-phone">{{ contact.phoneNumber }}</span>
+    </li>
+    <pagination-controls (pageChange)="cp = $event"></pagination-controls>
+  </ul>
+</div>
+
     <div class="detail">
       <strong>Text Content:</strong>
       <p class="content-text">{{ campaign.content }}</p>
@@ -36,6 +48,8 @@
       <strong>Template Content:</strong>
       <p class="content-text">{{ campaign.templateId?.content?.text }}</p>
     </div>
+
+    
 
   </div>
   <button [routerLink]="['/dashboard/campaigns']">Back</button>

@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let c of campaigns | paginate: { itemsPerPage: 6, currentPage: currentpage }">
+      <tr *ngFor="let c of campaigns">
         <td><a [routerLink]="['view', c._id]">{{ c.name }}</a></td>
         <td><span class="status-badge">{{ c.status }}</span></td>
         <td>
@@ -34,5 +34,13 @@
       </tr>
     </tbody>
   </table>
-  <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
+  <div class="pagination">
+    <button (click)="prevpage()" [disabled]="currentpage === 1">Previous</button>
+    <span>Page {{ currentpage }} of {{ totalPages }}</span>
+    <button (click)="nextpage()" [disabled]="currentpage === totalPages">Next</button>
+  </div>
+
+<ng-template #noContacts>
+  <p>No contacts found.</p>
+</ng-template>
 </div>

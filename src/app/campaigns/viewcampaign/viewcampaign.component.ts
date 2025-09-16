@@ -12,7 +12,9 @@ export class ViewcampaignComponent {
 
     constructor(private campaignService:CampaignService,private route:ActivatedRoute) {}
 
+    contacts:any[] = []
     campaign!:Campaign
+    cp = 1
     ngOnInit(){
       this.getTemplate();
     }
@@ -23,10 +25,24 @@ export class ViewcampaignComponent {
         next: (response) => {
           this.campaign = response
           console.log(this.campaign);
+          this.getContacts(this.campaign);
         },
         error: (error) => {
           console.log(error);
         }
       });
+    }
+
+    getContacts(campaign:Campaign){
+      this.campaignService.getContactsByTags(campaign.tags).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.contacts = response;
+        },
+
+        error: (error) => {
+          console.log(error);
+        }
+      })
     }
 }

@@ -25,4 +25,12 @@ export interface CampMess{
     createdAt?:Date
 }
 
+export interface CampPaginatedResponse {
+    data: Campaign[];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+}
+
 

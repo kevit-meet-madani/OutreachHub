@@ -6,4 +6,13 @@ export interface Contact{
     createdBy:Object;
     workspace:string;
     createdAt:Date;
+    data:Object[]
+}
+
+export interface PaginatedResponse {
+  data: Contact[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
 }

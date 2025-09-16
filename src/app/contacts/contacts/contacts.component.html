@@ -2,7 +2,7 @@
 <div class="contact-header-container">
   <div class="left-section">
     <h2 class="heading">Contacts</h2>
-    <span class="count">({{ contacts!.length }} total)</span>
+    <span class="count">({{ total }} total)</span>
   </div>
 
   <div class="right-section">
@@ -17,7 +17,7 @@
   </div>
 </div>
     <div class="contact-list">
-         <div class="contact-card" *ngFor="let contact of contacts | paginate: { itemsPerPage: 15, currentPage: currentPage }">
+         <div class="contact-card" *ngFor="let contact of contacts">
 
              <section class="listing">
                   <h2 class="listing-heading">Name :- {{ contact.name }}</h2>
@@ -31,5 +31,14 @@
             </section>
          </div>
     </div>
-    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    
+      <div class="pagination">
+    <button (click)="prevPage()" [disabled]="page === 1">Previous</button>
+    <span>Page {{ page }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="page === totalPages">Next</button>
+  </div>
+
+<ng-template #noContacts>
+  <p>No contacts found.</p>
+</ng-template>
 <hr />

@@ -18,9 +18,13 @@ export class ContactsComponent {
     constructor(private contactService:ContactService,private router:Router) {}
     // @Input() contact!:Contact
 
-    contacts: Contact[] = []
-    selectedSort = 'name';
-    currentPage = 1;
+     contacts: Contact[] = []
+     selectedSort = 'name';
+     currentPage = 1;
+     page = 1;
+     limit = 15;
+     totalPages = 0;
+     total!:number;
 
     user!:string[]
     getpermisson():string[]{
@@ -28,7 +32,7 @@ export class ContactsComponent {
     }
 
     ngOnInit(){
-       this.getContacts()
+       this.getContacts(1)
        this.user = this.getpermisson()
     }
 
@@ -49,15 +53,30 @@ export class ContactsComponent {
        // Implement sorting logic here
       }
 
-  getContacts(){
+  getContacts(page:number){
      
-     this.contactService.getContacts(localStorage.getItem('workspace')!).subscribe(contacts => {
-       this.contacts = contacts
-       console.log(this.contacts);
+     this.contactService.getContacts(page,this.limit,localStorage.getItem('workspace')!).subscribe(response => {
+       this.contacts = response.data
+       this.total = response.total
+       this.totalPages = response.totalPages
      })
   }
 
   deleteContact(id:any){
      this.contactService.deleteContact(id);
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.getContacts(this.page);
+    }
+  }
+
+  prevPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.getContacts(this.page);
+    }
   }
 }
