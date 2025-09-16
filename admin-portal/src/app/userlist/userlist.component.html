@@ -2,7 +2,7 @@
   <div class="header">
     <h2>Users</h2>
     <button class="create-btn oneb" [routerLink]="['/dashboard/adduser']">+ Create New User</button>
-    <button class="create-btn" [routerLink]="['/dashboard/create']">+ Add Existring User</button>
+    <button class="create-btn" [routerLink]="['/dashboard/existuser']">+ Add Existring User</button>
   </div>
 
   <table class="campaign-table">
@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let u of users">
+      <tr *ngFor="let u of users | paginate: { itemsPerPage: 10, currentPage: currentpage }">
         <td><a >{{ u.email }}</a></td>
         <td>{{ u.right }}</td>
         <td>{{u.createdAt | date:'mediumDate'}}</td>
@@ -27,4 +27,5 @@
       </tr>
     </tbody>
   </table>
+  <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
 </div>

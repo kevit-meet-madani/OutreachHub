@@ -21,6 +21,15 @@ export class UserService {
      return this.http.get<any[]>(`${this.url}/works/${id}`,{ headers });
   }
 
+  getToggledUsers(id:any):Observable<any[]>{
+    const token = localStorage.getItem('token');
+       const headers = {
+         'Authorization':`Bearer ${token}`
+       }
+
+      return this.http.get<any[]>(`${this.url}/toggled/${id}`,{ headers});
+  }
+
   createUser(body:User){
     const token = localStorage.getItem('token');
        const headers = {
@@ -52,6 +61,15 @@ export class UserService {
          'Authorization':`Bearer ${token}`
        }
 
-       return this.http.patch(`${this.url}/${body.id}`,body,{ headers })
+       return this.http.patch(`${this.url}/${body._id}`,body,{ headers })
+  }
+
+  updateWorkspaceUsers(id:any,body:any){
+       const token = localStorage.getItem('token');
+       const headers = {
+         'Authorization':`Bearer ${token}`
+       }
+
+       return this.http.patch(`${this.url}/addworks/${id}`,{array:body},{ headers});
   }
 }

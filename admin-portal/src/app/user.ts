@@ -1,7 +1,8 @@
 export interface User{
-    id:string;
+    name:string;
+    _id:string;
     email:string;
-    password:String;
+    password?:String;
 }
 
 export interface payload{

@@ -14,6 +14,7 @@ export class DataComponent {
     constructor(private authService:AuthService,private workspaceService:WorkspaceService) {}
 
     workspaces:Workspace[]=[]
+    currentpage = 1
 
     
     ngOnInit(){

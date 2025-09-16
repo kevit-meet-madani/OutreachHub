@@ -9,6 +9,7 @@ import { UserlistComponent } from './userlist/userlist.component';
 import { CreateuserComponent } from './createuser/createuser.component';
 import { VieworkspaceComponent } from './vieworkspace/vieworkspace.component';
 import { EdituserComponent } from './edituser/edituser.component';
+import { ExistuserComponent } from './existuser/existuser.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         path:'edit/user/:id',
         component:EdituserComponent
+      },
+      {
+        path:'existuser',
+        component:ExistuserComponent
       }
     ]
   }

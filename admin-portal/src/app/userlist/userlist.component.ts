@@ -12,7 +12,8 @@ export class UserlistComponent {
    constructor(private userService:UserService,private route:ActivatedRoute) {}
 
    users:any[] = []
-
+   currentpage = 1
+   
    ngOnInit(){
       const id = this.route.snapshot.paramMap.get('id')!;
       localStorage.setItem('workspace',id);

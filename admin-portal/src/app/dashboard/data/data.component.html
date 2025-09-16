@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let w of workspaces">
+      <tr *ngFor="let w of workspaces | paginate: { itemsPerPage: 6, currentPage: currentpage }">
         <td><a >{{ w.name }}</a></td>
         <td>{{ w.createdAt }}</td>
         <td>50</td>
@@ -27,4 +27,5 @@
       </tr>
     </tbody>
   </table>
+   <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
 </div>

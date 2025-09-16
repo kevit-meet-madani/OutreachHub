@@ -17,6 +17,8 @@ import { UserlistComponent } from './userlist/userlist.component';
 import { CreateuserComponent } from './createuser/createuser.component';
 import { VieworkspaceComponent } from './vieworkspace/vieworkspace.component';
 import { EdituserComponent } from './edituser/edituser.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ExistuserComponent } from './existuser/existuser.component';
 
 
 
@@ -33,14 +35,16 @@ import { EdituserComponent } from './edituser/edituser.component';
     UserlistComponent,
     CreateuserComponent,
     VieworkspaceComponent,
-    EdituserComponent
+    EdituserComponent,
+    ExistuserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [
     provideClientHydration(),
