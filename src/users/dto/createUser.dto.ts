@@ -2,6 +2,7 @@ import { IsNotEmpty , IsString , IsOptional , ValidateNested, MinLength} from 'c
 import mongoose from 'mongoose'
 
 export class createUserDto{
+
     @IsNotEmpty()
     email:string;
 

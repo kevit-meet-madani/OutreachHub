@@ -5,6 +5,7 @@ import { OutContacts } from "src/schemas/contacts.schema";
 import { createContactDto } from "./dto/create.contact.dto";
 import { Model } from 'mongoose';
 import * as jwt from 'jsonwebtoken';
+import { PaginationQueryDto } from "./dto/pagination.dto";
 
 @Injectable()
 export class ContactService
@@ -24,7 +25,7 @@ export class ContactService
         tags.pop();
 
 
-        return this.contactModel.find({tag:{$in:tags},workspace:wid}).select('_id name');
+        return this.contactModel.find({tag:{$in:tags},workspace:wid}).select('_id name phoneNumber');
     }
 
     createContact(contactDto:createContactDto,req:any){
@@ -59,4 +60,28 @@ export class ContactService
             }
         ]).limit(5)
     }
+
+    async findAll(paginationQuery: PaginationQueryDto,id:string) {
+    const { limit = 15, page = 1 } = paginationQuery;
+
+    const skip = (page - 1) * limit;
+
+    const [data, total] = await Promise.all([
+      this.contactModel
+        .find({workspace:id}).populate('_id createdBy','username role right').populate('workspace')
+        .skip(skip)
+        .limit(limit)
+        .sort({ createdAt: -1 }) 
+        .exec(),
+      this.contactModel.countDocuments({workspace:id}),
+    ]);
+
+    return {
+      data,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
+  }
 }

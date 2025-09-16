@@ -5,6 +5,7 @@ import { Model } from 'mongoose'
 import { createUserDto } from "./dto/createUser.dto";
 import * as bcrypt from 'bcrypt'
 import { updateUserDto } from "./dto/updateUser.dto"; 
+import { listDto } from "./dto/list.dto";
 
 @Injectable()
 export class UserService{
@@ -46,5 +47,23 @@ export class UserService{
 
     getUsersByWorks(id:string){
         return this.userModel.find({workspaces:id,role:'user'}).select('email right createdAt');
+    }
+
+    getToggledUsersByWorks(id:string){
+        return this.userModel.find({workspaces:{$ne : id},role:'user'}).select('_id email name');
+    }
+
+    async addWorkspaceToArray(id:string,body:any[]){
+
+        console.log(body)
+        const ids = body.map(item => item._id);
+        console.log(ids)
+
+        const res = await this.userModel.updateMany(
+            {_id:{$in:ids}},
+            {$push:{workspaces:id}}
+        ).exec();
+        
+        return res;
     }
 }

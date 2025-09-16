@@ -1,18 +1,24 @@
-import { Controller , Body , Get , Post , Delete , Patch , Param, UseGuards, Req} from "@nestjs/common";
+import { Controller , Body , Get , Post , Delete , Patch , Param, UseGuards, Req, Query} from "@nestjs/common";
 import { CampService } from "./camp.service";
 import { CreateCampaignDto } from "./dto/createcamp.dto";
 import { UpdateCampaignDto } from "./dto/update.dto";
 import { AuthGuard } from "src/auth/auth.guard";
+import { CampPaginationQueryDto } from "./dto/camppage.dto";
 
 @Controller('campaigns')
 
 export class CampController{
     constructor(private campService:CampService){}
     
+    // @Get('camps/:id')
+    // @UseGuards(AuthGuard)
+    // getCampaigns(@Param('id') id:string){
+    //     return this.campService.getCampaigns(id);
+    // }
+
     @Get('camps/:id')
-    @UseGuards(AuthGuard)
-    getCampaigns(@Param('id') id:string){
-        return this.campService.getCampaigns(id);
+    findAll(@Query() paginationQuery: CampPaginationQueryDto,@Param('id') id:string) {
+        return this.campService.findAll(paginationQuery,id);
     }
 
     @Get(':id')

@@ -3,6 +3,10 @@ import mongoose from 'mongoose'
 
 @Schema()
 export class OutUser{
+
+    @Prop({required:true})
+    name:string
+
     @Prop({unique:true,required:true})
     email:string
 

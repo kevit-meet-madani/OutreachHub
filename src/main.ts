@@ -16,7 +16,7 @@ async function bootstrap() {
     credentials: true, // optional, only if you use cookies/auth
   });
   
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({transform:true}));
 
   await app.listen(5000);
 }

@@ -3,6 +3,7 @@ import { Model } from "mongoose";
 import { OutCampaign } from "src/schemas/camp.schema";
 import { CreateCampaignDto } from "./dto/createcamp.dto";
 import { UpdateCampaignDto } from "./dto/update.dto";
+import { CampPaginationQueryDto } from "./dto/camppage.dto";
 
 export class CampService{
     constructor(@InjectModel(OutCampaign.name) private campModel:Model<OutCampaign>){}
@@ -45,7 +46,7 @@ export class CampService{
         const dates = [new Date(arr[0]),new Date(arr[1])];
         return this.campModel.aggregate([
             {
-                $match:{createdAt:{$gte:dates[0],$lte:dates[1]},workspaceId:arr[2]}
+                $match:{createdAt:{$gte:dates[0],$lte:dates[1]},workspaceId:arr[2],status:"Completed"}
             },
             {
                 $group:{
@@ -57,6 +58,9 @@ export class CampService{
                     },
                     count:{$sum:1}
                 }
+            },
+            {
+                $sort:{createdAt:-1}
             }
         ])
     }
@@ -64,4 +68,28 @@ export class CampService{
     changeStatus(id:string,body:any){
         return this.campModel.findByIdAndUpdate(id,body);
     }
+
+    async findAll(paginationQuery: CampPaginationQueryDto,id:string) {
+        const { limit = 6, page = 1 } = paginationQuery;
+    
+        const skip = (page - 1) * limit;
+    
+        const [data, total] = await Promise.all([
+          this.campModel
+            .find({workspaceId:id}).populate('_id createdBy','username role right').populate('workspaceId')
+            .skip(skip)
+            .limit(limit)
+            .sort({ createdAt: -1 }) 
+            .exec(),
+          this.campModel.countDocuments({workspaceId:id}),
+        ]);
+    
+        return {
+          data,
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        };
+      }
 }

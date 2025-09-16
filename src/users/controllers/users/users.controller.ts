@@ -5,6 +5,7 @@ import mongoose  from 'mongoose'
 import { updateUserDto } from 'src/users/dto/updateUser.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { WorkspaceService } from 'src/workspaces/workspace.service';
+import { listDto } from 'src/users/dto/list.dto';
 
 @Controller('users')
 export class UsersController {
@@ -78,5 +79,17 @@ export class UsersController {
     @UseGuards(AuthGuard)
     getUsersByWorks(@Param('id') id:string){
        return this.userService.getUsersByWorks(id);
+    }
+
+    @Get('toggled/:id')
+    @UseGuards(AuthGuard)
+    getToggledUsersByWorks(@Param('id') id:string){
+       return this.userService.getToggledUsersByWorks(id);
+    }
+
+    @Patch('addworks/:id')
+    @UseGuards(AuthGuard)
+    async addWorkspaces(@Param('id') id:string,@Body() body:any){
+         return this.userService.addWorkspaceToArray(id,body.array);
     }
 }
