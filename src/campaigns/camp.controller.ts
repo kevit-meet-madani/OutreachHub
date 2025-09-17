@@ -17,6 +17,7 @@ export class CampController{
     // }
 
     @Get('camps/:id')
+    @UseGuards(AuthGuard)
     findAll(@Query() paginationQuery: CampPaginationQueryDto,@Param('id') id:string) {
         return this.campService.findAll(paginationQuery,id);
     }
