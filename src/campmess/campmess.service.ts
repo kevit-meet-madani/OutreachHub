@@ -17,6 +17,9 @@ export class CampMessService{
     }
 
     createCampaign(campmessDto:CreateCamMessessDto,req:any){
+        if(req["user"].right === "view"){
+            return {message:"You don't have permission to create campaign message"};
+        }
         campmessDto["createdBy"] = req["user"].id;
         const newCamp = new this.campMessodel(campmessDto);
         return newCamp.save();

@@ -25,7 +25,23 @@ export class ContactService
         tags.pop();
 
 
-        return this.contactModel.find({tag:{$in:tags},workspace:wid}).select('_id name phoneNumber');
+        // return this.contactModel.find({tag:{$in:tags},workspace:wid}).select('_id name phoneNumber');
+        return this.contactModel.aggregate([
+            {
+                $unwind:"$tags"
+            },
+            {
+                $match:{workspace:wid,tags:{$in:tags}}
+            },
+            {
+                $group:{
+                    _id:"$_id",
+                    name:{$first:"$name"},
+                    phoneNumber:{$first:"$phoneNumber"},
+                    tags:{$addToSet:"$tags"},
+                }
+            }
+        ])
     }
 
     createContact(contactDto:createContactDto,req:any){
@@ -44,22 +60,20 @@ export class ContactService
         return this.contactModel.findByIdAndUpdate(id,contactDto);
     }
 
-    getTopTags(id:string){
-        return this.contactModel.aggregate([
-            {
-                $match:{workspace:id}
-            },
-            {
-                $group:{
-                    _id:"$tag",
-                    count:{$sum : 1}
-                },
-            },
-            {
-              $sort:{count:-1}
+    getTopTags(id: string) {
+    return this.contactModel.aggregate([
+        { $match: { workspace: id } },
+        { $unwind: "$tags" },
+        {
+            $group: {
+                _id: "$tags",
+                count: { $sum: 1 }
             }
-        ]).limit(5)
-    }
+        },
+        { $sort: { count: -1 } },
+        { $limit: 5 }
+    ]);
+}
 
     async findAll(paginationQuery: PaginationQueryDto,id:string) {
     const { limit = 15, page = 1 } = paginationQuery;

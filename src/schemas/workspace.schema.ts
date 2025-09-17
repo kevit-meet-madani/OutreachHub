@@ -12,6 +12,9 @@ export class OutWorkspace
 
     @Prop({required:true})
     summary:string
+
+    @Prop({type:Date,default: () => new Date()})
+    createdAt:Date
 }
 
 export const OutWorkspaaceSchema = SchemaFactory.createForClass(OutWorkspace);

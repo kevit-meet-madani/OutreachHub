@@ -10,7 +10,7 @@ export class updateContactDto{
    phoneNumber:string;
 
    @IsOptional()
-    tag:string
+    tags:string[]
     
    @IsOptional()
     createdBy:mongoose.Types.ObjectId;

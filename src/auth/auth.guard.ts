@@ -31,6 +31,7 @@ export class AuthGuard{
         try {
             const decoded = this.JwtService.verify(token, { secret: `${process.env.secret}` , clockTolerance:3600});           
             req["user"] = decoded;
+            console.log("Decoded Token:", decoded);
             return true; 
         } catch (error) {
             console.log(error);

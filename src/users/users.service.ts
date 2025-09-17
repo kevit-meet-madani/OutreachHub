@@ -66,4 +66,8 @@ export class UserService{
         
         return res;
     }
+
+    getUsersCount(id:string){
+        return this.userModel.countDocuments({workspaces:id});
+    }
 }

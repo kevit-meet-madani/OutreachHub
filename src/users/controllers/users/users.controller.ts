@@ -87,6 +87,11 @@ export class UsersController {
        return this.userService.getToggledUsersByWorks(id);
     }
 
+    @Get('count/:id')
+    getUsersCount(@Param('id') id:string){
+         return this.userService.getUsersCount(id);
+    }
+
     @Patch('addworks/:id')
     @UseGuards(AuthGuard)
     async addWorkspaces(@Param('id') id:string,@Body() body:any){

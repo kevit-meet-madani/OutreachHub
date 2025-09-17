@@ -11,7 +11,7 @@ export class OutContacts{
     phoneNumber:string;
 
     @Prop({required:true})
-    tag:string;
+    tags:string[];
 
     @Prop({type:mongoose.Types.ObjectId,ref:'OutUser'})
     createdBy:mongoose.Types.ObjectId;
