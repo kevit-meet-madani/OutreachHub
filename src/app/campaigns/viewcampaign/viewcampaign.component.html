@@ -16,7 +16,7 @@
     <div class="detail">
         <strong>Tgas:</strong>
          <ng-container *ngFor="let tag of campaign.tags">
-            <span class="tag-badge">{{ tag }}</span>
+            <span class="tag-badge" *ngIf="tag.length<10">{{ tag }}</span>
           </ng-container>
     </div>
 

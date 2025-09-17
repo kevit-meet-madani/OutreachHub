@@ -24,7 +24,6 @@ export class ViewcampaignComponent {
       this.campaignService.getCampaign(id).subscribe({
         next: (response) => {
           this.campaign = response
-          console.log(this.campaign);
           this.getContacts(this.campaign);
         },
         error: (error) => {

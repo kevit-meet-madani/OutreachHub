@@ -20,7 +20,7 @@
         <td><span class="status-badge">{{ c.status }}</span></td>
         <td>
           <ng-container *ngFor="let tag of c.tags">
-            <span class="tag-badge">{{ tag }}</span>
+            <span class="tag-badge" *ngIf="tag.length<10">{{ tag }}</span>
           </ng-container>
         </td>
         <td>{{ c.createdAt | date:'mediumDate' }}</td>

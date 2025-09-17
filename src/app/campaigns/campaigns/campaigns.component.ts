@@ -41,7 +41,6 @@ export class CampaignsComponent {
   getCampaigns(page:number){
     this.campsService.getCampaigns(page,this.limit,localStorage.getItem('workspace')!).subscribe( camps=> {
       this.campaigns = camps.data
-      console.log(camps);
       this.totalPages = camps.totalPages
     })
   }
@@ -83,11 +82,21 @@ export class CampaignsComponent {
     camp.tags.pop();
   }
 
-  duplicate(camp:Campaign){
-    const { _id , ... newCamp} = camp;
-    console.log(newCamp);
-    this.campsService.createCampaign(newCamp);
-  }
+  duplicate(camp: Campaign) {
+  const { _id, workspaceId, ...obj } = camp; 
+
+  
+  const newCamp = { 
+    ...obj, 
+    workspaceId: localStorage.getItem('workspace')! 
+  };
+  console.log(newCamp); 
+
+  this.campsService.createCampaign(newCamp); 
+
+  this.getCampaigns(this.currentpage); 
+}
+
 
   prevpage(){
     if(this.currentpage > 1){
