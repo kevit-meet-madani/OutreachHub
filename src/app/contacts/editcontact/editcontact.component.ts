@@ -20,12 +20,14 @@ export class EditcontactComponent {
         this.editform = new FormGroup({
           name:new FormControl('',[Validators.required]),
           phoneNumber: new FormControl('',[Validators.required]),
-          tag:new FormControl('',[Validators.required])
+          tags:new FormControl('',[Validators.required])
         })
      }
   
      OnSubmit(){
+        const tags = this.editform.value.tags.split(' ');
         const obj = this.editform.value;
+        obj["tags"] = tags;
         const id = this.route.snapshot.paramMap.get('id');
         obj["id"] = id;
         this.contactService.editContact(obj);

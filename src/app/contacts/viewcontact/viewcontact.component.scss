@@ -18,6 +18,17 @@ h2 {
   color: #333;
 }
 
+.tag-badge {
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 4px;
+  background-color: #e0f0ff;
+  color: #007bff;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8125rem;
+}
+
 .contact-row {
   display: flex;
   flex-direction: column;

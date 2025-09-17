@@ -7,8 +7,8 @@
         <label for="phone">Enter phone-number : </label>
         <input type="number" formControlName="phoneNumber" #phone>
 
-        <label for="tag">Enter tag : </label>
-        <input type="text" formControlName="tag" #tag>
+        <label for="tag">Enter tags (space-seperated) : </label>
+        <input type="text" formControlName="tags" #tag>
         
         <button type="submit" [disabled]="editform.invalid">Update</button>
     </form>

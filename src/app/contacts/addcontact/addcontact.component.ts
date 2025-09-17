@@ -18,13 +18,17 @@ export class AddcontactComponent {
       this.addform = new FormGroup({
         name:new FormControl('',[Validators.required]),
         phoneNumber: new FormControl('',[Validators.required]),
-        tag:new FormControl('',[Validators.required])
+        tags:new FormControl('',[Validators.required])
       })
    }
 
    OnSubmit(){
+      const tags = this.addform.value.tags.split(' ');
+
+      const obj = this.addform.value;
+      obj["tags"] = tags;
       console.log(this.addform.value);
-      this.contactService.createContact(this.addform.value);
+      this.contactService.createContact(obj);
       this.router.navigate(['/dashboard/contacts'])
    }
    

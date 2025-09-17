@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CampaignService } from '../campaign.service';
 import { ActivatedRoute } from '@angular/router';
+import { TemplatesService } from '../../templates/templates.service';
+import { Template } from '../../templates/data';
 
 @Component({
   selector: 'app-editcampaign',
@@ -9,9 +11,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './editcampaign.component.scss'
 })
 export class EditcampaignComponent {
-     constructor(private campaignService:CampaignService,private route:ActivatedRoute) {}
+     constructor(private campaignService:CampaignService,private route:ActivatedRoute,private templateService:TemplatesService) {}
      
        editform!:FormGroup
+       templates:Template[] = []
+       selectedTemplate!:Template
      
          ngOnInit(){
      
@@ -19,8 +23,10 @@ export class EditcampaignComponent {
                createdAt:new FormControl(''),
                name:new FormControl('',Validators.required),
                tags:new FormControl([''],Validators.required),
-               content:new FormControl('',Validators.required)
+               content:new FormControl('',Validators.required),
+               templateId:new FormControl('')
            })
+           this.getTemplates();
          }
      
          submitCampaign(){
@@ -35,6 +41,11 @@ export class EditcampaignComponent {
            console.log(obj);
            this.campaignService.updateCampaign(obj);
          }
-    
+     
+       getTemplates(){
+      this.templateService.getTemplates(localStorage.getItem('workspace')!).subscribe(tems => {
+        this.templates = tems;
+      })
+    }
      
 }

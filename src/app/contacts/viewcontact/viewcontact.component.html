@@ -9,9 +9,11 @@
       <label>Phone:</label>
       <p>{{ contact.phoneNumber }}</p>
     </div>
-    <div class="contact-row" *ngIf="contact.tag">
+    <div class="contact-row" *ngIf="contact.tags">
       <label>Tag:</label>
-      <p>{{ contact.tag }}</p>
+      <ng-container *ngFor="let tag of contact.tags">
+          <span class="tag-badge" *ngIf="tag.length<10">{{ tag }}</span>
+      </ng-container>
     </div>
     <div class="contact-row" *ngIf="contact.createdAt">
       <label>Created At:</label>

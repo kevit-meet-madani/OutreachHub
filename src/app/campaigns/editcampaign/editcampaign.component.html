@@ -1,5 +1,5 @@
 <div class="create-container">
-  <h2>Create New Campaign</h2>
+  <h2>Update Campaign</h2>
   <form (ngSubmit)="submitCampaign()" [formGroup]="editform">
     <div class="form-group">
       <label>Campaign Name</label>
@@ -44,6 +44,23 @@
     </div>
 
     <div class="form-group">
+      <label>Select Template</label>
+      <select formControlName="templateId" required>
+        <option *ngFor="let tmp of templates" [ngValue]="tmp">
+          {{ tmp.name }} ({{ tmp.type }})
+        </option>
+      </select>
+    </div>
+
+    <div class="template-preview" *ngIf="editform.value.templateId">
+      <h3>Template Preview</h3>
+      <p>{{ editform.value.templateId.content.text }}</p>
+      <img *ngIf="editform.value.templateId.content.imagePath"
+           [src]="editform.value.templateId.content.imagePath"
+           alt="Template Image" />
+    </div>
+
+    <div class="form-group">
       <label>Tags (space-separated)</label>
       <input type="text" formControlName="tags" placeholder="e.g., VIP, New Users" />
     </div>
@@ -55,6 +72,7 @@
 
     <button type="submit" [disabled]="editform.invalid" class="submit-btn">
       Update
-    </button>
+    </button> <br> <br><br>
+    <button class="submit-btn" [routerLink]="['/dashboard/campaigns']">Back</button>
   </form>
 </div>

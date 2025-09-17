@@ -24,6 +24,7 @@ export class CampaignsComponent {
   ngOnInit() {
     // replace with API call
     this.getCampaigns(1);
+    this.user = this.getpermisson()
   }
 
   call(id:any):boolean{

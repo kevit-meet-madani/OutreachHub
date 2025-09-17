@@ -22,7 +22,11 @@
              <section class="listing">
                   <h2 class="listing-heading">Name :- {{ contact.name }}</h2>
                   <h2 class="listing-heading">Phone :- {{ contact.phoneNumber }}</h2>
-                  <h2><span class="contact-tag">{{ contact.tag }}</span></h2>
+                  <h2>
+                    <ng-container *ngFor="let tag of contact.tags">
+                        <span class="tag-badge" *ngIf="tag.length<10">{{ tag }}</span>
+                    </ng-container>
+                  </h2>
                   <div class="contact-actions">
                        <button [routerLink]="['/dashboard/contacts/view',contact._id]">View</button>
                        <button [routerLink]="['/dashboard/contacts/edit',contact._id]" [ngClass]="{'denied':call(contact.createdBy)}">Edit</button>

@@ -2,7 +2,7 @@ export interface Contact{
     _id:string;
     name:string;
     phoneNumber:number;
-    tag:string;
+    tags:string[];
     createdBy:Object;
     workspace:string;
     createdAt:Date;
