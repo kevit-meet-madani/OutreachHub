@@ -3,6 +3,7 @@ import { Workspace } from '../data';
 import { AuthService } from '../../auth.service';
 import { HttpClient } from '@angular/common/http';
 import { WorkspaceService } from '../../workspace.service';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-data',
@@ -11,7 +12,7 @@ import { WorkspaceService } from '../../workspace.service';
 })
 export class DataComponent {
 
-    constructor(private authService:AuthService,private workspaceService:WorkspaceService) {}
+    constructor(private authService:AuthService,private workspaceService:WorkspaceService,private userService:UserService) {}
 
     workspaces:Workspace[]=[]
     currentpage = 1
@@ -24,8 +25,16 @@ export class DataComponent {
    getWorkspaces(){
      this.workspaceService.getWorkspaces().subscribe(works => {
         this.workspaces = works
-        console.log(this.workspaces);
-       })
+
+        for(let w of this.workspaces){
+         this.userService.getUsersCount(w._id).subscribe(count => {
+            w["count"] = count;
+            // w = w;
+         })
+       }
+      
+   })
+      
    } 
 
    delete(id:any){

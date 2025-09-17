@@ -14,10 +14,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let w of workspaces | paginate: { itemsPerPage: 6, currentPage: currentpage }">
+      <tr *ngFor="let w of workspaces | paginate: { itemsPerPage: 5, currentPage: currentpage }">
         <td><a >{{ w.name }}</a></td>
-        <td>{{ w.createdAt }}</td>
-        <td>50</td>
+        <td>{{ w.count }}</td>
+        <td>{{w.createdAt | date:'mediumDate'}}</td>
         <td class="actions">
           <button [routerLink]="['/dashboard/edit',w._id]">Edit</button>
           <button [routerLink]="['/dashboard/view',w._id]">View</button>

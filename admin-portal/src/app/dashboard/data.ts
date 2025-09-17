@@ -4,6 +4,7 @@ export interface Workspace{
     createdBy?:Object;
     summary:string;
     createdAt?:Date
+    count:number
 }
 
 export interface WorkUpdate{
