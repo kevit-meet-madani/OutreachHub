@@ -1,7 +1,7 @@
 <div class="campaign-list-container">
   <div class="header">
     <h2>Campaigns</h2>
-    <button class="create-btn" [routerLink]="['/dashboard/campaigns/create']" *nfIf="">+ Create New Campaign</button>
+    <button class="create-btn" [routerLink]="['/dashboard/campaigns/create']" *ngIf="user[0] === 'edit'">+ Create New Campaign</button>
   </div>
 
   <table class="campaign-table">
@@ -28,8 +28,8 @@
           <button *ngIf="c.status === 'Draft' && user[0] === 'edit'" [routerLink]="['edit', c._id]">Edit</button>
           <button [routerLink]="['view', c._id]">View</button>
           <button *ngIf="c.status === 'Draft' && user[0] === 'edit'" (click)="OnLaunch(c)">Launch</button>
-          <button (click)="duplicate(c)" *ngIf="c.status === 'Draft'">Copy</button>
-          <button (click)="deleteCampaign(c._id)">Delete</button>
+          <button (click)="duplicate(c)" *ngIf="c.status === 'Draft' && user[0] === 'edit'">Copy</button>
+          <button (click)="deleteCampaign(c._id)" *ngIf="user[0] === 'edit'">Delete</button>
         </td>
       </tr>
     </tbody>

@@ -40,6 +40,14 @@ export class TemplatesComponent {
       }
 
       delete(id:any){
-         this.templateService.deleteTemplate(id);
+         this.templateService.deleteTemplate(id).subscribe({
+           next:(response) => {
+              this.getTemplates();
+           },
+
+           error: (error) => {
+            console.log(error);
+           }
+         });
       }
 }

@@ -81,14 +81,6 @@ export class TemplatesService {
       'Authorization':`Bearer ${token}`
      }
 
-     this.http.delete(`${this.url}/${id}`, { headers }).subscribe({
-      next: (response) => {
-        console.log("data deleted");
-      },
-
-      error:(error) => {
-        console.log(error);
-      }
-     })
+     return this.http.delete(`${this.url}/${id}`, { headers })
   }
 }

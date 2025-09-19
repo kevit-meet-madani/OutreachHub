@@ -4,23 +4,28 @@ import { TemplatesComponent } from './templates.component';
 import { CreatetemplateComponent } from '../createtemplate/createtemplate.component';
 import { EdittemplateComponent } from '../edittemplate/edittemplate.component';
 import { ViewtemplateComponent } from '../viewtemplate/viewtemplate.component';
+import { authGuard } from '../../auth.guard';
 
 const routes: Routes = [
   {
     path:'',
-    component:TemplatesComponent
+    component:TemplatesComponent,
+    canActivate:[authGuard]
   },
   {
     path:'create',
-    component:CreatetemplateComponent
+    component:CreatetemplateComponent,
+    canActivate:[authGuard]
   },
   {
     path:'edit/:id',
-    component:EdittemplateComponent
+    component:EdittemplateComponent,
+    canActivate:[authGuard]
   },
   {
     path:'view/:id',
-    component:ViewtemplateComponent
+    component:ViewtemplateComponent,
+    canActivate:[authGuard]
   }
 ];
 

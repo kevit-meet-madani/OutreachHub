@@ -4,23 +4,28 @@ import { AddcontactComponent } from '../addcontact/addcontact.component';
 import { ContactsComponent } from './contacts.component';
 import { EditcontactComponent } from '../editcontact/editcontact.component';
 import { ViewcontactComponent } from '../viewcontact/viewcontact.component';
+import { authGuard } from '../../auth.guard';
 
 const routes: Routes = [
   {
     path:'',
-    component:ContactsComponent
+    component:ContactsComponent,
+    canActivate:[authGuard]
   },
   {
     path:'create',
-    component:AddcontactComponent
+    component:AddcontactComponent,
+    canActivate:[authGuard]
   },
   {
     path:'edit/:id',
-    component:EditcontactComponent
+    component:EditcontactComponent,
+    canActivate:[authGuard]
   },
   {
      path:'view/:id',
-     component:ViewcontactComponent
+     component:ViewcontactComponent,
+     canActivate:[authGuard]
   }
 ];
 

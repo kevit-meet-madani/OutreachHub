@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Work, Workspace } from '../data';
 import { AuthService } from '../../auth.service';
+import { SharedService } from '../../shared.service';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { AuthService } from '../../auth.service';
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent {
-   constructor(private authService:AuthService) {}
+   constructor(private authService:AuthService,private sharedService:SharedService) {}
 
 
       placeholder = "Select a workspace"
@@ -18,9 +19,14 @@ export class DropdownComponent {
       selectedWorkspaces: string[] = [];
       // workspaces:Work[]=[]
       workspaces:Workspace[]=[]
+
+      
   
       ngOnInit(){
         this.getWorkspaces();
+        if(localStorage.getItem('workspace')){
+          this.selectedValue = localStorage.getItem('workspace')!;
+        }
       }
       obj!:Object
       getWorkspaces(){
@@ -34,5 +40,6 @@ export class DropdownComponent {
 
       getVal(){
          localStorage.setItem('workspace',this.selectedValue);
+         this.sharedService.emitEvent(this.selectedValue);
       }
 }

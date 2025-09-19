@@ -49,7 +49,7 @@ export class CampaignsComponent {
   deleteCampaign(id:any){
      this.campsService.deleteCampaign(id).subscribe({
       next: (response) => {
-        console.log(response);
+        this.getCampaigns(this.currentpage);
       },
 
       error: (error) => {

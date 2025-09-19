@@ -81,17 +81,7 @@ export class ContactService {
       'Authorization':`Bearer ${token}`
     }
 
-    this.http.delete(`${this.url}/${id}`,{ headers }).subscribe({
-      next: (response) => {
-        if(response){
-          console.log("Data deleted");
-        }
-      },
-
-      error: (error) => {
-        console.log(error)
-      }
-    })
+    return this.http.delete(`${this.url}/${id}`,{ headers })
   }
 
   getContactsByTag(tag:string[]):Observable<any[]>{

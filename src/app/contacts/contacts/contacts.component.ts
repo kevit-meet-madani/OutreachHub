@@ -63,7 +63,11 @@ export class ContactsComponent {
   }
 
   deleteContact(id:any){
-     this.contactService.deleteContact(id);
+     this.contactService.deleteContact(id).subscribe({
+      next: (response) => {
+        this.getContacts(this.page);
+      }
+     });
   }
 
   nextPage() {

@@ -3,6 +3,7 @@ import { Work, Workspace } from '../data';
 import { AuthService } from '../../auth.service';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { CampaignService } from '../../campaigns/campaign.service';
+import { SharedService } from '../../shared.service';
 
 
 @Component({
@@ -12,7 +13,57 @@ import { CampaignService } from '../../campaigns/campaign.service';
 })
 export class DataComponent {
 
-    constructor(private campService:CampaignService) {}
+    constructor(private campService:CampaignService,private sharedService:SharedService) {}
+    cw = localStorage.getItem('workspace');
+
+    ngOnInit(){
+      this.sharedService.event$.subscribe(res => {
+
+         if(res === this.cw){
+          this.data = {
+       labels: [],
+       datasets: [
+         {
+           label: 'Campaigns per Day',
+           data: [],
+           borderColor: '#42A5F5',
+           backgroundColor: 'rgba(66, 165, 245, 0.3)',
+           fill: true,
+           tension: 0.3,
+         },
+       ],
+     };
+
+     this.Data1 = {
+    labels: [],
+    datasets: [
+      {
+        label: 'Contacts Reached',
+        data: [],
+        borderColor: '#AB47BC',
+        backgroundColor: 'rgba(171, 71, 188, 0.3)',
+        fill: true,
+        tension: 0.4
+      }
+    ]
+  };
+
+  this.Data2 = {
+    labels: [],
+    datasets: [
+      {
+        label: 'Contacts Reached',
+        data: [],
+        borderColor: '#AB47BC',
+        backgroundColor: 'rgba(171, 71, 188, 0.3)',
+        fill: true,
+        tension: 0.4
+      }
+    ]
+  };
+         }
+      })
+    }
 
 
     @Output() dates = new EventEmitter<string>();
@@ -138,13 +189,11 @@ export class DataComponent {
      public type: ChartType = 'line';
    
       public data: ChartConfiguration['data'] = {
-      //  labels: ['2025-08-25', '2025-08-26', '2025-08-27', '2025-08-28', '2025-08-29'],
-      labels: this.idarray,
+       labels: [],
        datasets: [
          {
            label: 'Campaigns per Day',
-          //  data: [3, 7, 5, 8, 6],
-          data:this.countarray,
+           data: [],
            borderColor: '#42A5F5',
            backgroundColor: 'rgba(66, 165, 245, 0.3)',
            fill: true,
