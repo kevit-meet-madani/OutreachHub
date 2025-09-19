@@ -101,7 +101,7 @@
         <option value="type">Type</option>
         <option value="sentAt">Sent Date</option>
       </select>
-      <button [routerLink]="['/dashboard/templates/create']" class="add-button">+ Add Template</button>
+      <button [routerLink]="['/dashboard/templates/create']" class="add-button" *ngIf="user[0] === 'edit'">+ Add Template</button>
     </div>
   </div>
 
@@ -116,8 +116,8 @@
           <p class="date">Sent: {{ template.createdAt | date:'mediumDate' }}</p>
           <div class="card-actions">
             <button [routerLink]="['/dashboard/templates/view', template._id]">View</button>
-            <button [routerLink]="['/dashboard/templates/edit', template._id]">Edit</button>
-            <button (click)="delete(template._id)" class="danger">Delete</button>
+            <button [routerLink]="['/dashboard/templates/edit', template._id]"  *ngIf="user[0] === 'edit'">Edit</button>
+            <button (click)="delete(template._id)" class="danger" *ngIf="user[0] === 'edit'">Delete</button>
           </div>
         </div>
       </div>

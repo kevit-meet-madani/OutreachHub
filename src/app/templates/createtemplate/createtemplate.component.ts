@@ -17,6 +17,8 @@ export class CreatetemplateComponent {
 
   previewImage: string | ArrayBuffer | null = null;
 
+   types = ['text', 'text and image'];
+
   addform!:FormGroup
   
      ngOnInit(){
@@ -45,10 +47,10 @@ export class CreatetemplateComponent {
   }
 
   onImageSelected(){
-
+     
   }
 
   OnCancel(){
-
+    this.router.navigate(['/dashboard/templates']);
   }
 }

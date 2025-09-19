@@ -17,15 +17,10 @@
 
     <!-- Type -->
     <div class="form-group">
-      <label for="type">Template Type</label>
-      <input
-        type="text"
-        id="type"
-        name="type"
-        required
-        placeholder="e.g., Welcome, Reminder, Promotion"
-        formControlName="type"
-      />
+      <label>Type</label>
+      <select name="type" required formControlName="type">
+        <option *ngFor="let t of types" [value]="t">{{ t }}</option>
+      </select>
     </div>
 
     <!-- Text Content -->
