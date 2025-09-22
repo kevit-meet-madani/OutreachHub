@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { WorkspaceService } from '../workspace.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-createworkspace',
@@ -9,7 +10,7 @@ import { WorkspaceService } from '../workspace.service';
 })
 export class CreateworkspaceComponent {
 
-  constructor(private workspaceService:WorkspaceService) {}
+  constructor(private workspaceService:WorkspaceService,private router:Router,private route:ActivatedRoute) {}
    addform!:FormGroup
 
    ngOnInit(){
@@ -21,6 +22,10 @@ export class CreateworkspaceComponent {
 
    OnSubmit(){
      this.workspaceService.createWorkspace(this.addform.value);
+   }
+
+   goBack(){
+      this.router.navigate(['../../'], { relativeTo: this.route });
    }
       
 }

@@ -3,7 +3,7 @@
   <h2>Select Users from another workspaces</h2>
 
   <ul class="user-list">
-    <li *ngFor="let user of users" class="user-item">
+    <li *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: currentpage }" class="user-item">
       <label>
         <input
           type="checkbox"
@@ -21,4 +21,6 @@
   <div class="submit-section">
     <button (click)="submitSelection()">Submit</button>
   </div>
+   <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
+  <button (click)="goBack()">Back</button>
 </div>

@@ -20,7 +20,6 @@ export class WorkspaceService {
        const headers = {
          'Authorization':`Bearer ${token}`
        }
-       alert(token);
        return this.http.get<Workspace[]>(this.url,{ headers })
   }
 

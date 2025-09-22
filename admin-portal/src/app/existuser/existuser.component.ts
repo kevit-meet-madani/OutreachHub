@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -11,10 +12,11 @@ import { UserService } from '../user.service';
 })
 export class ExistuserComponent implements OnInit {
 
-  constructor(private userService:UserService) {}
+  constructor(private userService:UserService,private router:Router,private route:ActivatedRoute) {}
 
   users: User[] = []; // Simulate fetching users
   selectedUserIds: Set<string> = new Set();
+  currentpage = 1
 
   ngOnInit(): void {
     // Simulate fetched user list
@@ -50,4 +52,8 @@ export class ExistuserComponent implements OnInit {
       }
     });
   }
+
+  goBack(){
+      this.router.navigate(['../'], { relativeTo: this.route });
+   }
 }

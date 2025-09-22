@@ -20,6 +20,14 @@ export class UserService {
 
      return this.http.get<any[]>(`${this.url}/works/${id}`,{ headers });
   }
+  getUser(id:string):Observable<User>{
+    const token = localStorage.getItem('token');
+       const headers = {
+         'Authorization':`Bearer ${token}`
+       }
+
+       return this.http.get<User>(`${this.url}/${id}`,{ headers })
+  }
 
   getUsersCount(id:any):Observable<number>{
     const token = localStorage.getItem('token');
@@ -61,7 +69,7 @@ export class UserService {
          'Authorization':`Bearer ${token}`
        }
 
-    this.http.delete(`${this.url}/${id}`,{ headers })
+    return this.http.delete(`${this.url}/${id}`,{ headers })
   }
 
   updateUser(body:User){

@@ -1,7 +1,7 @@
 <div class="campaign-list-container">
   <div class="header">
     <h2>Workspaces</h2>
-    <button class="create-btn" [routerLink]="['/dashboard/create']">+ Create New Workspace</button>
+    <button class="create-btn" [routerLink]="[':id/create']">+ Create New Workspace</button>
   </div>
 
   <table class="campaign-table">
@@ -19,10 +19,10 @@
         <td>{{ w.count }}</td>
         <td>{{w.createdAt | date:'mediumDate'}}</td>
         <td class="actions">
-          <button [routerLink]="['/dashboard/edit',w._id]">Edit</button>
-          <button [routerLink]="['/dashboard/view',w._id]">View</button>
+          <button [routerLink]="['/dashboard',w._id,'edit']">Edit</button>
+          <button [routerLink]="['/dashboard',w._id,'view']">View</button>
           <button (click)="delete(w._id)">Delete</button> 
-          <button [routerLink]="['/dashboard/users',w._id]">Open Users List</button>
+          <button [routerLink]="['/dashboard',w._id,'users']">Open Users List</button>
         </td>
       </tr>
     </tbody>

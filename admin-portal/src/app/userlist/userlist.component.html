@@ -1,8 +1,8 @@
 <div class="campaign-list-container">
   <div class="header">
     <h2>Users</h2>
-    <button class="create-btn oneb" [routerLink]="['/dashboard/adduser']">+ Create New User</button>
-    <button class="create-btn" [routerLink]="['/dashboard/existuser']">+ Add Existring User</button>
+    <button class="create-btn oneb" (click)="createtUser()">+ Create New User</button>
+    <button class="create-btn" (click)="existUsers()">+ Add Existring User</button>
   </div>
 
   <table class="campaign-table">
@@ -20,12 +20,14 @@
         <td>{{ u.right }}</td>
         <td>{{u.createdAt | date:'mediumDate'}}</td>
         <td class="actions">
-          <button [routerLink]="['/dashboard/edit/user',u._id]">Edit</button>
-          <button>View</button>
+          <!-- <button [routerLink]="['/dashboard/edit/user',u._id]">Edit</button> -->
+          <button (click)="editUser(u._id)">Edit</button>
+          <button (click)="viewuser(u._id)">View</button>
           <button (click)="delete(u._id)">Delete</button> 
         </td>
       </tr>
     </tbody>
   </table>
+  <button (click)="goBack()">Back</button>
   <pagination-controls (pageChange)="currentpage = $event"></pagination-controls>
 </div>

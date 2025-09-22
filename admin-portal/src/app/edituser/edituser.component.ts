@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { WorkspaceService } from '../workspace.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class EdituserComponent {
     
       userForm!: FormGroup;
     
-      constructor(private fb: FormBuilder , private workspaceService:WorkspaceService,private roue:ActivatedRoute,private userService:UserService) {}
+      constructor(private fb: FormBuilder , private workspaceService:WorkspaceService,private roue:ActivatedRoute,private userService:UserService,private router: Router,private route:ActivatedRoute) {}
     
       ngOnInit(): void {
         this.userForm = this.fb.group({
@@ -36,4 +36,10 @@ export class EdituserComponent {
           }
         })
       }
+
+      // edit-user.component.ts
+goBack() {
+  this.router.navigate(['../../'], { relativeTo: this.route });
+}
+
 }

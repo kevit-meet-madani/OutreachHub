@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-createuser',
@@ -9,8 +10,8 @@ import { UserService } from '../user.service';
 })
 export class CreateuserComponent {
       addform!:FormGroup
-
-    constructor(private userService:UserService) {}
+      selected: string = '';
+    constructor(private userService:UserService,private router:Router,private route:ActivatedRoute) {}
 
    ngOnInit(){
       this.addform = new FormGroup({
@@ -26,6 +27,11 @@ export class CreateuserComponent {
       const obj = this.addform.value;
       obj["workspaces"] = [localStorage.getItem('workspace')];
       obj["role"] = "user";
+      console.log(obj)
       this.userService.createUser(this.addform.value);
+   }
+
+   goBack(){
+      this.router.navigate(['../'], { relativeTo: this.route });
    }
 }

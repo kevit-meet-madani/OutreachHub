@@ -12,9 +12,17 @@
         <label for="password">Enter temporary password</label>
         <input type="password" formControlName="password" #password>
 
-        <label for="tag">Enter Right : </label>
-        <input type="text" formControlName="right" #tag>
+        <!-- workspace-select.component.html -->
+       <label for="ws">Select Right:</label>
+      <select id="ws" formControlName="right">
+          <option value="">-- Select --</option>
+          <option>edit</option>
+          <option>view</option>
+      </select>
+
         
         <button type="submit" [disabled]="addform.invalid">Add User</button>
+        <button (click)="goBack()">Back</button>
     </form>
+    
 </div>

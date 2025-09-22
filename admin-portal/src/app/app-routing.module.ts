@@ -10,6 +10,8 @@ import { CreateuserComponent } from './createuser/createuser.component';
 import { VieworkspaceComponent } from './vieworkspace/vieworkspace.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { ExistuserComponent } from './existuser/existuser.component';
+import { authGuard } from './auth.guard';
+import { ViewuserComponent } from './viewuser/viewuser.component';
 
 
 const routes: Routes = [
@@ -20,41 +22,54 @@ const routes: Routes = [
   {
     path:'dashboard',
     component:DashboardComponent,
+    canActivate:[authGuard],
     children:[
       {
         path:'',
         component:DataComponent
       },
       {
-        path:'create',
-        component:CreateworkspaceComponent
+        path:':id/view',
+        component:VieworkspaceComponent,
+        canActivate:[authGuard],
       },
       {
-        path:'edit/:id',
-        component:WorkspaceUpdateComponent
+        path:':id/edit',
+        component:WorkspaceUpdateComponent,
+        canActivate:[authGuard],
       },
       {
-        path:'users/:id',
-        component:UserlistComponent
+        path:':id/create',
+        component:CreateworkspaceComponent,
+        canActivate:[authGuard],
       },
       {
-        path:'adduser',
-        component:CreateuserComponent
+        path:':id/users',
+        component:UserlistComponent,
+        canActivate:[authGuard],
       },
       {
-        path:'view/:id',
-        component:VieworkspaceComponent
+        path:':id/users/create',
+       component:CreateuserComponent,
+       canActivate:[authGuard],
       },
       {
-        path:'edit/user/:id',
-        component:EdituserComponent
+        path:':id/users/exist',
+       component:ExistuserComponent,
+       canActivate:[authGuard],
       },
       {
-        path:'existuser',
-        component:ExistuserComponent
+         path:':id/users/:userId/edit',
+        component:EdituserComponent,
+        canActivate:[authGuard],
+      },
+      {
+        path:':id/users/:userId/view',
+        component:ViewuserComponent,
+        canActivate:[authGuard],
       }
     ]
-  }
+  },
   
 ];
 

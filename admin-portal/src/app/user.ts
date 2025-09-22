@@ -3,6 +3,7 @@ export interface User{
     _id:string;
     email:string;
     password?:String;
+    right:string;
 }
 
 export interface payload{

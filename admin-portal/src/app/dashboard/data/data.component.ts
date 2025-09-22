@@ -25,7 +25,6 @@ export class DataComponent {
    getWorkspaces(){
      this.workspaceService.getWorkspaces().subscribe(works => {
         this.workspaces = works
-
         for(let w of this.workspaces){
          this.userService.getUsersCount(w._id).subscribe(count => {
             w["count"] = count;
@@ -39,6 +38,7 @@ export class DataComponent {
 
    delete(id:any){
       this.workspaceService.deleteWorkspace(id);
+      this.getWorkspaces();
    }
 
    edit(w:Workspace){

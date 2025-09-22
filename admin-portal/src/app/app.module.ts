@@ -19,6 +19,7 @@ import { VieworkspaceComponent } from './vieworkspace/vieworkspace.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ExistuserComponent } from './existuser/existuser.component';
+import { ViewuserComponent } from './viewuser/viewuser.component';
 
 
 
@@ -36,7 +37,8 @@ import { ExistuserComponent } from './existuser/existuser.component';
     CreateuserComponent,
     VieworkspaceComponent,
     EdituserComponent,
-    ExistuserComponent
+    ExistuserComponent,
+    ViewuserComponent
   ],
   imports: [
     BrowserModule,
